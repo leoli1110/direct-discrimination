@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild the curve database
+        run: |
+          pip install -r database/requirements.txt
+          python3 database/build_db.py
+      - name: Database is up to date with its build script
+        run: |
+          python3 - <<'PY'
+          import json, subprocess
+          committed = json.loads(subprocess.check_output(["git", "show", "HEAD:db/curvedb.json"]))
+          built = json.load(open("db/curvedb.json"))
+          assert committed["devices"] == built["devices"], "db/curvedb.json is stale: run npm run build:db and commit"
+          print(len(built["devices"]), "devices OK")
+          PY
+      - name: Engine tests
+        run: node --test tests/
