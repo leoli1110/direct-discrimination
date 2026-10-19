@@ -21,13 +21,9 @@ function curveOf(it, d = dev(it.deviceId)) {
 }
 const faultA = () => (S.view === 'earth' ? S.efKA : S.faultKA) * 1000;
 const CC_TYPES = { FUSE: 'Fuse', MCB: 'MCB', MCCB: 'MCCB', ACB: 'ACB', RELAY: 'Relay', DAMAGE: 'Damage / withstand', EARTH: 'Earth fault / RCD', OTHER: 'Other' };
-const LS_KEY = 'tcc-studio.mycurves.v1';
-function loadMyCurves() {
-  try { const arr = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); for (const d of arr) if (d && d.id && Array.isArray(d.points)) CUSTOM.set(d.id, { ...d, saved: true }); } catch { /* storage unavailable */ }
-}
-function storeMyCurves() {
-  try { localStorage.setItem(LS_KEY, JSON.stringify([...CUSTOM.values()].filter((d) => d.saved))); } catch { /* storage unavailable */ }
-}
+// "My curves" travel with the study: they are written into the study file and URL hash.
+function loadMyCurves() {}
+function storeMyCurves() { saveHash(); }
 
 // ------------------------------------------------------------ boot
 async function boot() {
@@ -399,12 +395,13 @@ function renderSelectivity() {
 
 // ------------------------------------------------------------ persistence (file + URL hash)
 function serialize() {
-  const used = [...new Set(S.items.map((i) => i.deviceId))].filter((id) => CUSTOM.has(id)).map((id) => { const { saved, ...d } = CUSTOM.get(id); return d; });
+  const usedIds = new Set(S.items.map((i) => i.deviceId));
+  const used = [...CUSTOM.values()].filter((d) => d.saved || usedIds.has(d.id)).map((d) => ({ ...d }));
   return { app: 'tcc-studio', version: DB.meta.version, baseKV: S.baseKV, faultKA: S.faultKA, efKA: S.efKA, view: S.view, efPhase: S.efPhase, customCurves: used, items: S.items.map(({ uid, ...r }) => ({ uid, ...r })) };
 }
 function applyStudy(o) {
   if (!o || !Array.isArray(o.items)) throw new Error('not a study file');
-  for (const d of o.customCurves || []) if (d && d.id && Array.isArray(d.points)) CUSTOM.set(d.id, { ...d, model: 'custom', saved: CUSTOM.get(d.id)?.saved || false });
+  for (const d of o.customCurves || []) if (d && d.id && Array.isArray(d.points)) CUSTOM.set(d.id, { ...d, model: 'custom', saved: !!d.saved || CUSTOM.get(d.id)?.saved || false });
   S.baseKV = +o.baseKV || 0.4; S.faultKA = +o.faultKA || 10; S.efKA = o.efKA > 0 ? +o.efKA : 1; S.efPhase = !!o.efPhase;
   $('#base-kv').value = S.baseKV; $('#fault-ka').value = S.faultKA; $('#ef-ka').value = S.efKA; $('#ef-phase').checked = S.efPhase;
   setView(o.view === 'earth' ? 'earth' : 'phase', false);
@@ -501,7 +498,7 @@ function renderMethod() {
   <h2>Custom curves</h2>
   <p>Any device that is not in the database, such as a fuse, a motor starting curve, a cable or transformer withstand curve or a relay you digitised from a manufacturer chart, can be entered as a custom curve. This works like Curve Direct's "curve defined by points": give the curve a name, then add, edit or delete current–time points, paste a list, load a <span class="mono">.txt</span> or <span class="mono">.csv</span> points list, or click points straight onto the chart. A curve needs at least two points.</p>
   <p>Between points the curve is interpolated linearly on the log-log chart. Two points at the same current give a vertical step, for example an instantaneous trip. Below the first point the device does not operate. Above the last point it either holds the last time or the curve ends, as you choose. In band mode each row has a minimum and a maximum time, and the coordination check uses the minimum as the earliest operating time and the maximum as the latest clearing time.</p>
-  <p>Currents can be entered in amperes or as multiples of a base current, which is useful when you copy points from a chart drawn in multiples of In or Ir. On the study card, the current and time multipliers shift the whole curve, for example ×0.577 to move a curve across a delta-star transformer for a phase-to-phase fault. Custom curves are saved inside the study file and its link. Ticking "Save to My curves" also keeps them in this browser for reuse in other studies.</p>
+  <p>Currents can be entered in amperes or as multiples of a base current, which is useful when you copy points from a chart drawn in multiples of In or Ir. On the study card, the current and time multipliers shift the whole curve, for example ×0.577 to move a curve across a delta-star transformer for a phase-to-phase fault. Custom curves are saved inside the study file and its link. Ticking "Save to My curves" keeps a curve in the library list. That list is also saved with the study file and link, even when no device in the study uses the curve.</p>
   <p>Points list format: one point per line, giving current, then time, then an optional maximum time. Values can be separated by spaces, tabs, commas or semicolons. When the separator is a tab or semicolon, decimal commas are accepted. Lines starting with <span class="mono">#</span> and header lines are ignored.</p>
   <h2>Limits</h2>
   <ul><li>Ambient derating is not applied. Each entry records its calibration reference temperature (20–50 °C).</li><li>G functions are plotted only for trip units whose G settings were found in the cited documents. Inhibition of G at high currents, and DC or pulsating residual thresholds, are not modelled.</li><li>Some rating lists marked in notes are typical values that were not extracted from the cited page. Check catalogue numbers before use.</li></ul>

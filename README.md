@@ -17,7 +17,7 @@ A browser-based time-current curve (TCC) generator and viewer for low-voltage br
   - single line or minimum/maximum band
   - currents in amperes or as multiples of a base current
   - current and time multipliers on the study card (e.g. ×0.577 across a delta-star transformer)
-  - saved inside study files and links, and optionally in a per-browser "My curves" library
+  - saved inside study files and links, and in a "My curves" list that is saved with the study
 - Save and load studies as JSON. The study is also kept in the URL hash.
 - Export the chart as PNG or SVG, the curve points as CSV, or a Markdown settings report.
 - Database and Method tabs, dark mode and a phone layout.
