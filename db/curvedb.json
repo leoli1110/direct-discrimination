@@ -1,0 +1,3760 @@
+{
+ "meta": {
+  "name": "Open TCC curve database",
+  "version": "2026.1",
+  "built": "2026-10-19",
+  "basisLegend": {
+   "datasheet": "value printed in the cited manufacturer document",
+   "standard": "value defined by the governing standard",
+   "assumed": "modelling assumption \u2014 see note",
+   "user": "user entered"
+  },
+  "disclaimer": "Parametric curves reconstructed from published setting ranges and test points. Not a substitute for manufacturer-certified curves or selectivity tables.",
+  "fitCheck": {
+   "60898<=32": {
+    "1.13": [
+     null,
+     null
+    ],
+    "1.3": [
+     12.65,
+     null
+    ],
+    "1.45": [
+     6.33,
+     3600.02
+    ],
+    "1.5": [
+     5.37,
+     1208.93
+    ],
+    "2.55": [
+     1.0,
+     60.0
+    ],
+    "3": [
+     0.68,
+     38.51
+    ],
+    "5": [
+     0.22,
+     11.69
+    ],
+    "6": [
+     0.15,
+     7.9
+    ],
+    "7.2": [
+     0.1,
+     5.39
+    ],
+    "10": [
+     0.05,
+     2.74
+    ]
+   },
+   "60898>32": {
+    "1.13": [
+     null,
+     null
+    ],
+    "1.3": [
+     12.65,
+     null
+    ],
+    "1.45": [
+     6.33,
+     3600.02
+    ],
+    "1.5": [
+     5.37,
+     1825.41
+    ],
+    "2.55": [
+     1.0,
+     120.0
+    ],
+    "3": [
+     0.68,
+     77.48
+    ],
+    "5": [
+     0.22,
+     23.7
+    ],
+    "6": [
+     0.15,
+     16.04
+    ],
+    "7.2": [
+     0.1,
+     10.95
+    ],
+    "10": [
+     0.05,
+     5.57
+    ]
+   },
+   "NSX TM-D": {
+    "1.13": [
+     688.12,
+     null
+    ],
+    "1.3": [
+     218.16,
+     1088.77
+    ],
+    "1.45": [
+     135.32,
+     475.74
+    ],
+    "1.5": [
+     120.0,
+     400.0
+    ],
+    "2.55": [
+     34.56,
+     89.37
+    ],
+    "3": [
+     26.22,
+     66.36
+    ],
+    "5": [
+     12.36,
+     30.2
+    ],
+    "6": [
+     9.69,
+     23.53
+    ],
+    "7.2": [
+     7.66,
+     18.5
+    ],
+    "10": [
+     5.09,
+     12.21
+    ]
+   },
+   "NSXm": {
+    "1.13": [
+     964.21,
+     null
+    ],
+    "1.3": [
+     291.68,
+     879.29
+    ],
+    "1.45": [
+     174.09,
+     336.7
+    ],
+    "1.5": [
+     152.48,
+     276.7
+    ],
+    "2.55": [
+     35.45,
+     48.2
+    ],
+    "3": [
+     25.0,
+     33.25
+    ],
+    "5": [
+     9.19,
+     11.83
+    ],
+    "6": [
+     6.55,
+     8.39
+    ],
+    "7.2": [
+     4.7,
+     5.99
+    ],
+    "10": [
+     2.6,
+     3.3
+    ]
+   }
+  }
+ },
+ "sources": {
+  "abb_s200": {
+   "title": "ABB S200/S200M MCB technical data (2CDC002157D0202)",
+   "url": "https://www.tme.eu/Document/1a6739c5055347b2e2fc1ea33617e1cc/S200-S200M-EN.pdf",
+   "publisher": "ABB",
+   "accessed": "2026-10-19"
+  },
+  "siemens_mcb_guide": {
+   "title": "Siemens MCB technical guide (IEC/EN 60898-1 characteristics)",
+   "url": "https://assets.new.siemens.com/siemens/assets/api/uuid:e5c92a0f-793e-44dd-a9c5-491e2c0c920f/guidatecnicamcb.pdf",
+   "publisher": "Siemens",
+   "accessed": "2026-10-19"
+  },
+  "siemens_mcb_primer": {
+   "title": "Siemens Miniature Circuit Breakers primer",
+   "url": "https://cache.industry.siemens.com/dl/files/304/109482304/att_866617/v1/MiniatureCircuitBreakers_primer_EN_201601250852395217.pdf",
+   "publisher": "Siemens",
+   "accessed": "2026-10-19"
+  },
+  "beama_2026": {
+   "title": "BEAMA Guide to Low Voltage Circuit-Breaker Standards (Aug 2026)",
+   "url": "https://www.beama.org.uk/static/7ef23bd3-2c98-4b9c-8d120bef5ba293b5/BEAMA-Guide-to-Low-Voltage-Circuit-Breaker-Standards-August-2026.pdf",
+   "publisher": "BEAMA",
+   "accessed": "2026-10-19"
+  },
+  "se_acti9": {
+   "title": "Schneider Electric Acti9 iC60/iK60 catalogue",
+   "url": "https://baa.vn/document/ik60n-series-schneider-aptomat-cai-acti-9-dai-dong-toi-63a-mcb-209-catalog1.pdf",
+   "publisher": "Schneider Electric",
+   "accessed": "2026-10-19"
+  },
+  "eaton_faz": {
+   "title": "Eaton xEffect FAZ / FAZ-PN MCB catalogue (CA003002EN)",
+   "url": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/Eaton-xEffect-CA003002EN-catalog-FAZ-PN-MCB-en-us.pdf",
+   "publisher": "Eaton",
+   "accessed": "2026-10-19"
+  },
+  "legrand_dx3": {
+   "title": "Legrand DX3 50 kA MCB technical sheet (F01220EN)",
+   "url": "https://assets.legrand.com/pim/NP-FT-GT/F01220EN-01.pdf",
+   "publisher": "Legrand",
+   "accessed": "2026-10-19"
+  },
+  "hager_mcb_in": {
+   "title": "Hager MCB NBN/NCN/NDN 10 kA catalogue",
+   "url": "https://eurolecenergy.com/upload/eurolec-downloads/catalogues/hager-mcb.pdf",
+   "publisher": "Hager",
+   "accessed": "2026-10-19"
+  },
+  "hager_mcb_au": {
+   "title": "Hager Technical Information - MCBs (derating, 30 \u00b0C calibration)",
+   "url": "https://www.hagerelectro.com.au/files/download/0/32587_1/0/TECHINFO_MCBS.PDF",
+   "publisher": "Hager",
+   "accessed": "2026-10-19"
+  },
+  "se_nsx_cat": {
+   "title": "Schneider Electric PacT Series ComPacT NSX & NSXm catalogue",
+   "url": "https://www.ideal.co.nz/medias/sys_master/sheets/sheets/h18/hbc/8877665353758/SCH-pdf-ComPact-NSX-Catalogue.pdf",
+   "publisher": "Schneider Electric",
+   "accessed": "2026-10-19"
+  },
+  "se_nsx_tmd_ug": {
+   "title": "ComPacT NSX User Guide DOCA0187 - TM-D trip unit 80-250 A",
+   "url": "https://productinfo.se.com/compactnsxuserguide/doca0187-compact-nsx-user-guide/English/BM_ComPacT_NSX_DOCA0187_0000547863.xml/$/TPC_TMDTripUnitFor3P_4PCircuitBreakers80_250A_354b1ab7_T000227045",
+   "publisher": "Schneider Electric",
+   "accessed": "2026-10-19"
+  },
+  "abb_xt": {
+   "title": "ABB SACE Tmax XT technical catalogue",
+   "url": "https://new.abb.com/docs/librariesprovider54/publikationer/katalog-tmax-xt.pdf?sfvrsn=ce6cc113_2",
+   "publisher": "ABB",
+   "accessed": "2026-10-19"
+  },
+  "siemens_3va_manual": {
+   "title": "Siemens SENTRON 3VA system manual",
+   "url": "https://assets.new.siemens.com/siemens/assets/api/uuid:1dfc72e2-76bd-4242-82af-baf29ad9b3a2/manual-sentron-3va-en.pdf",
+   "publisher": "Siemens",
+   "accessed": "2026-10-19"
+  },
+  "siemens_3va_ul_manual": {
+   "title": "Siemens 3VA molded case circuit breakers with UL and IEC certification - manual",
+   "url": "https://cache.industry.siemens.com/dl/files/561/109758561/att_971663/v1/3VA_IEC_UL_manual_molded_case_circuit_breakers_en_en-US.pdf",
+   "publisher": "Siemens",
+   "accessed": "2026-10-19"
+  },
+  "siemens_no_cat": {
+   "title": "Siemens low-voltage products main catalogue (Norway) - 3VA listings",
+   "url": "https://assets.new.siemens.com/siemens/assets/api/uuid:14eac432-eb0f-4429-b913-d3f0fd968b8a/siemens-lavspenningsprodukter-hovedkatalog.pdf",
+   "publisher": "Siemens",
+   "accessed": "2026-10-19"
+  },
+  "eaton_nzm": {
+   "title": "Eaton NZM MCCB technical data (CA08103002Z-EN)",
+   "url": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/circuit-breakers/india/nzm/02%20NZM%20MCCB%20Technical%20data.pdf",
+   "publisher": "Eaton",
+   "accessed": "2026-10-19"
+  },
+  "legrand_dpx3": {
+   "title": "Legrand DPX3 - precise protection & measurement catalogue",
+   "url": "https://www.legrand.co.za/download/power-distribution/dpx-3-precise-protection-measurement.pdf",
+   "publisher": "Legrand",
+   "accessed": "2026-10-19"
+  },
+  "legrand_dpx3_250": {
+   "title": "Legrand DPX3 250 technical sheet (F01365EN)",
+   "url": "https://assets.legrand.com/pim/NP-FT-GT/F01365EN_06.pdf",
+   "publisher": "Legrand",
+   "accessed": "2026-10-19"
+  },
+  "hager_h3": {
+   "title": "Hager h3+ MCCB catalogue P160/P250/P630",
+   "url": "https://assets1.sc.hager.com/exports/files/20EN_AF_CAT_H3_630_web.pdf",
+   "publisher": "Hager",
+   "accessed": "2026-10-19"
+  },
+  "cdg_brochure": {
+   "title": "GE Grid Solutions / Alstom CDG 11 overcurrent & earthfault relay brochure",
+   "url": "https://studylib.net/doc/26045881/cdg11-broucher",
+   "publisher": "GE / Alstom",
+   "accessed": "2026-10-19"
+  },
+  "cdg_ops": {
+   "title": "GEC CDG11/12/13/14/16 operating instructions",
+   "url": "https://www.scribd.com/document/883773289/CDG-Operating-Instructions",
+   "publisher": "GEC",
+   "accessed": "2026-10-19"
+  },
+  "cdg_1116": {
+   "title": "Types CDG 11 and CDG 16 inverse time overcurrent and earth fault relays (data sheet)",
+   "url": "https://www.scribd.com/doc/123289858/56706383-Cdg11-16",
+   "publisher": "GEC Alsthom",
+   "accessed": "2026-10-19"
+  },
+  "idmt_settings": {
+   "title": "IDMT settings note - curve constants and 3s/10 classification",
+   "url": "https://id.scribd.com/document/275864012/IDMT-Settings",
+   "publisher": "-",
+   "accessed": "2026-10-19"
+  },
+  "iec60255_ecalpro": {
+   "title": "ECalPro - Overcurrent protection coordination methodology (IEC 60255-151 equations, CTI)",
+   "url": "https://ecalpro.com/docs/protection-coordination-methodology",
+   "publisher": "ECalPro",
+   "accessed": "2026-10-19"
+  },
+  "ieee_c37112": {
+   "title": "IEEE Std C37.112-1996 - inverse-time characteristic equations",
+   "url": "http://rfc.nop.hu/ieee2/IEEE%20Std%20C37.112-1996%20(2).pdf",
+   "publisher": "IEEE",
+   "accessed": "2026-10-19"
+  }
+ },
+ "devices": [
+  {
+   "id": "gen-60898",
+   "manufacturer": "Generic (standard)",
+   "series": "IEC 60898-1 MCB",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC 60898-1",
+   "refTempC": 30,
+   "ratings": [
+    0.5,
+    1,
+    1.6,
+    2,
+    3,
+    4,
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 20,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn per product",
+   "sources": [
+    "siemens_mcb_guide",
+    "beama_2026"
+   ],
+   "notes": "Pure standard envelope. Instantaneous region: trip <0.1 s above the upper magnetic limit (BEAMA)."
+  },
+  {
+   "id": "se-ic60n",
+   "manufacturer": "Schneider Electric",
+   "series": "Acti9 iC60N",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60947-2 + IEC/EN 60898-1",
+   "refTempC": 50,
+   "ratings": [
+    0.5,
+    1,
+    1.6,
+    2,
+    3,
+    4,
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3.2,
+     "hi": 4.8,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2",
+     "nominal": 4,
+     "tol": 0.2
+    },
+    "C": {
+     "lo": 6.4,
+     "hi": 9.6,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2",
+     "nominal": 8,
+     "tol": 0.2
+    },
+    "D": {
+     "lo": 9.6,
+     "hi": 14.4,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2",
+     "nominal": 12,
+     "tol": 0.2
+    }
+   },
+   "breaking": "Icn 6 kA (60898-1); Icu 10 kA @380\u2013415 V for 6\u201363 A, 50 kA for 0.5\u20134 A (60947-2)",
+   "sources": [
+    "se_acti9"
+   ],
+   "notes": "Magnetic thresholds B 4\u00b7In \u00b120 %, C 8\u00b7In \u00b120 %, D 12\u00b7In \u00b120 % (IEC 60947-2). Thermal band from IEC 60898-1 conventional points (multi-standard device). Catalogue reference temperature 50 \u00b0C under IEC 60947-2."
+  },
+  {
+   "id": "se-ik60n",
+   "manufacturer": "Schneider Electric",
+   "series": "Acti9 iK60N",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60898-1",
+   "refTempC": 30,
+   "ratings": [
+    1,
+    1.6,
+    2,
+    3,
+    4,
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 6 kA",
+   "sources": [
+    "se_acti9"
+   ],
+   "notes": "Curves B 3\u20135\u00b7In and C 5\u201310\u00b7In, 1\u201363 A, calibrated at 30 \u00b0C."
+  },
+  {
+   "id": "abb-s200",
+   "manufacturer": "ABB",
+   "series": "S200 / S200M",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60898-1 (B,C,D); IEC/EN 60947-2 (K,Z)",
+   "refTempC": 30,
+   "ratings": [
+    0.5,
+    1,
+    1.6,
+    2,
+    3,
+    4,
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "thermalByCurve": {
+    "K": {
+     "le32": {
+      "lo": {
+       "x0": 1.05,
+       "K": 4.897959,
+       "a": 2.0
+      },
+      "hi": {
+       "x0": 1.163699,
+       "K": 228.104759,
+       "a": 2.0
+      },
+      "basis": "assumed",
+      "note": "IEC 60947-2 conventional currents 1.05\u00b7In (no trip 1 h) / 1.2\u00b7In (trip <1 h) per datasheet. No 2.55\u00b7In window is published under 60947-2, so the IEC 60898-1 1\u201360 s / 1\u2013120 s window is applied to shape the band (assumed)."
+     },
+     "gt32": {
+      "lo": {
+       "x0": 1.05,
+       "K": 4.897959,
+       "a": 2.0
+      },
+      "hi": {
+       "x0": 1.124914,
+       "K": 496.627836,
+       "a": 2.0
+      },
+      "basis": "assumed",
+      "note": "IEC 60947-2 conventional currents 1.05\u00b7In (no trip 1 h) / 1.2\u00b7In (trip <1 h) per datasheet. No 2.55\u00b7In window is published under 60947-2, so the IEC 60898-1 1\u201360 s / 1\u2013120 s window is applied to shape the band (assumed)."
+     }
+    },
+    "Z": {
+     "le32": {
+      "lo": {
+       "x0": 1.05,
+       "K": 4.897959,
+       "a": 2.0
+      },
+      "hi": {
+       "x0": 1.163699,
+       "K": 228.104759,
+       "a": 2.0
+      },
+      "basis": "assumed",
+      "note": "IEC 60947-2 conventional currents 1.05\u00b7In (no trip 1 h) / 1.2\u00b7In (trip <1 h) per datasheet. No 2.55\u00b7In window is published under 60947-2, so the IEC 60898-1 1\u201360 s / 1\u2013120 s window is applied to shape the band (assumed)."
+     },
+     "gt32": {
+      "lo": {
+       "x0": 1.05,
+       "K": 4.897959,
+       "a": 2.0
+      },
+      "hi": {
+       "x0": 1.124914,
+       "K": 496.627836,
+       "a": 2.0
+      },
+      "basis": "assumed",
+      "note": "IEC 60947-2 conventional currents 1.05\u00b7In (no trip 1 h) / 1.2\u00b7In (trip <1 h) per datasheet. No 2.55\u00b7In window is published under 60947-2, so the IEC 60898-1 1\u201360 s / 1\u2013120 s window is applied to shape the band (assumed)."
+     }
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 20,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "K": {
+     "lo": 10,
+     "hi": 14,
+     "basis": "datasheet",
+     "tripMax": 0.2,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2"
+    },
+    "Z": {
+     "lo": 2,
+     "hi": 3,
+     "basis": "datasheet",
+     "tripMax": 0.2,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2"
+    }
+   },
+   "ratingsByCurve": {
+    "B": [
+     6,
+     8,
+     10,
+     13,
+     16,
+     20,
+     25,
+     32,
+     40,
+     50,
+     63
+    ]
+   },
+   "breaking": "S200 Icn 6 kA / Icu 10 kA; S200M Icn 10 kA / Icu 15 kA",
+   "sources": [
+    "abb_s200"
+   ],
+   "notes": "B 6\u201363 A, C/D/K/Z 0.5\u201363 A. K and Z use 1.05/1.2\u00b7In thermal limits (ref. 20 \u00b0C). Datasheet time windows at the lower magnetic limit: B 3\u00b7In 0.1\u201345 s, C 5\u00b7In 0.1\u201315 s, D 10\u00b7In 0.1\u20134 s (In \u2264 32 A)."
+  },
+  {
+   "id": "siemens-5sl",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 5SL",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60898-1",
+   "refTempC": 30,
+   "ratings": [
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 20,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "6 / 10 kA",
+   "sources": [
+    "siemens_mcb_guide",
+    "siemens_mcb_primer"
+   ],
+   "notes": "Standard residential/commercial range, up to 63 A."
+  },
+  {
+   "id": "siemens-5sy",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 5SY",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60898-1; IEC/EN 60947-2",
+   "refTempC": 30,
+   "ratings": [
+    0.5,
+    1,
+    1.6,
+    2,
+    3,
+    4,
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 20,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "up to 15 kA (60898-1); up to 25 kA (60947-2)",
+   "sources": [
+    "siemens_mcb_guide",
+    "siemens_mcb_primer"
+   ],
+   "notes": "Industrial range up to 63 A. B/C/D characteristics per IEC/EN 60898-1."
+  },
+  {
+   "id": "eaton-faz",
+   "manufacturer": "Eaton",
+   "series": "xEffect FAZ",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    0.5,
+    1,
+    1.6,
+    2,
+    3,
+    4,
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.05,
+      "K": 4.897959,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.26824,
+      "K": 182.5654,
+      "a": 2.0
+     },
+     "basis": "assumed",
+     "note": "IEC 60947-2 conventional currents 1.05\u00b7In (no trip 1 h) / 1.3\u00b7In (trip <1 h) per datasheet. No 2.55\u00b7In window is published under 60947-2, so the IEC 60898-1 1\u201360 s / 1\u2013120 s window is applied to shape the band (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.05,
+      "K": 4.897959,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.234525,
+      "K": 391.990499,
+      "a": 2.0
+     },
+     "basis": "assumed",
+     "note": "IEC 60947-2 conventional currents 1.05\u00b7In (no trip 1 h) / 1.3\u00b7In (trip <1 h) per datasheet. No 2.55\u00b7In window is published under 60947-2, so the IEC 60898-1 1\u201360 s / 1\u2013120 s window is applied to shape the band (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.2,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.2,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 20,
+     "basis": "datasheet",
+     "tripMax": 0.2,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2"
+    }
+   },
+   "ratingsByCurve": {
+    "B": [
+     1,
+     1.6,
+     2,
+     3,
+     4,
+     6,
+     8,
+     10,
+     13,
+     16,
+     20,
+     25,
+     32,
+     40,
+     50,
+     63
+    ],
+    "C": [
+     0.16,
+     0.5,
+     1,
+     1.6,
+     2,
+     3,
+     4,
+     6,
+     8,
+     10,
+     13,
+     16,
+     20,
+     25,
+     32,
+     40,
+     50,
+     63
+    ],
+    "D": [
+     0.5,
+     1,
+     1.6,
+     2,
+     3,
+     4,
+     6,
+     8,
+     10,
+     13,
+     16,
+     20,
+     25,
+     32,
+     40,
+     50,
+     63
+    ]
+   },
+   "breaking": "10 kA (\u226440 A) / 15 kA (50\u201363 A) to IEC 60947-2",
+   "sources": [
+    "eaton_faz"
+   ],
+   "notes": "Thermal: >1 h at 1.05\u00b7In, <1 h at 1.3\u00b7In, 40 \u00b0C (IEC 60947-2 data). K, S, Z characteristics are offered but their data is not given in the cited catalogue."
+  },
+  {
+   "id": "legrand-dx3",
+   "manufacturer": "Legrand",
+   "series": "DX3 50 kA",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    10,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.05,
+      "K": 4.897959,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.26824,
+      "K": 182.5654,
+      "a": 2.0
+     },
+     "basis": "assumed",
+     "note": "IEC 60947-2 conventional currents 1.05\u00b7In (no trip 1 h) / 1.3\u00b7In (trip <1 h) per datasheet. No 2.55\u00b7In window is published under 60947-2, so the IEC 60898-1 1\u201360 s / 1\u2013120 s window is applied to shape the band (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.05,
+      "K": 4.897959,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.234525,
+      "K": 391.990499,
+      "a": 2.0
+     },
+     "basis": "assumed",
+     "note": "IEC 60947-2 conventional currents 1.05\u00b7In (no trip 1 h) / 1.3\u00b7In (trip <1 h) per datasheet. No 2.55\u00b7In window is published under 60947-2, so the IEC 60898-1 1\u201360 s / 1\u2013120 s window is applied to shape the band (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.2,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.2,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 14,
+     "basis": "datasheet",
+     "tripMax": 0.2,
+     "clearMin": 0.01,
+     "std": "IEC 60947-2"
+    }
+   },
+   "breaking": "Icu 50 kA @400 V (2P\u20134P), Ics 75 % Icu",
+   "sources": [
+    "legrand_dx3"
+   ],
+   "notes": "Magnetic calibration B 3\u20135, C 5\u201310, D 10\u201314\u00b7In; thermal Inf 1.05\u00b7In / If 1.3\u00b7In; derating reference 40 \u00b0C. MA (12\u201314\u00b7In) motor curve omitted (magnetic-only)."
+  },
+  {
+   "id": "hager-n",
+   "manufacturer": "Hager",
+   "series": "NBN / NCN / NDN 10 kA",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC 60898-1",
+   "refTempC": 30,
+   "ratings": [
+    0.5,
+    1,
+    1.6,
+    2,
+    3,
+    4,
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 20,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "ratingsByCurve": {
+    "B": [
+     6,
+     8,
+     10,
+     13,
+     16,
+     20,
+     25,
+     32,
+     40,
+     50,
+     63
+    ]
+   },
+   "breaking": "10 kA (IEC 60898-1)",
+   "sources": [
+    "hager_mcb_in",
+    "hager_mcb_au"
+   ],
+   "notes": "NB 6\u201363 A, NC/ND 0.5\u201363 A; 2.55\u00b7In trip between 1 and 120 s; calibrated at 30 \u00b0C. Hager publishes a derating table (e.g. 16 A \u2192 13.4 A at 50 \u00b0C)."
+  },
+  {
+   "id": "se-nsx-tmd",
+   "manufacturer": "Schneider Electric",
+   "series": "ComPacT NSX100\u2013250 TM-D",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    16,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160,
+    200,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.161869,
+      "K": 133.347977,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Fitted to ComPacT NSX TM-D published thermal data: pick-up 1.05\u20131.20\u00b7Ir, 1.5\u00b7In 120\u2013400 s, 6\u00b7Ir 15 s (nominal). Shape between points assumed."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.182075,
+      "K": 123.09018,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Fitted to ComPacT NSX TM-D published thermal data: pick-up 1.05\u20131.20\u00b7Ir, 1.5\u00b7In 120\u2013400 s, 6\u00b7Ir 15 s (nominal). Shape between points assumed."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "16": 190,
+     "25": 300,
+     "32": 400,
+     "40": 500,
+     "50": 500,
+     "63": 500,
+     "80": 640,
+     "100": 800,
+     "125": 1250,
+     "160": 1250
+    },
+    "adjXIn": {
+     "200": [
+      5,
+      10
+     ],
+     "250": [
+      5,
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "stepsA": {
+     "200": [
+      1000,
+      1200,
+      1400,
+      1600,
+      1800,
+      2000
+     ],
+     "250": [
+      1250,
+      1500,
+      1750,
+      2000,
+      2250,
+      2500
+     ]
+    }
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "per NSX performance (B/F/N/H/S/L)",
+   "sources": [
+    "se_nsx_cat",
+    "se_nsx_tmd_ug"
+   ],
+   "notes": "Ir 0.7\u20131\u00b7In; pick-up 1.05\u20131.20\u00b7Ir; tr fixed (1.5\u00b7In 120\u2013400 s, 6\u00b7Ir 15 s). Ii fixed \u00b120 % up to 160 A; 200/250 A adjustable 5\u201310\u00b7In (6-position dial)."
+  },
+  {
+   "id": "se-nsxm-tmd",
+   "manufacturer": "Schneider Electric",
+   "series": "ComPacT NSXm TM-D",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    16,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 132.414165,
+      "a": 1.752522
+     },
+     "hi": {
+      "x0": 1.2,
+      "K": 132.414165,
+      "a": 1.752522
+     },
+     "basis": "datasheet",
+     "note": "Fitted to ComPacT NSXm TM-D published points 1.5\u00b7Ir 200 s, 6\u00b7Ir 8 s, 7.2\u00b7Ir 5 s; band spread from pick-up tolerance 1.05\u20131.20\u00b7Ir (assumed same time constant)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 132.414165,
+      "a": 1.752522
+     },
+     "hi": {
+      "x0": 1.2,
+      "K": 132.414165,
+      "a": 1.752522
+     },
+     "basis": "datasheet",
+     "note": "Fitted to ComPacT NSXm TM-D published points 1.5\u00b7Ir 200 s, 6\u00b7Ir 8 s, 7.2\u00b7Ir 5 s; band spread from pick-up tolerance 1.05\u20131.20\u00b7Ir (assumed same time constant)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "16": 500,
+     "25": 600,
+     "32": 600,
+     "40": 600,
+     "50": 600,
+     "63": 800,
+     "80": 1000,
+     "100": 1250,
+     "125": 1250,
+     "160": 1250
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "per NSXm performance",
+   "sources": [
+    "se_nsx_cat"
+   ],
+   "notes": "Ir 0.7\u20131\u00b7In; tr non-adjustable: 1.5\u00b7Ir 200 s, 6\u00b7Ir 8 s, 7.2\u00b7Ir 5 s; Ii fixed \u00b120 %."
+  },
+  {
+   "id": "abb-xt1-tmd",
+   "manufacturer": "ABB",
+   "series": "Tmax XT1 160 TMD",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "16": 450,
+     "20": 450,
+     "25": 450,
+     "32": 450,
+     "40": 450,
+     "50": 500,
+     "63": 630,
+     "80": 800,
+     "100": 1000,
+     "125": 1250,
+     "160": 1600
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "XT1 B/C/N/S/H",
+   "sources": [
+    "abb_xt",
+    "beama_2026"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In (fixed values per rating, 450 A for \u226440 A). 16/20 A N,S,H are TMF (fixed I1). Magnetic tolerance not stated by ABB: IEC 60947-2 \u00b120 % applied."
+  },
+  {
+   "id": "abb-xt3-tmd",
+   "manufacturer": "ABB",
+   "series": "Tmax XT3 250 TMD",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    63,
+    80,
+    100,
+    125,
+    160,
+    200,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "xIn": 10,
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "XT3 N/S",
+   "sources": [
+    "abb_xt",
+    "beama_2026"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In fixed."
+  },
+  {
+   "id": "abb-xt4-tma",
+   "manufacturer": "ABB",
+   "series": "Tmax XT4 160/250 TMD/TMA",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160,
+    200,
+    225,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "16": 300,
+     "20": 300,
+     "25": 300,
+     "32": 320
+    },
+    "rangeA": {
+     "40": [
+      300,
+      400
+     ],
+     "50": [
+      300,
+      500
+     ],
+     "63": [
+      315,
+      630
+     ],
+     "80": [
+      400,
+      800
+     ],
+     "100": [
+      500,
+      1000
+     ],
+     "125": [
+      625,
+      1250
+     ],
+     "160": [
+      800,
+      1600
+     ],
+     "200": [
+      1000,
+      2000
+     ],
+     "225": [
+      1125,
+      2250
+     ],
+     "250": [
+      1250,
+      2500
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "XT4 N/S/H/L/V",
+   "sources": [
+    "abb_xt",
+    "beama_2026"
+   ],
+   "notes": "TMD (\u226432 A) fixed I3; TMA adjustable 8\u201310\u00b7In (40 A), 6\u201310\u00b7In (50 A), 5\u201310\u00b7In (\u226563 A)."
+  },
+  {
+   "id": "siemens-3va1-tm240",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 3VA1 TM240 (ATAM)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 50,
+   "ratings": [
+    63,
+    100,
+    125,
+    160,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "adjXInAll": [
+     5,
+     10
+    ],
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "Class M: Icu 55 kA @415 V",
+   "sources": [
+    "siemens_no_cat",
+    "siemens_3va_manual",
+    "beama_2026"
+   ],
+   "notes": "Ir adjustable (e.g. 44\u201363 A on 63 A = 0.7\u20131\u00b7In); Ii 5\u201310\u00b7In; thermal-magnetic values refer to +50 \u00b0C."
+  },
+  {
+   "id": "eaton-nzm-a",
+   "manufacturer": "Eaton",
+   "series": "NZM1/2/3 A (system & cable)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160,
+    200,
+    250,
+    300,
+    320,
+    400,
+    500
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.8,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "20": 350,
+     "25": 350,
+     "32": 350,
+     "160": 1280
+    },
+    "adjXIn": {
+     "40": [
+      8,
+      10
+     ],
+     "50": [
+      6,
+      10
+     ],
+     "63": [
+      6,
+      10
+     ],
+     "80": [
+      6,
+      10
+     ],
+     "100": [
+      6,
+      10
+     ],
+     "125": [
+      6,
+      10
+     ],
+     "200": [
+      6,
+      10
+     ],
+     "250": [
+      6,
+      10
+     ],
+     "300": [
+      6,
+      10
+     ],
+     "320": [
+      6,
+      10
+     ],
+     "400": [
+      6,
+      10
+     ],
+     "500": [
+      6,
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "NZMB/NZMC/NZMN/NZMH",
+   "sources": [
+    "eaton_nzm",
+    "beama_2026"
+   ],
+   "notes": "Ir 0.8\u20131\u00b7In; Ii 350 A fixed (20\u201332 A), 8\u201310\u00b7In (40 A), 6\u201310\u00b7In (50\u2013500 A), 160 A NZM1: 1280 A fixed (NZM2 160 A: 6\u201310\u00b7In)."
+  },
+  {
+   "id": "legrand-dpx3-160",
+   "manufacturer": "Legrand",
+   "series": "DPX3 160 thermal-magnetic",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    16,
+    25,
+    40,
+    63,
+    80,
+    100,
+    125,
+    160
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.8,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "16": 400,
+     "25": 400,
+     "40": 400,
+     "63": 630,
+     "80": 800,
+     "100": 1000,
+     "125": 1250,
+     "160": 1600
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "Icu 16/25/36/50 kA",
+   "sources": [
+    "legrand_dpx3",
+    "beama_2026"
+   ],
+   "notes": "Ir 0.8\u20131\u00b7In; magnetic fixed 10\u00b7In (400 A for 16\u201340 A)."
+  },
+  {
+   "id": "legrand-dpx3-250",
+   "manufacturer": "Legrand",
+   "series": "DPX3 250/630 thermal-magnetic",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    100,
+    160,
+    200,
+    250,
+    320,
+    400,
+    500,
+    630
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.8,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "adjXInAll": [
+     5,
+     10
+    ],
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "DPX3 250: 25\u201370 kA; DPX3 630: 36\u2013100 kA",
+   "sources": [
+    "legrand_dpx3",
+    "legrand_dpx3_250",
+    "beama_2026"
+   ],
+   "notes": "Ir 0.8\u20131\u00b7In; Im 5\u201310\u00b7In. Ratings 320\u2013500 A within the 250\u2013630 A DPX3 630 span are typical values (verify catalogue numbers)."
+  },
+  {
+   "id": "hager-h3-p160-tm",
+   "manufacturer": "Hager",
+   "series": "h3+ P160 TM",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    25,
+    40,
+    63,
+    80,
+    100,
+    125,
+    160
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.63,
+    "max": 1.0,
+    "steps": [
+     0.63,
+     0.8,
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsXIn": {
+     "25": [
+      6,
+      8,
+      10,
+      12
+     ],
+     "40": [
+      6,
+      8,
+      10,
+      12
+     ],
+     "63": [
+      6,
+      8,
+      10,
+      12
+     ],
+     "80": [
+      6,
+      8,
+      10,
+      12
+     ],
+     "100": [
+      6,
+      8,
+      10,
+      12
+     ],
+     "125": [
+      6,
+      8,
+      10,
+      12
+     ],
+     "160": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "per h3+ performance",
+   "sources": [
+    "hager_h3"
+   ],
+   "notes": "Ir 0.63/0.8/1\u00b7In; tripping between 1.05 and 1.30\u00b7Ir; tr fixed; Ii \u00b120 % (6-8-10-12\u00b7In, 160 A: 6\u201310\u00b7In). Reference temperature not stated in extract; 40 \u00b0C assumed."
+  },
+  {
+   "id": "hager-h3-p250-tm",
+   "manufacturer": "Hager",
+   "series": "h3+ P250 TM",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    50,
+    63,
+    100,
+    125,
+    160,
+    200,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.63,
+    "max": 1.0,
+    "steps": [
+     0.63,
+     0.8,
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsXIn": {
+     "50": [
+      6,
+      8,
+      10,
+      13
+     ],
+     "63": [
+      6,
+      8,
+      10,
+      13
+     ],
+     "100": [
+      6,
+      8,
+      10,
+      13
+     ],
+     "125": [
+      6,
+      8,
+      10,
+      13
+     ],
+     "160": [
+      6,
+      8,
+      10,
+      13
+     ],
+     "200": [
+      6,
+      8,
+      10,
+      12
+     ],
+     "250": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "per h3+ performance",
+   "sources": [
+    "hager_h3"
+   ],
+   "notes": "Ir 0.63/0.8/1\u00b7In; Ii \u00b120 %: \u2264160 A 6-8-10-13, 200 A 6-8-10-12, 250 A 6\u201310\u00b7In."
+  },
+  {
+   "id": "se-ml22",
+   "manufacturer": "Schneider Electric",
+   "series": "ComPacT NSX MicroLogic 2.2 (LS0I)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    40,
+    100,
+    160,
+    250,
+    400,
+    630
+   ],
+   "L": {
+    "ir": {
+     "io": {
+      "40": [
+       18,
+       18,
+       20,
+       23,
+       25,
+       28,
+       32,
+       36,
+       40
+      ],
+      "100": [
+       40,
+       45,
+       50,
+       55,
+       63,
+       70,
+       80,
+       90,
+       100
+      ],
+      "160": [
+       63,
+       70,
+       80,
+       90,
+       100,
+       110,
+       125,
+       150,
+       160
+      ],
+      "250": [
+       100,
+       110,
+       125,
+       140,
+       160,
+       175,
+       200,
+       225,
+       250
+      ],
+      "400": [
+       160,
+       180,
+       200,
+       230,
+       250,
+       280,
+       320,
+       360,
+       400
+      ],
+      "630": [
+       250,
+       280,
+       320,
+       350,
+       400,
+       450,
+       500,
+       570,
+       630
+      ]
+     },
+     "fine": [
+      0.9,
+      1.0
+     ]
+    },
+    "tr": {
+     "fixed": 16
+    },
+    "form": "thermal-image",
+    "ref": 6,
+    "c": 0.84375,
+    "basis": "datasheet",
+    "note": "t = tr\u00b7(36\u2212c)/((I/Ir)\u00b2\u2212c), c = 0.844 \u2014 reproduces published 1.5\u00b7Ir, 6\u00b7Ir and 7.2\u00b7Ir times exactly (fit).",
+    "pickup": [
+     1.05,
+     1.2
+    ],
+    "tTol": [
+     -0.2,
+     0.0
+    ]
+   },
+   "S": {
+    "isd": {
+     "xIr": [
+      1.5,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10
+     ]
+    },
+    "tol": 0.1,
+    "tsd": {
+     "fixed": 0,
+     "band": [
+      [
+       0.02,
+       0.08
+      ]
+     ]
+    },
+    "i2t": false
+   },
+   "I": {
+    "fixedA": {
+     "40": 600,
+     "100": 1500,
+     "160": 2400,
+     "250": 3000,
+     "400": 4800,
+     "630": 6900
+    },
+    "tol": 0.15,
+    "band": [
+     0.01,
+     0.05
+    ]
+   },
+   "sources": [
+    "se_nsx_cat"
+   ],
+   "notes": "Ir = Io \u00d7 (0.9\u20261); tr non-adjustable (1.5\u00b7Ir 400 s, 6\u00b7Ir 16 s, 7.2\u00b7Ir 11 s, accuracy 0/\u221220 %); Isd 1.5\u201310\u00b7Ir \u00b110 %, 20 ms / 80 ms; Ii fixed \u00b115 %, 10 ms / 50 ms."
+  },
+  {
+   "id": "se-ml52",
+   "manufacturer": "Schneider Electric",
+   "series": "ComPacT NSX MicroLogic 5.2/6.2 E (LSI/LSIG)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    40,
+    100,
+    160,
+    250,
+    400,
+    630
+   ],
+   "L": {
+    "ir": {
+     "io": {
+      "40": [
+       18,
+       18,
+       20,
+       23,
+       25,
+       28,
+       32,
+       36,
+       40
+      ],
+      "100": [
+       40,
+       45,
+       50,
+       55,
+       63,
+       70,
+       80,
+       90,
+       100
+      ],
+      "160": [
+       63,
+       70,
+       80,
+       90,
+       100,
+       110,
+       125,
+       150,
+       160
+      ],
+      "250": [
+       100,
+       110,
+       125,
+       140,
+       160,
+       175,
+       200,
+       225,
+       250
+      ],
+      "400": [
+       160,
+       180,
+       200,
+       230,
+       250,
+       280,
+       320,
+       360,
+       400
+      ],
+      "630": [
+       250,
+       280,
+       320,
+       350,
+       400,
+       450,
+       500,
+       570,
+       630
+      ]
+     },
+     "fineA": 1
+    },
+    "tr": {
+     "steps": [
+      0.5,
+      1,
+      2,
+      4,
+      8,
+      16
+     ]
+    },
+    "form": "thermal-image",
+    "ref": 6,
+    "c": 0.84375,
+    "basis": "datasheet",
+    "note": "t = tr\u00b7(36\u2212c)/((I/Ir)\u00b2\u2212c), c = 0.844 \u2014 reproduces published 1.5\u00b7Ir, 6\u00b7Ir and 7.2\u00b7Ir times exactly (fit).",
+    "pickup": [
+     1.05,
+     1.2
+    ],
+    "tTol": [
+     -0.2,
+     0.0
+    ]
+   },
+   "S": {
+    "isd": {
+     "min": 1.5,
+     "max": 10,
+     "step": 0.5,
+     "unit": "xIr"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0,
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ],
+     "bandBySetting": {
+      "0": [
+       0.02,
+       0.08
+      ],
+      "0.1": [
+       0.08,
+       0.14
+      ],
+      "0.2": [
+       0.14,
+       0.2
+      ],
+      "0.3": [
+       0.23,
+       0.32
+      ],
+      "0.4": [
+       0.35,
+       0.5
+      ]
+     }
+    },
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefBasis": "assumed"
+   },
+   "I": {
+    "xInMax": {
+     "40": 15,
+     "100": 15,
+     "160": 15,
+     "250": 12,
+     "400": 12,
+     "630": 11
+    },
+    "xInMin": 1.5,
+    "step": 0.5,
+    "tol": 0.15,
+    "band": [
+     0.01,
+     0.05
+    ]
+   },
+   "G": {
+    "note": "MicroLogic 6: Ig 0.2\u20131\u00b7In, tg 0\u20130.4 s (not plotted)"
+   },
+   "sources": [
+    "se_nsx_cat"
+   ],
+   "notes": "tr 0.5\u201316 s @6\u00b7Ir (0/\u221220 %); Isd 1.5\u201310\u00b7Ir step 0.5 (\u00b110 %); tsd 0\u20130.4 s with I\u00b2t ON/OFF, non-trip/max-break times published; Ii 1.5\u201315\u00b7In (\u2264160 A), 12\u00b7In (250\u2013400 A), 11\u00b7In (630 A) \u00b115 %. I\u00b2t-ON reference point 10\u00b7Ir is assumed (not stated in cited catalogue)."
+  },
+  {
+   "id": "abb-xt-ekip-lsi",
+   "manufacturer": "ABB",
+   "series": "Tmax XT2/XT4 Ekip LSI",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    40,
+    63,
+    100,
+    160,
+    250
+   ],
+   "ratingsBasis": "assumed",
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "step": 0.02,
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      3,
+      12,
+      36,
+      60
+     ]
+    },
+    "form": "i2t",
+    "ref": 3,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = t1\u00b79/(I/I1)\u00b2, t1 defined at 3\u00b7I1."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4.5,
+      5.5,
+      6.5,
+      7,
+      7.5,
+      8,
+      8.5,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.05,
+      0.1,
+      0.2,
+      0.4
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInSteps": [
+     1,
+     1.5,
+     2,
+     2.5,
+     3,
+     3.5,
+     4.5,
+     5.5,
+     6.5,
+     7,
+     7.5,
+     8,
+     8.5,
+     9,
+     10
+    ],
+    "tol": 0.1,
+    "band": [
+     0.005,
+     0.04
+    ]
+   },
+   "sources": [
+    "abb_xt"
+   ],
+   "notes": "I1 0.4\u20131\u00b7In step 0.02 (manual); t1 3/12/36/60 s @3\u00b7I1, \u00b110 % (\u22644\u00b7In); I2 1\u201310\u00b7In, t2 0.05\u20130.4 s @10\u00b7In, I\u00b2t ON/OFF; I3 1\u201310\u00b7In \u00b110 %, \u226440 ms. In ratings listed are typical XT2/XT4 values \u2014 not extracted from the cited page."
+  },
+  {
+   "id": "siemens-3va-etu350",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 3VA2 ETU350 (LSI)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    63,
+    100,
+    160,
+    250,
+    400,
+    630
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "min": 0.5,
+     "max": 12
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": null,
+    "tTol": null,
+    "note": "I\u00b2t = constant, tr at 6\u00b7Ir. Tolerances not stated in cited manual (nominal line only)."
+   },
+   "S": {
+    "isd": {
+     "min": 1.5,
+     "max": 10,
+     "unit": "xIr"
+    },
+    "tol": null,
+    "tsd": {
+     "min": 0,
+     "max": 0.4
+    },
+    "i2t": true,
+    "i2tRef": 8,
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "fixedXIn": {
+     "63": 12,
+     "100": 12,
+     "160": 10,
+     "250": 10,
+     "400": 10,
+     "630": 9
+    },
+    "tol": null,
+    "band": [
+     0.01,
+     0.05
+    ],
+    "bandBasis": "assumed"
+   },
+   "sources": [
+    "siemens_3va_ul_manual",
+    "siemens_no_cat"
+   ],
+   "notes": "Ir 0.4\u20131\u00b7In (10 steps); tr 0.5\u201312/15/17 s @6\u00b7Ir; Isd 1.5\u201310\u00b7Ir (630 A: 1.5\u20139); tsd 0\u20130.4 s (I\u00b2t, ref. 8\u00b7Ir); Ii fixed 12\u00b7In (\u2264100 A), 10\u00b7In (160\u2013400 A), 9\u00b7In (630 A)."
+  },
+  {
+   "id": "siemens-3va-etu550",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 3VA2 ETU550 (LSI)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    63,
+    100,
+    160,
+    250,
+    400,
+    630
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "unit": "xIn"
+    },
+    "tr": {
+     "min": 0.5,
+     "max": 13
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": null,
+    "tTol": null,
+    "note": "I\u00b2t = constant, tr at 6\u00b7Ir; tolerances not stated (nominal line only)."
+   },
+   "S": {
+    "isd": {
+     "min": 0.6,
+     "max": 10,
+     "unit": "xIn"
+    },
+    "tol": null,
+    "tsd": {
+     "min": 0.05,
+     "max": 0.5
+    },
+    "i2t": true,
+    "i2tRef": 8,
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInMin": 1.5,
+    "xInMaxAll": 12,
+    "tol": null,
+    "band": [
+     0.01,
+     0.05
+    ],
+    "bandBasis": "assumed"
+   },
+   "sources": [
+    "siemens_3va_ul_manual",
+    "siemens_3va_manual"
+   ],
+   "notes": "Ir 0.4\u20131\u00b7In; tr 0.5\u201313/15/17/20/25 s @6\u00b7Ir; Isd 0.6\u20139/10\u00b7In; tsd 0.05\u20130.5 s (I\u00b2t switchable, ref. Isd = 8\u00b7Ir); Ii 1.5\u20139/10/12\u00b7In (frame dependent)."
+  },
+  {
+   "id": "eaton-nzm-ve",
+   "manufacturer": "Eaton",
+   "series": "NZM2/3/4 VE (selective)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    100,
+    160,
+    250,
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "min": 0.5,
+     "max": 1.0,
+     "unit": "xIn"
+    },
+    "tr": {
+     "min": 2,
+     "max": 20
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": null,
+    "tTol": null,
+    "note": "tr 2\u201320 s at 6\u00b7Ir; tolerance not stated (nominal only). I\u00b2t law assumed for long-time."
+   },
+   "S": {
+    "isd": {
+     "min": 2,
+     "max": 10,
+     "unit": "xIr"
+    },
+    "tol": null,
+    "tsd": {
+     "steps": [
+      0,
+      0.02,
+      0.06,
+      0.1,
+      0.2,
+      0.3,
+      0.5,
+      0.75,
+      1.0
+     ]
+    },
+    "i2t": true,
+    "i2tRef": 8,
+    "i2tRefBasis": "assumed"
+   },
+   "I": {
+    "fixedA": {
+     "100": 1200,
+     "160": 1920,
+     "250": 3000
+    },
+    "xInRange": {
+     "400": [
+      2,
+      11
+     ],
+     "630": [
+      2,
+      8
+     ],
+     "800": [
+      2,
+      12
+     ],
+     "1000": [
+      2,
+      12
+     ],
+     "1250": [
+      2,
+      12
+     ],
+     "1600": [
+      2,
+      12
+     ]
+    },
+    "tol": null,
+    "band": [
+     0.01,
+     0.05
+    ],
+    "bandBasis": "assumed"
+   },
+   "sources": [
+    "eaton_nzm"
+   ],
+   "notes": "Ir = 0.5\u20131\u00b7In; tr 2\u201320 s @6\u00b7Ir; Isd 2\u201310\u00b7Ir (NZM3 630 A: 1.5\u20137\u00b7Ir); tsd 0\u20131000 ms; I\u00b2t: NZM2 fixed OFF, NZM3/4 switchable; Ii NZM2 fixed 1200/1920/3000 A, NZM3 2\u201311\u00b7In (250/400 A), 2\u20138\u00b7In (630 A), NZM4 2\u201312\u00b7In. I\u00b2t-ON reference 8\u00b7Ir assumed."
+  },
+  {
+   "id": "legrand-dpx3-630-s2",
+   "manufacturer": "Legrand",
+   "series": "DPX3 630/1600 S2 electronic",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    250,
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      0.95,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      5,
+      10,
+      20,
+      30
+     ]
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": null,
+    "tTol": null,
+    "note": "tr 5-10-20-30 s at 6\u00b7Ir; I\u00b2t law assumed."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      1.5,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10
+     ],
+     "unit": "xIr"
+    },
+    "tol": null,
+    "tsd": {
+     "steps": [
+      0,
+      0.1,
+      0.2,
+      0.3
+     ]
+    },
+    "i2t": false
+   },
+   "I": {
+    "fixedAByFrame": {
+     "630": 5000,
+     "1600": 20000
+    },
+    "tol": null,
+    "band": [
+     0.01,
+     0.05
+    ],
+    "bandBasis": "assumed"
+   },
+   "sources": [
+    "legrand_dpx3"
+   ],
+   "notes": "DPX3 630 (250\u2013630 A) instantaneous If = 5 kA; DPX3 1600 (630\u20131600 A) If = 20 kA. S1 version: tr fixed 5 s, tsd fixed 0.05 s."
+  },
+  {
+   "id": "hager-h3-lsni",
+   "manufacturer": "Hager",
+   "series": "h3+ P160/P250 LSnI electronic",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    40,
+    100,
+    160,
+    250
+   ],
+   "L": {
+    "ir": {
+     "io": {
+      "40": [
+       16,
+       18,
+       20,
+       22,
+       25,
+       28,
+       32,
+       34,
+       37,
+       40
+      ],
+      "100": [
+       40,
+       45,
+       50,
+       57,
+       63,
+       72,
+       80,
+       87,
+       93,
+       100
+      ],
+      "160": [
+       63,
+       70,
+       80,
+       90,
+       100,
+       110,
+       125,
+       135,
+       150,
+       160
+      ],
+      "250": [
+       90,
+       100,
+       110,
+       125,
+       140,
+       160,
+       180,
+       200,
+       225,
+       250
+      ]
+     },
+     "fine": [
+      0.91,
+      1.0
+     ]
+    },
+    "tr": {
+     "fixed": 5
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.2
+    ],
+    "tTol": [
+     -0.21,
+     0.01
+    ]
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      1.5,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      10
+     ],
+     "unit": "xIr"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "fixed": 0.1
+    },
+    "i2t": false
+   },
+   "I": {
+    "fixedXIn": {
+     "40": 15,
+     "100": 15,
+     "160": 11,
+     "250": 11
+    },
+    "tol": 0.15,
+    "band": [
+     0.01,
+     0.05
+    ]
+   },
+   "sources": [
+    "hager_h3"
+   ],
+   "notes": "Ir = Ir1 \u00d7 Ir2 (0.91\u20131); tr 5 s @6\u00b7Ir (\u221221 %/+1 %); Isd 1.5\u201310\u00b7Ir \u00b110 %, tsd 100 ms fixed; Ii 15\u00b7In (40/100 A) or 11\u00b7In (160/250 A) \u00b115 %, 10/50 ms."
+  },
+  {
+   "id": "cdg11-3s",
+   "series": "CDG11 / CDG16 / CDG31 \u2014 3 s (standard inverse)",
+   "curves": {
+    "SI (BS142 3/10)": {
+     "k": 0.14,
+     "alpha": 0.02,
+     "L": 0,
+     "scale": 1.0
+    }
+   },
+   "sources": [
+    "cdg_brochure",
+    "cdg_ops",
+    "cdg_1116",
+    "idmt_settings"
+   ],
+   "category": "RELAY",
+   "model": "idmt",
+   "manufacturer": "GEC / Alstom / GE (CDG)",
+   "standard": "BS 142-1966 / IS 3231",
+   "ctSec": [
+    1,
+    5
+   ],
+   "plug": {
+    "50-200%": [
+     50,
+     75,
+     100,
+     125,
+     150,
+     175,
+     200
+    ],
+    "20-80%": [
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80
+    ],
+    "10-40%": [
+     10,
+     15,
+     20,
+     25,
+     30,
+     35,
+     40
+    ]
+   },
+   "tms": {
+    "min": 0.1,
+    "max": 1.0,
+    "step": 0.025,
+    "basis": "assumed",
+    "note": "Graduated time-multiplier scale; numerical range not stated in cited brochure (0.1\u20131.0 typical)."
+   },
+   "tol": 0.075,
+   "tolBasis": "datasheet",
+   "mMax": 20,
+   "start": 1.03,
+   "notes": "Induction-disc IDMT, 3 s at 10\u00d7 setting; conforms to BS 142 (IEC 60255 SI equation k=0.14, \u03b1=0.02). Error class E7.5. Plug settings 50\u2013200 % (25 % steps), 20\u201380 %, 10\u201340 %. Reset 9 s at TMS 1. CDG16 = isolated contacts; CDG31 = triple-pole."
+  },
+  {
+   "id": "cdg11-13s",
+   "series": "CDG11 \u2014 1.3 s (short inverse)",
+   "curves": {
+    "SI \u00d71.3/2.97 (1.3 s)": {
+     "k": 0.14,
+     "alpha": 0.02,
+     "L": 0,
+     "scale": 0.43762
+    }
+   },
+   "sources": [
+    "cdg_brochure",
+    "cdg_1116"
+   ],
+   "category": "RELAY",
+   "model": "idmt",
+   "manufacturer": "GEC / Alstom / GE (CDG)",
+   "standard": "BS 142-1966 / IS 3231",
+   "ctSec": [
+    1,
+    5
+   ],
+   "plug": {
+    "50-200%": [
+     50,
+     75,
+     100,
+     125,
+     150,
+     175,
+     200
+    ],
+    "20-80%": [
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80
+    ],
+    "10-40%": [
+     10,
+     15,
+     20,
+     25,
+     30,
+     35,
+     40
+    ]
+   },
+   "tms": {
+    "min": 0.1,
+    "max": 1.0,
+    "step": 0.025,
+    "basis": "assumed",
+    "note": "Graduated time-multiplier scale; numerical range not stated in cited brochure (0.1\u20131.0 typical)."
+   },
+   "tol": 0.075,
+   "tolBasis": "datasheet",
+   "mMax": 20,
+   "start": 1.03,
+   "notes": "1.3 s at 10\u00d7 setting variant. Modelled as the SI shape scaled to 1.3 s at 10\u00d7 (assumed \u2014 the published Figure 1 curve was not digitised). Reset 4 s."
+  },
+  {
+   "id": "cdg12-lt",
+   "series": "CDG12 \u2014 long time delay",
+   "curves": {
+    "LTI (30 s @5\u00d7)": {
+     "k": 120,
+     "alpha": 1,
+     "L": 0,
+     "scale": 1.0
+    }
+   },
+   "sources": [
+    "cdg_ops",
+    "iec60255_ecalpro"
+   ],
+   "category": "RELAY",
+   "model": "idmt",
+   "manufacturer": "GEC / Alstom / GE (CDG)",
+   "standard": "BS 142-1966 / IS 3231",
+   "ctSec": [
+    1,
+    5
+   ],
+   "plug": {
+    "continuous": null
+   },
+   "tms": {
+    "min": 0.1,
+    "max": 1.0,
+    "step": 0.025,
+    "basis": "assumed",
+    "note": "Graduated time-multiplier scale; numerical range not stated in cited brochure (0.1\u20131.0 typical)."
+   },
+   "tol": 0.075,
+   "tolBasis": "datasheet",
+   "mMax": 20,
+   "start": 1.03,
+   "notes": "Long time delay, 30 s at 5\u00d7 tap value (CDG12 has two taps). IEC LTI gives exactly 30 s at 5\u00d7 (TMS 1), so LTI shape is used (assumed)."
+  },
+  {
+   "id": "cdg13-vi",
+   "series": "CDG13 \u2014 very inverse",
+   "curves": {
+    "VI": {
+     "k": 13.5,
+     "alpha": 1,
+     "L": 0,
+     "scale": 1.0
+    }
+   },
+   "sources": [
+    "cdg_ops",
+    "iec60255_ecalpro"
+   ],
+   "category": "RELAY",
+   "model": "idmt",
+   "manufacturer": "GEC / Alstom / GE (CDG)",
+   "standard": "BS 142-1966 / IS 3231",
+   "ctSec": [
+    1,
+    5
+   ],
+   "plug": {
+    "50-200%": [
+     50,
+     75,
+     100,
+     125,
+     150,
+     175,
+     200
+    ],
+    "20-80%": [
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80
+    ],
+    "10-40%": [
+     10,
+     15,
+     20,
+     25,
+     30,
+     35,
+     40
+    ]
+   },
+   "tms": {
+    "min": 0.1,
+    "max": 1.0,
+    "step": 0.025,
+    "basis": "assumed",
+    "note": "Graduated time-multiplier scale; numerical range not stated in cited brochure (0.1\u20131.0 typical)."
+   },
+   "tol": 0.075,
+   "tolBasis": "datasheet",
+   "mMax": 20,
+   "start": 1.03,
+   "notes": "Very inverse time. IEC 60255 VI equation used (assumed equivalent; verify against GEC publication R-5092)."
+  },
+  {
+   "id": "cdg14-ei",
+   "series": "CDG14 \u2014 extremely inverse",
+   "curves": {
+    "EI": {
+     "k": 80,
+     "alpha": 2,
+     "L": 0,
+     "scale": 1.0
+    }
+   },
+   "sources": [
+    "cdg_ops",
+    "iec60255_ecalpro"
+   ],
+   "category": "RELAY",
+   "model": "idmt",
+   "manufacturer": "GEC / Alstom / GE (CDG)",
+   "standard": "BS 142-1966 / IS 3231",
+   "ctSec": [
+    1,
+    5
+   ],
+   "plug": {
+    "50-200%": [
+     50,
+     75,
+     100,
+     125,
+     150,
+     175,
+     200
+    ],
+    "20-80%": [
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80
+    ],
+    "10-40%": [
+     10,
+     15,
+     20,
+     25,
+     30,
+     35,
+     40
+    ]
+   },
+   "tms": {
+    "min": 0.1,
+    "max": 1.0,
+    "step": 0.025,
+    "basis": "assumed",
+    "note": "Graduated time-multiplier scale; numerical range not stated in cited brochure (0.1\u20131.0 typical)."
+   },
+   "tol": 0.075,
+   "tolBasis": "datasheet",
+   "mMax": 20,
+   "start": 1.03,
+   "notes": "Extremely inverse time, used for grading with fuses. IEC 60255 EI equation used (assumed equivalent)."
+  },
+  {
+   "id": "cdg21-hs",
+   "series": "CDG21 / CDG61 \u2014 3 s IDMT + high-set (CAG17)",
+   "curves": {
+    "SI (BS142 3/10)": {
+     "k": 0.14,
+     "alpha": 0.02,
+     "L": 0,
+     "scale": 1.0
+    }
+   },
+   "highset": {
+    "enabled": true,
+    "default": 8,
+    "unit": "xIs",
+    "time": 0.04,
+    "basis": "assumed",
+    "note": "Instantaneous unit; set ranges printed ambiguously in the cited brochure, enter the fitted value."
+   },
+   "sources": [
+    "cdg_brochure"
+   ],
+   "category": "RELAY",
+   "model": "idmt",
+   "manufacturer": "GEC / Alstom / GE (CDG)",
+   "standard": "BS 142-1966 / IS 3231",
+   "ctSec": [
+    1,
+    5
+   ],
+   "plug": {
+    "50-200%": [
+     50,
+     75,
+     100,
+     125,
+     150,
+     175,
+     200
+    ],
+    "20-80%": [
+     20,
+     30,
+     40,
+     50,
+     60,
+     70,
+     80
+    ],
+    "10-40%": [
+     10,
+     15,
+     20,
+     25,
+     30,
+     35,
+     40
+    ]
+   },
+   "tms": {
+    "min": 0.1,
+    "max": 1.0,
+    "step": 0.025,
+    "basis": "assumed",
+    "note": "Graduated time-multiplier scale; numerical range not stated in cited brochure (0.1\u20131.0 typical)."
+   },
+   "tol": 0.075,
+   "tolBasis": "datasheet",
+   "mMax": 20,
+   "start": 1.03,
+   "notes": "CDG21 = single-pole CDG11 with high-set instantaneous unit; CDG61 = triple-pole version."
+  },
+  {
+   "id": "iec60255",
+   "manufacturer": "Generic (standard)",
+   "series": "IEC 60255-151 numerical relay",
+   "category": "RELAY",
+   "model": "idmt",
+   "standard": "IEC 60255-151",
+   "curves": {
+    "SI": {
+     "k": 0.14,
+     "alpha": 0.02,
+     "L": 0,
+     "scale": 1.0
+    },
+    "VI": {
+     "k": 13.5,
+     "alpha": 1,
+     "L": 0,
+     "scale": 1.0
+    },
+    "EI": {
+     "k": 80,
+     "alpha": 2,
+     "L": 0,
+     "scale": 1.0
+    },
+    "LTI": {
+     "k": 120,
+     "alpha": 1,
+     "L": 0,
+     "scale": 1.0
+    }
+   },
+   "ctSec": [
+    1,
+    5
+   ],
+   "plug": {
+    "continuous": null
+   },
+   "tms": {
+    "min": 0.05,
+    "max": 1.0,
+    "step": 0.05,
+    "basis": "standard"
+   },
+   "tol": 0.05,
+   "tolBasis": "standard",
+   "mMax": 20,
+   "start": 1.1,
+   "highset": {
+    "enabled": false,
+    "default": 10,
+    "unit": "xIs",
+    "time": 0.05,
+    "basis": "user"
+   },
+   "sources": [
+    "iec60255_ecalpro"
+   ],
+   "notes": "SI 0.14/0.02, VI 13.5/1, EI 80/2, LTI 120/1; TMS 0.05\u20131.0 (0.05 steps); \u00b15 % numerical timing error; CTI 0.3 s numerical / 0.4 s electromechanical."
+  },
+  {
+   "id": "ieee-c37112",
+   "manufacturer": "Generic (standard)",
+   "series": "IEEE C37.112 relay",
+   "category": "RELAY",
+   "model": "idmt",
+   "standard": "IEEE C37.112",
+   "curves": {
+    "MI": {
+     "k": 0.0515,
+     "alpha": 0.02,
+     "L": 0.114,
+     "scale": 1.0
+    },
+    "VI": {
+     "k": 19.61,
+     "alpha": 2,
+     "L": 0.491,
+     "scale": 1.0
+    },
+    "EI": {
+     "k": 28.2,
+     "alpha": 2,
+     "L": 0.1217,
+     "scale": 1.0
+    }
+   },
+   "ctSec": [
+    1,
+    5
+   ],
+   "plug": {
+    "continuous": null
+   },
+   "tms": {
+    "min": 0.5,
+    "max": 15,
+    "step": 0.1,
+    "basis": "assumed",
+    "label": "TD",
+    "note": "Equation t = A/(M^p\u22121)+B published; time-dial multiplier applied as TD/1 scaling (relay-specific)."
+   },
+   "tol": 0.05,
+   "tolBasis": "assumed",
+   "mMax": 20,
+   "start": 1.1,
+   "highset": {
+    "enabled": false,
+    "default": 10,
+    "unit": "xIs",
+    "time": 0.05,
+    "basis": "user"
+   },
+   "sources": [
+    "ieee_c37112"
+   ],
+   "notes": "MI A=0.0515 B=0.114 p=0.02; VI A=19.61 B=0.491 p=2; EI A=28.2 B=0.1217 p=2."
+  }
+ ]
+}

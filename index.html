@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCC Studio 2026 — multi-manufacturer time-current curves</title>
+<meta name="description" content="Time-current curve generator and viewer for MCB, MCCB and CDG / IEC / IEEE IDMT relays, built from a source-cited 2026 datasheet database.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M6 4c1 6 3 9 6 10.5S17 16 18 20"/><path d="M9 4c.6 4 2 6.5 4.5 8"/></svg>
+    </span>
+    <span class="brand-name">TCC Studio <span class="brand-year">2026</span></span>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="Views">
+    <button role="tab" class="tab" data-view="study" aria-selected="true">Study</button>
+    <button role="tab" class="tab" data-view="database" aria-selected="false">Database</button>
+    <button role="tab" class="tab" data-view="method" aria-selected="false">Method</button>
+  </nav>
+  <div class="top-actions">
+    <button class="btn ghost" id="btn-save" title="Download the study as JSON">Save</button>
+    <label class="btn ghost" title="Load a study JSON file">Load<input type="file" id="file-load" accept="application/json,.json" hidden></label>
+    <div class="menu">
+      <button class="btn ghost" id="btn-export" aria-haspopup="true" aria-expanded="false">Export</button>
+      <div class="menu-pop" id="export-pop" hidden>
+        <button data-export="png">Chart as PNG</button>
+        <button data-export="svg">Chart as SVG</button>
+        <button data-export="csv">Curve points (CSV)</button>
+        <button data-export="report">Settings report (Markdown)</button>
+      </div>
+    </div>
+    <button class="btn icon" id="btn-theme" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="disclaimer" role="note">
+  Engineering aid only. Curves are parametric reconstructions from published setting ranges and standard test points, not digitised manufacturer curves. Check against manufacturer software and selectivity tables before design or settings work.
+</div>
+
+<main id="view-study" class="view study" data-active="true">
+  <aside class="panel library" aria-label="Device library">
+    <div class="panel-head">
+      <h2>Library</h2>
+      <span class="count" id="lib-count"></span>
+    </div>
+    <div class="lib-filters">
+      <input type="search" id="lib-search" placeholder="Search series, brand, curve…" aria-label="Search library">
+      <div class="chips" role="group" aria-label="Category">
+        <button class="chip" data-cat="ALL" aria-pressed="true">All</button>
+        <button class="chip" data-cat="MCB" aria-pressed="false">MCB</button>
+        <button class="chip" data-cat="MCCB" aria-pressed="false">MCCB</button>
+        <button class="chip" data-cat="RELAY" aria-pressed="false">Relay</button>
+      </div>
+      <select id="lib-brand" aria-label="Manufacturer"><option value="">All manufacturers</option></select>
+    </div>
+    <div class="lib-list" id="lib-list"></div>
+  </aside>
+
+  <section class="center">
+    <div class="chart-card">
+      <div class="chart-toolbar">
+        <div class="tb-group">
+          <label>Base voltage <span class="inp-unit"><input type="number" id="base-kv" step="0.01" min="0.01" value="0.4"><i>kV</i></span></label>
+          <label>Fault level <span class="inp-unit"><input type="number" id="fault-ka" step="0.1" min="0" value="10"><i>kA</i></span></label>
+        </div>
+        <div class="tb-group">
+          <label>Current axis
+            <select id="x-range">
+              <option value="0,5">1 A – 100 kA</option>
+              <option value="1,5">10 A – 100 kA</option>
+              <option value="-1,4">0.1 A – 10 kA</option>
+              <option value="1,6">10 A – 1 MA</option>
+              <option value="auto" selected>Auto</option>
+            </select>
+          </label>
+          <label class="check"><input type="checkbox" id="show-bands" checked> Tolerance bands</label>
+        </div>
+      </div>
+      <div class="chart-wrap" id="chart-wrap">
+        <svg id="chart" role="img" aria-label="Time-current characteristic chart"></svg>
+        <div class="empty-chart" id="empty-chart" hidden>
+          <p>Add a breaker or relay from the library to plot its time-current band.</p>
+        </div>
+      </div>
+      <div class="readout" id="readout" aria-live="polite"><span class="ro-hint">Hover the chart to read operating times at any current.</span></div>
+    </div>
+
+    <section class="analysis">
+      <div class="an-head">
+        <h2>Coordination check</h2>
+        <button class="btn small" id="btn-autochain" title="Link devices into an upstream→downstream chain ordered by pick-up current">Auto-chain by pick-up</button>
+      </div>
+      <div class="table-scroll"><table class="grid-table" id="sel-table"></table></div>
+      <p class="fine">Time-current selectivity limit is the lowest current where the downstream device's latest clearing time reaches the upstream device's earliest operating time. Relay grading uses the CTI from <a href="https://ecalpro.com/docs/protection-coordination-methodology" target="_blank" rel="noopener">ECalPro's IEC 60255 methodology</a> (0.4 s electromechanical, 0.3 s numerical). When both devices are in their instantaneous region, energy-based selectivity needs the manufacturer's selectivity tables.</p>
+    </section>
+  </section>
+
+  <aside class="panel studypanel" aria-label="Study devices">
+    <div class="panel-head">
+      <h2>Study</h2>
+      <button class="btn small ghost" id="btn-clear">Clear</button>
+    </div>
+    <div class="study-list" id="study-list"></div>
+  </aside>
+</main>
+
+<main id="view-database" class="view database" data-active="false" hidden>
+  <div class="db-head">
+    <div>
+      <h1>Curve database <span class="mono" id="db-version"></span></h1>
+      <p class="lead" id="db-summary"></p>
+    </div>
+    <div class="db-actions">
+      <input type="search" id="db-search" placeholder="Filter entries…" aria-label="Filter database">
+      <a class="btn" href="db/curvedb.json" download="curvedb-2026.json">Download JSON</a>
+    </div>
+  </div>
+  <div class="legend-basis" id="basis-legend"></div>
+  <div class="table-scroll"><table class="grid-table db-table" id="db-table"></table></div>
+  <h2 class="mt">Sources</h2>
+  <ol class="sources" id="db-sources"></ol>
+</main>
+
+<main id="view-method" class="view method" data-active="false" hidden>
+  <article class="prose" id="method-body"></article>
+</main>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
