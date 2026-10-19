@@ -1,7 +1,7 @@
 {
  "meta": {
   "name": "Open TCC curve database",
-  "version": "2026.3",
+  "version": "2026.4",
   "built": "2026-10-19",
   "basisLegend": {
    "datasheet": "value printed in the cited manufacturer document",
@@ -463,6 +463,84 @@
    "url": "https://www.chintglobal.com/global/en/products/low-voltage/iec/final-power-distribution/nxble-63.html",
    "publisher": "CHINT",
    "accessed": "2026-10-19"
+  },
+  "se_vigipact": {
+   "title": "Schneider Electric ComPacT NSX user guide (DOCA0187) \u2014 VigiPacT add-on earth-leakage protection",
+   "url": "https://productinfo.se.com/compactnsxuserguide/doca0187-compact-nsx-user-guide/English/BM_ComPacT_NSX_DOCA0187_0000547863.xml/$/TPC_Earth_LeakageProtectionByVigiPactAdd_On_354b1ab7_T000227050",
+   "publisher": "Schneider Electric",
+   "accessed": "2026-10-19"
+  },
+  "abb_rcsel": {
+   "title": "ABB RC Sel XT2-XT4 residual current release instructions (1SDH000721R0503)",
+   "url": "https://library.e.abb.com/public/de8bc478ec76430c88f1a198dbabbe61/1SDH000721R0503.pdf",
+   "publisher": "ABB",
+   "accessed": "2026-10-19"
+  },
+  "siemens_3va_lv10": {
+   "title": "Siemens SENTRON 3VA molded case circuit breakers catalogue LV 10 (2023) \u2014 RCD310/510/520/820",
+   "url": "https://assets.new.siemens.com/siemens/assets/api/uuid:77ecee1e-a769-4de2-8f27-0a6d1e23559f/Catalogo-Disjuntores-3VA-LV10-2023-10-EN-.pdf",
+   "publisher": "Siemens",
+   "accessed": "2026-10-19"
+  },
+  "eaton_xfi": {
+   "title": "Eaton NZM1-XFI(R) residual-current module instruction leaflet (IL01219028Z)",
+   "url": "https://www.eaton.com/content/dam/eaton/technicaldocumentation/il/circuit-breakers/nzm/eaton-residual-current-module-mount-right-nzm1-il01219028z.pdf",
+   "publisher": "Eaton",
+   "accessed": "2026-10-19"
+  },
+  "se_vigirex": {
+   "title": "Schneider Electric Vigirex RH10M/RH21M/RH99M/RH197 earth-leakage relays data",
+   "url": "https://anco.com.pk/wp-content/uploads/2025/05/Schneider_Electric_Vigirex-RH10MPRH21MPRH99MRH197RHU_56173.pdf",
+   "publisher": "Schneider Electric",
+   "accessed": "2026-10-19"
+  },
+  "iec60228": {
+   "title": "IEC 60228:2004 Conductors of insulated cables \u2014 Table 2 class 2 conductor resistance (preview)",
+   "url": "https://cdn.standards.iteh.ai/samples/12024/921fee9a88c24612b68340a7330c2262/IEC-60228-2004.pdf",
+   "publisher": "IEC",
+   "accessed": "2026-10-19"
+  },
+  "iec60364_552_pvc": {
+   "title": "IEC 60364-5-52 Table B.52.4 (PVC, three loaded conductors), reproduced by TI-Soft",
+   "url": "https://www.ti-soft.com/en/support/help/electricaldesign/standards/iec-60364-5-52/current-carrying-capacity/table_b_52_4",
+   "publisher": "IEC",
+   "accessed": "2026-10-19"
+  },
+  "nbr5410_ampacity": {
+   "title": "NBR 5410 Tables 36\u201339 ampacity (IEC 60364-5-52 method basis; PVC and XLPE, Cu and Al, methods A1\u2013F), LOGOS reference",
+   "url": "https://www.logoscalc.com/en/reference/nbr-5410-ampacity-table",
+   "publisher": "ABNT",
+   "accessed": "2026-10-19"
+  },
+  "bs7671_k": {
+   "title": "BS 7671 Table 54.3 \u2014 k for protective conductors incorporated in a cable (OW Electric summary)",
+   "url": "https://www.owelectric.co.uk/posts/main-earthing-terminals-protective-conductors-cross-sectional-areas-bonding-calculations/",
+   "publisher": "IET",
+   "accessed": "2026-10-19"
+  },
+  "eig_isc": {
+   "title": "Schneider Electric Electrical Installation Guide \u2014 3-phase short-circuit current at any point within a LV installation",
+   "url": "https://www.electrical-installation.org/enwiki/3-phase_short-circuit_current_(Isc)_at_any_point_within_a_LV_installation",
+   "publisher": "Schneider Electric",
+   "accessed": "2026-10-19"
+  },
+  "iec60909_c": {
+   "title": "IEC 60909-0 voltage factor c table (Wiley sample chapter, Schlabbach: Short-circuit currents)",
+   "url": "https://application.wiley-vch.de/books/sample/3527341366_c01.pdf",
+   "publisher": "IEC",
+   "accessed": "2026-10-19"
+  },
+  "iec60909_kt": {
+   "title": "IEC 60909-0 transformer correction factor KT (kVA Tools documentation)",
+   "url": "https://www.kvatools.io/docs/short_circuit_analyzer_doc",
+   "publisher": "IEC",
+   "accessed": "2026-10-19"
+  },
+  "iec60364_41": {
+   "title": "IEC 60364-4-41:2005 Table 41.1 maximum disconnection times (preview)",
+   "url": "https://cdn.standards.iteh.ai/samples/10887/b410f7c10853465e9e7f293d9e18fd98/IEC-60364-4-41-2005.pdf",
+   "publisher": "IEC",
+   "accessed": "2026-10-19"
   }
  },
  "devices": [
@@ -554,7 +632,38 @@
     "siemens_mcb_guide",
     "beama_2026"
    ],
-   "notes": "Pure standard envelope. Instantaneous region: trip <0.1 s above the upper magnetic limit (BEAMA)."
+   "notes": "Pure standard envelope. Instantaneous region: trip <0.1 s above the upper magnetic limit (BEAMA).",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 4.5 kA",
+      "basis": "standard",
+      "icu": 4.5
+     },
+     {
+      "code": "Icn 6 kA",
+      "basis": "standard",
+      "icu": 6
+     },
+     {
+      "code": "Icn 10 kA",
+      "basis": "standard",
+      "icu": 10
+     },
+     {
+      "code": "Icn 15 kA",
+      "basis": "standard",
+      "icu": 15
+     },
+     {
+      "code": "Icn 25 kA",
+      "basis": "standard",
+      "icu": 25
+     }
+    ],
+    "source": "siemens_mcb_guide",
+    "note": "IEC 60898-1 standard values; choose the product's rating."
+   }
   },
   {
    "id": "se-ic60n",
@@ -649,7 +758,32 @@
    "sources": [
     "se_acti9"
    ],
-   "notes": "Magnetic thresholds B 4\u00b7In \u00b120 %, C 8\u00b7In \u00b120 %, D 12\u00b7In \u00b120 % (IEC 60947-2). Thermal band from IEC 60898-1 conventional points (multi-standard device). Catalogue reference temperature 50 \u00b0C under IEC 60947-2."
+   "notes": "Magnetic thresholds B 4\u00b7In \u00b120 %, C 8\u00b7In \u00b120 %, D 12\u00b7In \u00b120 % (IEC 60947-2). Thermal band from IEC 60898-1 conventional points (multi-standard device). Catalogue reference temperature 50 \u00b0C under IEC 60947-2.",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA (IEC 60898-1)",
+      "basis": "datasheet",
+      "icu": 6
+     },
+     {
+      "code": "Icu 10 kA (IEC 60947-2, 6\u201363 A)",
+      "basis": "datasheet",
+      "icuBy": [
+       [
+        4,
+        50
+       ],
+       [
+        63,
+        10
+       ]
+      ]
+     }
+    ],
+    "source": "se_acti9",
+    "note": ""
+   }
   },
   {
    "id": "se-ik60n",
@@ -729,7 +863,18 @@
    "sources": [
     "se_acti9"
    ],
-   "notes": "Curves B 3\u20135\u00b7In and C 5\u201310\u00b7In, 1\u201363 A, calibrated at 30 \u00b0C."
+   "notes": "Curves B 3\u20135\u00b7In and C 5\u201310\u00b7In, 1\u201363 A, calibrated at 30 \u00b0C.",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     }
+    ],
+    "source": "se_acti9",
+    "note": ""
+   }
   },
   {
    "id": "abb-s200",
@@ -911,7 +1056,33 @@
    "sources": [
     "abb_s200"
    ],
-   "notes": "B 6\u201363 A, C/D/K/Z 0.5\u201363 A. K and Z use 1.05/1.2\u00b7In thermal limits (ref. 20 \u00b0C). Datasheet time windows at the lower magnetic limit: B 3\u00b7In 0.1\u201345 s, C 5\u00b7In 0.1\u201315 s, D 10\u00b7In 0.1\u20134 s (In \u2264 32 A)."
+   "notes": "B 6\u201363 A, C/D/K/Z 0.5\u201363 A. K and Z use 1.05/1.2\u00b7In thermal limits (ref. 20 \u00b0C). Datasheet time windows at the lower magnetic limit: B 3\u00b7In 0.1\u201345 s, C 5\u00b7In 0.1\u201315 s, D 10\u00b7In 0.1\u20134 s (In \u2264 32 A).",
+   "bc": {
+    "options": [
+     {
+      "code": "S200 Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     },
+     {
+      "code": "S200M Icn 10 kA",
+      "basis": "datasheet",
+      "icu": 10
+     },
+     {
+      "code": "S200 Icu 10 kA (IEC 60947-2)",
+      "basis": "datasheet",
+      "icu": 10
+     },
+     {
+      "code": "S200M Icu 15 kA (IEC 60947-2)",
+      "basis": "datasheet",
+      "icu": 15
+     }
+    ],
+    "source": "abb_s200",
+    "note": ""
+   }
   },
   {
    "id": "siemens-5sl",
@@ -995,7 +1166,23 @@
     "siemens_mcb_guide",
     "siemens_mcb_primer"
    ],
-   "notes": "Standard residential/commercial range, up to 63 A."
+   "notes": "Standard residential/commercial range, up to 63 A.",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     },
+     {
+      "code": "Icn 10 kA",
+      "basis": "datasheet",
+      "icu": 10
+     }
+    ],
+    "source": "siemens_mcb_guide",
+    "note": ""
+   }
   },
   {
    "id": "siemens-5sy",
@@ -1085,7 +1272,28 @@
     "siemens_mcb_guide",
     "siemens_mcb_primer"
    ],
-   "notes": "Industrial range up to 63 A. B/C/D characteristics per IEC/EN 60898-1."
+   "notes": "Industrial range up to 63 A. B/C/D characteristics per IEC/EN 60898-1.",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 10 kA",
+      "basis": "assumed",
+      "icu": 10
+     },
+     {
+      "code": "Icn 15 kA",
+      "basis": "datasheet",
+      "icu": 15
+     },
+     {
+      "code": "Icu 25 kA (IEC 60947-2)",
+      "basis": "datasheet",
+      "icu": 25
+     }
+    ],
+    "source": "siemens_mcb_guide",
+    "note": "Catalogue gives 'up to' values; the 10 kA version is assumed."
+   }
   },
   {
    "id": "eaton-faz",
@@ -1233,7 +1441,27 @@
    "sources": [
     "eaton_faz"
    ],
-   "notes": "Thermal: >1 h at 1.05\u00b7In, <1 h at 1.3\u00b7In, 40 \u00b0C (IEC 60947-2 data). K, S, Z characteristics are offered but their data is not given in the cited catalogue."
+   "notes": "Thermal: >1 h at 1.05\u00b7In, <1 h at 1.3\u00b7In, 40 \u00b0C (IEC 60947-2 data). K, S, Z characteristics are offered but their data is not given in the cited catalogue.",
+   "bc": {
+    "options": [
+     {
+      "code": "Icu 10 / 15 kA (IEC 60947-2)",
+      "basis": "datasheet",
+      "icuBy": [
+       [
+        40,
+        10
+       ],
+       [
+        63,
+        15
+       ]
+      ]
+     }
+    ],
+    "source": "eaton_faz",
+    "note": "10 kA up to 40 A, 15 kA for 50\u201363 A."
+   }
   },
   {
    "id": "legrand-dx3",
@@ -1313,7 +1541,19 @@
    "sources": [
     "legrand_dx3"
    ],
-   "notes": "Magnetic calibration B 3\u20135, C 5\u201310, D 10\u201314\u00b7In; thermal Inf 1.05\u00b7In / If 1.3\u00b7In; derating reference 40 \u00b0C. MA (12\u201314\u00b7In) motor curve omitted (magnetic-only)."
+   "notes": "Magnetic calibration B 3\u20135, C 5\u201310, D 10\u201314\u00b7In; thermal Inf 1.05\u00b7In / If 1.3\u00b7In; derating reference 40 \u00b0C. MA (12\u201314\u00b7In) motor curve omitted (magnetic-only).",
+   "bc": {
+    "options": [
+     {
+      "code": "Icu 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 75
+     }
+    ],
+    "source": "legrand_dx3",
+    "note": ""
+   }
   },
   {
    "id": "hager-n",
@@ -1418,7 +1658,18 @@
     "hager_mcb_in",
     "hager_mcb_au"
    ],
-   "notes": "NB 6\u201363 A, NC/ND 0.5\u201363 A; 2.55\u00b7In trip between 1 and 120 s; calibrated at 30 \u00b0C. Hager publishes a derating table (e.g. 16 A \u2192 13.4 A at 50 \u00b0C)."
+   "notes": "NB 6\u201363 A, NC/ND 0.5\u201363 A; 2.55\u00b7In trip between 1 and 120 s; calibrated at 30 \u00b0C. Hager publishes a derating table (e.g. 16 A \u2192 13.4 A at 50 \u00b0C).",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 10 kA",
+      "basis": "datasheet",
+      "icu": 10
+     }
+    ],
+    "source": "hager_mcb_in",
+    "note": ""
+   }
   },
   {
    "id": "se-nsx-tmd",
@@ -1532,7 +1783,56 @@
     "se_nsx_cat",
     "se_nsx_tmd_ug"
    ],
-   "notes": "Ir 0.7\u20131\u00b7In; pick-up 1.05\u20131.20\u00b7Ir; tr fixed (1.5\u00b7In 120\u2013400 s, 6\u00b7Ir 15 s). Ii fixed \u00b120 % up to 160 A; 200/250 A adjustable 5\u201310\u00b7In (6-position dial)."
+   "notes": "Ir 0.7\u20131\u00b7In; pick-up 1.05\u20131.20\u00b7Ir; tr fixed (1.5\u00b7In 120\u2013400 s, 6\u00b7Ir 15 s). Ii fixed \u00b120 % up to 160 A; 200/250 A adjustable 5\u201310\u00b7In (6-position dial).",
+   "bc": {
+    "options": [
+     {
+      "code": "B 25 kA",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100,
+      "note": "NSX100\u2013250 only"
+     },
+     {
+      "code": "F 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "N 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "S 100 kA",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 100
+     },
+     {
+      "code": "L 150 kA",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     },
+     {
+      "code": "R 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "se_nsx_cat",
+    "note": "Icu at 380/415 V, Ics = 100 % Icu. VigiPacT add-ons are not compatible with R, HB1, HB2 versions."
+   }
   },
   {
    "id": "se-nsxm-tmd",
@@ -1615,7 +1915,43 @@
    "sources": [
     "se_nsx_cat"
    ],
-   "notes": "Ir 0.7\u20131\u00b7In; tr non-adjustable: 1.5\u00b7Ir 200 s, 6\u00b7Ir 8 s, 7.2\u00b7Ir 5 s; Ii fixed \u00b120 %."
+   "notes": "Ir 0.7\u20131\u00b7In; tr non-adjustable: 1.5\u00b7Ir 200 s, 6\u00b7Ir 8 s, 7.2\u00b7Ir 5 s; Ii fixed \u00b120 %.",
+   "bc": {
+    "options": [
+     {
+      "code": "E 16 kA",
+      "basis": "datasheet",
+      "icu": 16,
+      "ics": 100
+     },
+     {
+      "code": "B 25 kA",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100
+     },
+     {
+      "code": "F 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "N 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     }
+    ],
+    "source": "se_nsx_cat",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt1-tmd",
@@ -1700,9 +2036,46 @@
    "breaking": "XT1 B/C/N/S/H",
    "sources": [
     "abb_xt",
-    "beama_2026"
+    "beama_2026",
+    "abb_xt_iec_2020"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In (fixed values per rating, 450 A for \u226440 A). 16/20 A N,S,H are TMF (fixed I1). Magnetic tolerance not stated by ABB: IEC 60947-2 \u00b120 % applied."
+   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In (fixed values per rating, 450 A for \u226440 A). 16/20 A N,S,H are TMF (fixed I1). Magnetic tolerance not stated by ABB: IEC 60947-2 \u00b120 % applied.",
+   "bc": {
+    "options": [
+     {
+      "code": "B 18 kA",
+      "basis": "datasheet",
+      "icu": 18,
+      "ics": 100
+     },
+     {
+      "code": "C 25 kA",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100
+     },
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 75
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 50
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": "Ics at 415 V."
+   }
   },
   {
    "id": "abb-xt3-tmd",
@@ -1771,9 +2144,28 @@
    "breaking": "XT3 N/S",
    "sources": [
     "abb_xt",
-    "beama_2026"
+    "beama_2026",
+    "abb_xt_iec_2020"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In fixed."
+   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In fixed.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt4-tma",
@@ -1896,9 +2288,52 @@
    "breaking": "XT4 N/S/H/L/V",
    "sources": [
     "abb_xt",
-    "beama_2026"
+    "beama_2026",
+    "abb_xt_iec_2020"
    ],
-   "notes": "TMD (\u226432 A) fixed I3; TMA adjustable 8\u201310\u00b7In (40 A), 6\u201310\u00b7In (50 A), 5\u201310\u00b7In (\u226563 A)."
+   "notes": "TMD (\u226432 A) fixed I3; TMA adjustable 8\u201310\u00b7In (40 A), 6\u201310\u00b7In (50 A), 5\u201310\u00b7In (\u226563 A).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     },
+     {
+      "code": "X 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "siemens-3va1-tm240",
@@ -1971,7 +2406,33 @@
     "siemens_3va_manual",
     "beama_2026"
    ],
-   "notes": "Ir adjustable (e.g. 44\u201363 A on 63 A = 0.7\u20131\u00b7In); Ii 5\u201310\u00b7In; thermal-magnetic values refer to +50 \u00b0C."
+   "notes": "Ir adjustable (e.g. 44\u201363 A on 63 A = 0.7\u20131\u00b7In); Ii 5\u201310\u00b7In; thermal-magnetic values refer to +50 \u00b0C.",
+   "bc": {
+    "options": [
+     {
+      "code": "M 55 kA (415 V)",
+      "basis": "datasheet",
+      "icu": 55
+     },
+     {
+      "code": "H 85 kA",
+      "basis": "assumed",
+      "icu": 85
+     },
+     {
+      "code": "C 110 kA",
+      "basis": "assumed",
+      "icu": 110
+     },
+     {
+      "code": "L 150 kA",
+      "basis": "assumed",
+      "icu": 150
+     }
+    ],
+    "source": "siemens_no_cat",
+    "note": "Only class M is stated in the cited catalogue; H/C/L are assumed typical values."
+   }
   },
   {
    "id": "eaton-nzm-a",
@@ -2106,7 +2567,38 @@
     "eaton_nzm",
     "beama_2026"
    ],
-   "notes": "Ir 0.8\u20131\u00b7In; Ii 350 A fixed (20\u201332 A), 8\u201310\u00b7In (40 A), 6\u201310\u00b7In (50\u2013500 A), 160 A NZM1: 1280 A fixed (NZM2 160 A: 6\u201310\u00b7In)."
+   "notes": "Ir 0.8\u20131\u00b7In; Ii 350 A fixed (20\u201332 A), 8\u201310\u00b7In (40 A), 6\u201310\u00b7In (50\u2013500 A), 160 A NZM1: 1280 A fixed (NZM2 160 A: 6\u201310\u00b7In).",
+   "bc": {
+    "options": [
+     {
+      "code": "NZMB 25 kA",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100,
+      "note": "NZM1/2"
+     },
+     {
+      "code": "NZMC 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "NZMN 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "NZMH 100 kA (NZM2/3 150 kA)",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 50
+     }
+    ],
+    "source": "eaton_nzm",
+    "note": "Lower NZM1 value used where frames differ."
+   }
   },
   {
    "id": "legrand-dpx3-160",
@@ -2187,7 +2679,37 @@
     "legrand_dpx3",
     "beama_2026"
    ],
-   "notes": "Ir 0.8\u20131\u00b7In; magnetic fixed 10\u00b7In (400 A for 16\u201340 A)."
+   "notes": "Ir 0.8\u20131\u00b7In; magnetic fixed 10\u00b7In (400 A for 16\u201340 A).",
+   "bc": {
+    "options": [
+     {
+      "code": "16 kA",
+      "basis": "datasheet",
+      "icu": 16,
+      "ics": 100
+     },
+     {
+      "code": "25 kA",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100
+     },
+     {
+      "code": "36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     }
+    ],
+    "source": "legrand_dpx3",
+    "note": ""
+   }
   },
   {
    "id": "legrand-dpx3-250",
@@ -2263,7 +2785,43 @@
     "legrand_dpx3_250",
     "beama_2026"
    ],
-   "notes": "Ir 0.8\u20131\u00b7In; Im 5\u201310\u00b7In. Ratings 320\u2013500 A within the 250\u2013630 A DPX3 630 span are typical values (verify catalogue numbers)."
+   "notes": "Ir 0.8\u20131\u00b7In; Im 5\u201310\u00b7In. Ratings 320\u2013500 A within the 250\u2013630 A DPX3 630 span are typical values (verify catalogue numbers).",
+   "bc": {
+    "options": [
+     {
+      "code": "25 kA (DPX3 250)",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100
+     },
+     {
+      "code": "36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "100 kA (DPX3 630)",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 100
+     }
+    ],
+    "source": "legrand_dpx3",
+    "note": ""
+   }
   },
   {
    "id": "hager-h3-p160-tm",
@@ -2380,7 +2938,31 @@
    "sources": [
     "hager_h3"
    ],
-   "notes": "Ir 0.63/0.8/1\u00b7In; tripping between 1.05 and 1.30\u00b7Ir; tr fixed; Ii \u00b120 % (6-8-10-12\u00b7In, 160 A: 6\u201310\u00b7In). Reference temperature not stated in extract; 40 \u00b0C assumed."
+   "notes": "Ir 0.63/0.8/1\u00b7In; tripping between 1.05 and 1.30\u00b7Ir; tr fixed; Ii \u00b120 % (6-8-10-12\u00b7In, 160 A: 6\u201310\u00b7In). Reference temperature not stated in extract; 40 \u00b0C assumed.",
+   "bc": {
+    "options": [
+     {
+      "code": "H 25 kA",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100
+     },
+     {
+      "code": "M 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "E 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 71
+     }
+    ],
+    "source": "hager_h3",
+    "note": ""
+   }
   },
   {
    "id": "hager-h3-p250-tm",
@@ -2497,7 +3079,25 @@
    "sources": [
     "hager_h3"
    ],
-   "notes": "Ir 0.63/0.8/1\u00b7In; Ii \u00b120 %: \u2264160 A 6-8-10-13, 200 A 6-8-10-12, 250 A 6\u201310\u00b7In."
+   "notes": "Ir 0.63/0.8/1\u00b7In; Ii \u00b120 %: \u2264160 A 6-8-10-13, 200 A 6-8-10-12, 250 A 6\u201310\u00b7In.",
+   "bc": {
+    "options": [
+     {
+      "code": "M 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "E 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 71
+     }
+    ],
+    "source": "hager_h3",
+    "note": ""
+   }
   },
   {
    "id": "se-ml22",
@@ -2650,7 +3250,56 @@
    "sources": [
     "se_nsx_cat"
    ],
-   "notes": "Ir = Io \u00d7 (0.9\u20261); tr non-adjustable (1.5\u00b7Ir 400 s, 6\u00b7Ir 16 s, 7.2\u00b7Ir 11 s, accuracy 0/\u221220 %); Isd 1.5\u201310\u00b7Ir \u00b110 %, 20 ms / 80 ms; Ii fixed \u00b115 %, 10 ms / 50 ms."
+   "notes": "Ir = Io \u00d7 (0.9\u20261); tr non-adjustable (1.5\u00b7Ir 400 s, 6\u00b7Ir 16 s, 7.2\u00b7Ir 11 s, accuracy 0/\u221220 %); Isd 1.5\u201310\u00b7Ir \u00b110 %, 20 ms / 80 ms; Ii fixed \u00b115 %, 10 ms / 50 ms.",
+   "bc": {
+    "options": [
+     {
+      "code": "B 25 kA",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100,
+      "note": "NSX100\u2013250 only"
+     },
+     {
+      "code": "F 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "N 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "S 100 kA",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 100
+     },
+     {
+      "code": "L 150 kA",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     },
+     {
+      "code": "R 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "se_nsx_cat",
+    "note": "Icu at 380/415 V, Ics = 100 % Icu. VigiPacT add-ons are not compatible with R, HB1, HB2 versions."
+   }
   },
   {
    "id": "se-ml52",
@@ -2880,7 +3529,56 @@
    "sources": [
     "se_nsx_cat"
    ],
-   "notes": "tr 0.5\u201316 s @6\u00b7Ir (0/\u221220 %); Isd 1.5\u201310\u00b7Ir step 0.5 (\u00b110 %); tsd 0\u20130.4 s with I\u00b2t ON/OFF, non-trip/max-break times published; Ii 1.5\u201315\u00b7In (\u2264160 A), 12\u00b7In (250\u2013400 A), 11\u00b7In (630 A) \u00b115 %. I\u00b2t-ON reference point 10\u00b7Ir is assumed (not stated in cited catalogue)."
+   "notes": "tr 0.5\u201316 s @6\u00b7Ir (0/\u221220 %); Isd 1.5\u201310\u00b7Ir step 0.5 (\u00b110 %); tsd 0\u20130.4 s with I\u00b2t ON/OFF, non-trip/max-break times published; Ii 1.5\u201315\u00b7In (\u2264160 A), 12\u00b7In (250\u2013400 A), 11\u00b7In (630 A) \u00b115 %. I\u00b2t-ON reference point 10\u00b7Ir is assumed (not stated in cited catalogue).",
+   "bc": {
+    "options": [
+     {
+      "code": "B 25 kA",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100,
+      "note": "NSX100\u2013250 only"
+     },
+     {
+      "code": "F 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "N 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "S 100 kA",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 100
+     },
+     {
+      "code": "L 150 kA",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     },
+     {
+      "code": "R 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "se_nsx_cat",
+    "note": "Icu at 380/415 V, Ics = 100 % Icu. VigiPacT add-ons are not compatible with R, HB1, HB2 versions."
+   }
   },
   {
    "id": "abb-xt-ekip-lsi",
@@ -2986,7 +3684,8 @@
     ]
    },
    "sources": [
-    "abb_xt"
+    "abb_xt",
+    "abb_xt_iec_2020"
    ],
    "notes": "I1 0.4\u20131\u00b7In step 0.02 (manual); t1 3/12/36/60 s @3\u00b7I1, \u00b110 % (\u22644\u00b7In); I2 1\u201310\u00b7In, t2 0.05\u20130.4 s @10\u00b7In, I\u00b2t ON/OFF; I3 1\u201310\u00b7In \u00b110 %, \u226440 ms. In ratings listed are typical XT2/XT4 values \u2014 not extracted from the cited page.",
    "G": {
@@ -3016,6 +3715,48 @@
     "i2t": false,
     "note": "Ekip LSIG (OFF = LSI). I4 \u00b110 %, t4 \u00b115 %, t = k. G is inhibited at high currents (not modelled).",
     "basis": "datasheet"
+   },
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     },
+     {
+      "code": "X 200 kA (XT4 only)",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
    }
   },
   {
@@ -3095,7 +3836,33 @@
     "siemens_3va_ul_manual",
     "siemens_no_cat"
    ],
-   "notes": "Ir 0.4\u20131\u00b7In (10 steps); tr 0.5\u201312/15/17 s @6\u00b7Ir; Isd 1.5\u201310\u00b7Ir (630 A: 1.5\u20139); tsd 0\u20130.4 s (I\u00b2t, ref. 8\u00b7Ir); Ii fixed 12\u00b7In (\u2264100 A), 10\u00b7In (160\u2013400 A), 9\u00b7In (630 A)."
+   "notes": "Ir 0.4\u20131\u00b7In (10 steps); tr 0.5\u201312/15/17 s @6\u00b7Ir; Isd 1.5\u201310\u00b7Ir (630 A: 1.5\u20139); tsd 0\u20130.4 s (I\u00b2t, ref. 8\u00b7Ir); Ii fixed 12\u00b7In (\u2264100 A), 10\u00b7In (160\u2013400 A), 9\u00b7In (630 A).",
+   "bc": {
+    "options": [
+     {
+      "code": "M 55 kA (415 V)",
+      "basis": "datasheet",
+      "icu": 55
+     },
+     {
+      "code": "H 85 kA",
+      "basis": "assumed",
+      "icu": 85
+     },
+     {
+      "code": "C 110 kA",
+      "basis": "assumed",
+      "icu": 110
+     },
+     {
+      "code": "L 150 kA",
+      "basis": "assumed",
+      "icu": 150
+     }
+    ],
+    "source": "siemens_no_cat",
+    "note": "Only class M is stated in the cited catalogue; H/C/L are assumed typical values."
+   }
   },
   {
    "id": "siemens-3va-etu550",
@@ -3156,9 +3923,36 @@
    },
    "sources": [
     "siemens_3va_ul_manual",
-    "siemens_3va_manual"
+    "siemens_3va_manual",
+    "siemens_no_cat"
    ],
-   "notes": "Ir 0.4\u20131\u00b7In; tr 0.5\u201313/15/17/20/25 s @6\u00b7Ir; Isd 0.6\u20139/10\u00b7In; tsd 0.05\u20130.5 s (I\u00b2t switchable, ref. Isd = 8\u00b7Ir); Ii 1.5\u20139/10/12\u00b7In (frame dependent)."
+   "notes": "Ir 0.4\u20131\u00b7In; tr 0.5\u201313/15/17/20/25 s @6\u00b7Ir; Isd 0.6\u20139/10\u00b7In; tsd 0.05\u20130.5 s (I\u00b2t switchable, ref. Isd = 8\u00b7Ir); Ii 1.5\u20139/10/12\u00b7In (frame dependent).",
+   "bc": {
+    "options": [
+     {
+      "code": "M 55 kA (415 V)",
+      "basis": "datasheet",
+      "icu": 55
+     },
+     {
+      "code": "H 85 kA",
+      "basis": "assumed",
+      "icu": 85
+     },
+     {
+      "code": "C 110 kA",
+      "basis": "assumed",
+      "icu": 110
+     },
+     {
+      "code": "L 150 kA",
+      "basis": "assumed",
+      "icu": 150
+     }
+    ],
+    "source": "siemens_no_cat",
+    "note": "Only class M is stated in the cited catalogue; H/C/L are assumed typical values."
+   }
   },
   {
    "id": "eaton-nzm-ve",
@@ -3261,7 +4055,31 @@
    "sources": [
     "eaton_nzm"
    ],
-   "notes": "Ir = 0.5\u20131\u00b7In; tr 2\u201320 s @6\u00b7Ir; Isd 2\u201310\u00b7Ir (NZM3 630 A: 1.5\u20137\u00b7Ir); tsd 0\u20131000 ms; I\u00b2t: NZM2 fixed OFF, NZM3/4 switchable; Ii NZM2 fixed 1200/1920/3000 A, NZM3 2\u201311\u00b7In (250/400 A), 2\u20138\u00b7In (630 A), NZM4 2\u201312\u00b7In. I\u00b2t-ON reference 8\u00b7Ir assumed."
+   "notes": "Ir = 0.5\u20131\u00b7In; tr 2\u201320 s @6\u00b7Ir; Isd 2\u201310\u00b7Ir (NZM3 630 A: 1.5\u20137\u00b7Ir); tsd 0\u20131000 ms; I\u00b2t: NZM2 fixed OFF, NZM3/4 switchable; Ii NZM2 fixed 1200/1920/3000 A, NZM3 2\u201311\u00b7In (250/400 A), 2\u20138\u00b7In (630 A), NZM4 2\u201312\u00b7In. I\u00b2t-ON reference 8\u00b7Ir assumed.",
+   "bc": {
+    "options": [
+     {
+      "code": "NZMC 36 kA (NZM2/3)",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "NZMN 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 74
+     },
+     {
+      "code": "NZMH 85 kA (NZM2/3 150 kA)",
+      "basis": "datasheet",
+      "icu": 85,
+      "ics": 50
+     }
+    ],
+    "source": "eaton_nzm",
+    "note": "Lower NZM4 values used where frames differ (NZM4 Ics 37/43 kA)."
+   }
   },
   {
    "id": "legrand-dpx3-630-s2",
@@ -3369,6 +4187,36 @@
     "source": "legrand_dpx3",
     "note": "DPX3 Sg versions (OFF = S2): Ig 0.2\u20131\u00b7In and OFF, tg 0.1\u20131 s. Tolerances not printed (assumed \u00b110 % / \u00b115 %).",
     "basis": "datasheet"
+   },
+   "bc": {
+    "options": [
+     {
+      "code": "36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "100 kA",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 100
+     }
+    ],
+    "source": "legrand_dpx3",
+    "note": ""
    }
   },
   {
@@ -3536,6 +4384,30 @@
     "i2tRefBasis": "assumed",
     "note": "Ig OFF or 20\u2013100 % In in 5 % steps (40\u2013100 % for In = 40 A); tg 50\u2013500 ms with I\u00b2t ON/OFF.",
     "basis": "datasheet"
+   },
+   "bc": {
+    "options": [
+     {
+      "code": "H 25 kA (P160)",
+      "basis": "datasheet",
+      "icu": 25,
+      "ics": 100
+     },
+     {
+      "code": "M 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "E 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 71
+     }
+    ],
+    "source": "hager_h3",
+    "note": ""
    }
   },
   {
@@ -4135,7 +5007,28 @@
     "abb_tmax_t_0202",
     "abb_tmax_t"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 fixed: 630 A for 16\u201363 A (500 A version on T1B/C/N), 10\u00b7In above. Magnetic \u00b120 % (IEC 60947-2 \u00a78.3.3.1.2)."
+   "notes": "I1 0.7\u20131\u00b7In; I3 fixed: 630 A for 16\u201363 A (500 A version on T1B/C/N), 10\u00b7In above. Magnetic \u00b120 % (IEC 60947-2 \u00a78.3.3.1.2).",
+   "bc": {
+    "options": [
+     {
+      "code": "B 16 kA",
+      "basis": "assumed",
+      "icu": 16
+     },
+     {
+      "code": "C 25 kA",
+      "basis": "assumed",
+      "icu": 25
+     },
+     {
+      "code": "N 36 kA",
+      "basis": "assumed",
+      "icu": 36
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T1 values not readable in the cited catalogue (assumed typical)."
+   }
   },
   {
    "id": "abb-t2-tmd",
@@ -4241,7 +5134,33 @@
     "abb_tmax_t_0202",
     "abb_tmax_t"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 fixed: 10\u00b7In up to 12.5 A, 500 A for 16\u201350 A, 10\u00b7In for 63\u2013160 A. \u00b120 %."
+   "notes": "I1 0.7\u20131\u00b7In; I3 fixed: 10\u00b7In up to 12.5 A, 500 A for 16\u201350 A, 10\u00b7In for 63\u2013160 A. \u00b120 %.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "assumed",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "L 85 kA",
+      "basis": "assumed",
+      "icu": 85
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T2 values not readable in the cited catalogue (assumed typical)."
+   }
   },
   {
    "id": "abb-t2-tmg",
@@ -4318,9 +5237,36 @@
    },
    "breaking": "T2 N/S/H/L",
    "sources": [
-    "abb_tmax_t_0202"
+    "abb_tmax_t_0202",
+    "abb_tmax_t"
    ],
-   "notes": "Generator protection: I3 = 3\u00b7In (minimum 160/200 A on low ratings)."
+   "notes": "Generator protection: I3 = 3\u00b7In (minimum 160/200 A on low ratings).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "assumed",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "L 85 kA",
+      "basis": "assumed",
+      "icu": 85
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T2 values not readable in the cited catalogue (assumed typical)."
+   }
   },
   {
    "id": "abb-t3-tmd",
@@ -4390,7 +5336,23 @@
     "abb_tmax_t_0202",
     "abb_tmax_t"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In fixed (630\u20132500 A)."
+   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In fixed (630\u20132500 A).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "assumed",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T3 values not readable in the cited catalogue (assumed typical)."
+   }
   },
   {
    "id": "abb-t3-tmg",
@@ -4465,9 +5427,26 @@
    },
    "breaking": "T3 N/S",
    "sources": [
-    "abb_tmax_t_0202"
+    "abb_tmax_t_0202",
+    "abb_tmax_t"
    ],
-   "notes": "Generator protection: I3 = 3\u00b7In (400 A minimum)."
+   "notes": "Generator protection: I3 = 3\u00b7In (400 A minimum).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "assumed",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T3 values not readable in the cited catalogue (assumed typical)."
+   }
   },
   {
    "id": "abb-t4-tm",
@@ -4568,7 +5547,43 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "TMD 20\u201350 A: I3 fixed 320/320/500 A. TMA 80\u2013250 A: I3 5\u201310\u00b7In. Thermal band uses the catalogue's T4N 250 example (2\u00b7I1: 105.3\u2013357.8 s cold)."
+   "notes": "TMD 20\u201350 A: I3 fixed 320/320/500 A. TMA 80\u2013250 A: I3 5\u201310\u00b7In. Thermal band uses the catalogue's T4N 250 example (2\u00b7I1: 105.3\u2013357.8 s cold).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T4 250 A: L and V only; N/S/H listed for T4 320 A."
+   }
   },
   {
    "id": "abb-t5-tma",
@@ -4646,7 +5661,43 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (1600\u20135000 A) \u00b120 %."
+   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (1600\u20135000 A) \u00b120 %.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T4 250 A: L and V only; N/S/H listed for T4 320 A."
+   }
   },
   {
    "id": "abb-t5-tmg",
@@ -4724,7 +5775,43 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "Generator protection: I3 2.5\u20135\u00b7In."
+   "notes": "Generator protection: I3 2.5\u20135\u00b7In.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T4 250 A: L and V only; N/S/H listed for T4 320 A."
+   }
   },
   {
    "id": "abb-t6-tma",
@@ -4797,7 +5884,37 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (3150\u20138000 A). No thermal-magnetic unit for 1000 A."
+   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (3150\u20138000 A). No thermal-magnetic unit for 1000 A.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 100 kA",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": ""
+   }
   },
   {
    "id": "abb-t2-pr221",
@@ -4918,9 +6035,36 @@
     ]
    },
    "sources": [
-    "abb_tmax_t_0202"
+    "abb_tmax_t_0202",
+    "abb_tmax_t"
    ],
-   "notes": "I1 0.4\u20131\u00b7In step 0.04; t1 3/6/12 s @6\u00b7I1; I2 1\u201310\u00b7In, t2 0.1/0.25 s @8\u00b7In (I\u00b2t); I3 1\u201310\u00b7In \u00b120 %, \u226440 ms. PR221DS-LS/I: S and I are alternatives \u2014 S defaults to OFF; switch I to OFF if you use S."
+   "notes": "I1 0.4\u20131\u00b7In step 0.04; t1 3/6/12 s @6\u00b7I1; I2 1\u201310\u00b7In, t2 0.1/0.25 s @8\u00b7In (I\u00b2t); I3 1\u201310\u00b7In \u00b120 %, \u226440 ms. PR221DS-LS/I: S and I are alternatives \u2014 S defaults to OFF; switch I to OFF if you use S.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "assumed",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "L 85 kA",
+      "basis": "assumed",
+      "icu": 85
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "T2 values not readable in the cited catalogue (assumed typical)."
+   }
   },
   {
    "id": "abb-t456-pr221",
@@ -5042,7 +6186,43 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "T4 In 320, T5 630, T6 1000 A: 10\u00b7In setting = 9.5\u00b7In. PR221DS-LS/I: S and I are alternatives \u2014 S defaults to OFF; switch I to OFF if you use S."
+   "notes": "T4 In 320, T5 630, T6 1000 A: 10\u00b7In setting = 9.5\u00b7In. PR221DS-LS/I: S and I are alternatives \u2014 S defaults to OFF; switch I to OFF if you use S.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 100 kA (T4/T5 120 kA)",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA (T4/T5 200 kA)",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "Lower T6 values used where frames differ."
+   }
   },
   {
    "id": "abb-t456-pr222",
@@ -5148,7 +6328,43 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "Electronic setting values (PR010/T or dialogue). I2 0.6\u201310\u00b7In, t2 0.05\u20130.5 s (t=k or t=k/I\u00b2 @8\u00b7In); I3 1.5\u201312\u00b7In \u00b110 %."
+   "notes": "Electronic setting values (PR010/T or dialogue). I2 0.6\u201310\u00b7In, t2 0.05\u20130.5 s (t=k or t=k/I\u00b2 @8\u00b7In); I3 1.5\u201312\u00b7In \u00b110 %.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 100 kA (T4/T5 120 kA)",
+      "basis": "datasheet",
+      "icu": 100,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA (T4/T5 200 kA)",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": "Lower T6 values used where frames differ."
+   }
   },
   {
    "id": "abb-t7-pr231",
@@ -5272,7 +6488,43 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "S (t=k or k/I\u00b2 @10\u00b7In) and I are alternatives \u2014 set the unused one to OFF."
+   "notes": "S (t=k or k/I\u00b2 @10\u00b7In) and I are alternatives \u2014 set the unused one to OFF.",
+   "bc": {
+    "options": [
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA (800\u20131250 A)",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     },
+     {
+      "code": "X 170 kA (800 A)",
+      "basis": "datasheet",
+      "icu": 170,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": ""
+   }
   },
   {
    "id": "abb-t7-pr232",
@@ -5397,7 +6649,43 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "I1 0.4\u20131\u00b7In step 0.04; t1 3/6/12/18 s @6\u00b7I1; I2 0.6\u201310\u00b7In, t2 0.1\u20130.8 s; I3 1.5\u201312\u00b7In \u00b110 %."
+   "notes": "I1 0.4\u20131\u00b7In step 0.04; t1 3/6/12/18 s @6\u00b7I1; I2 0.6\u201310\u00b7In, t2 0.1\u20130.8 s; I3 1.5\u201312\u00b7In \u00b110 %.",
+   "bc": {
+    "options": [
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA (800\u20131250 A)",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     },
+     {
+      "code": "X 170 kA (800 A)",
+      "basis": "datasheet",
+      "icu": 170,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": ""
+   }
   },
   {
    "id": "abb-t7-pr332",
@@ -5491,7 +6779,43 @@
    "sources": [
     "abb_tmax_t"
    ],
-   "notes": "I2 \u00b17 % (\u22646\u00b7In); I3 1.5\u201315\u00b7In \u00b110 %, \u226430 ms. PR331/P uses discrete steps of the same ranges."
+   "notes": "I2 \u00b17 % (\u22646\u00b7In); I3 1.5\u201315\u00b7In \u00b110 %, \u226430 ms. PR331/P uses discrete steps of the same ranges.",
+   "bc": {
+    "options": [
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA (800\u20131250 A)",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     },
+     {
+      "code": "X 170 kA (800 A)",
+      "basis": "datasheet",
+      "icu": 170,
+      "ics": 100
+     }
+    ],
+    "source": "abb_tmax_t",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt2-tm",
@@ -5620,7 +6944,43 @@
    "sources": [
     "abb_xt_iec_2020"
    ],
-   "notes": "TMD 1.6\u201332 A fixed I3; TMA 40\u2013160 A adjustable I3 (300 A minimum)."
+   "notes": "TMD 1.6\u201332 A fixed I3; TMA 40\u2013160 A adjustable I3 (300 A minimum).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt5-tma",
@@ -5704,7 +7064,49 @@
    "sources": [
     "abb_xt_iec_2020"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (1600\u20136300 A)."
+   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (1600\u20136300 A).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     },
+     {
+      "code": "X 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt6-tma",
@@ -5778,7 +7180,31 @@
    "sources": [
     "abb_xt_iec_2020"
    ],
-   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (3150\u20138000 A)."
+   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (3150\u20138000 A).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt-ekipdip-lsi",
@@ -5901,7 +7327,43 @@
    "sources": [
     "abb_xt_iec_2020"
    ],
-   "notes": "XT2 In 10\u2013160 A, XT5 250\u2013630 A, XT6 630\u20131000 A. S definite time t = k (0.1/0.2 s); I3 \u226420 ms."
+   "notes": "XT2 In 10\u2013160 A, XT5 250\u2013630 A, XT6 630\u20131000 A. S definite time t = k (0.1/0.2 s); I3 \u226420 ms.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA (XT2/XT5)",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 150 kA (XT2; XT5 200 kA)",
+      "basis": "datasheet",
+      "icu": 150,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": "Values common to XT2/XT5/XT6; the lower figure is used where frames differ."
+   }
   },
   {
    "id": "abb-xt5-ekipdip-lsi",
@@ -6037,7 +7499,49 @@
    "sources": [
     "abb_xt_iec_2020"
    ],
-   "notes": "t1 3/12/36/48 s @3\u00b7I1; I2 1\u201310\u00b7In, t2 0.05\u20130.4 s (t=k or I\u00b2t @10\u00b7In); I3 1\u201310\u00b7In \u226420 ms."
+   "notes": "t1 3/12/36/48 s @3\u00b7I1; I2 1\u201310\u00b7In, t2 0.05\u20130.4 s (t=k or I\u00b2t @10\u00b7In); I3 1\u201310\u00b7In \u226420 ms.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     },
+     {
+      "code": "X 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt6-ekipdip-lsi",
@@ -6173,7 +7677,31 @@
    "sources": [
     "abb_xt_iec_2020"
    ],
-   "notes": "t1 3/12/36/MAX @3\u00b7I1 \u2014 MAX = 72 s (800 A) or 42 s (1000 A)."
+   "notes": "t1 3/12/36/MAX @3\u00b7I1 \u2014 MAX = 72 s (800 A) or 42 s (1000 A).",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt7-ekipdip-lsi",
@@ -6341,6 +7869,30 @@
     "i2t": false,
     "basis": "assumed",
     "note": "LSIG version (OFF = LSI). Settings taken from the XT2/XT4 Ekip LSIG table (assumed for this frame)."
+   },
+   "bc": {
+    "options": [
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
    }
   },
   {
@@ -6433,7 +7985,49 @@
    "sources": [
     "abb_xt_iec_2020"
    ],
-   "notes": "I1 0.4\u20131\u00b7In; t1 3\u201348 s @3\u00b7I1 (\u00b110 % <6\u00b7In); I2 0.6\u201310\u00b7In \u00b17 %, t2 0.05\u20130.5 s; I3 1.5\u201310\u00b7In \u00b110 %, \u226430 ms."
+   "notes": "I1 0.4\u20131\u00b7In; t1 3\u201348 s @3\u00b7I1 (\u00b110 % <6\u00b7In); I2 0.6\u201310\u00b7In \u00b17 %, t2 0.05\u20130.5 s; I3 1.5\u201310\u00b7In \u00b110 %, \u226430 ms.",
+   "bc": {
+    "options": [
+     {
+      "code": "N 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 100
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     },
+     {
+      "code": "V 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     },
+     {
+      "code": "X 200 kA",
+      "basis": "datasheet",
+      "icu": 200,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "abb-xt7-ekiptouch",
@@ -6526,7 +8120,31 @@
     "abb_xt_iec_2020",
     "abb_xt7_manual"
    ],
-   "notes": "I1 0.4\u20131\u00b7In; t1 3\u2013144 s @3\u00b7I1 (\u00b110 % <6\u00b7In); I2 0.6\u201310\u00b7In \u00b17 %, t2 0.05\u20130.8 s; I3 1.5\u201315\u00b7In \u00b110 %, \u226430 ms."
+   "notes": "I1 0.4\u20131\u00b7In; t1 3\u2013144 s @3\u00b7I1 (\u00b110 % <6\u00b7In); I2 0.6\u201310\u00b7In \u00b17 %, t2 0.05\u20130.8 s; I3 1.5\u201315\u00b7In \u00b110 %, \u226430 ms.",
+   "bc": {
+    "options": [
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50,
+      "ics": 100
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70,
+      "ics": 100
+     },
+     {
+      "code": "L 120 kA",
+      "basis": "datasheet",
+      "icu": 120,
+      "ics": 100
+     }
+    ],
+    "source": "abb_xt_iec_2020",
+    "note": ""
+   }
   },
   {
    "id": "chint-nxb63",
@@ -6611,7 +8229,23 @@
    "sources": [
     "chint_nxb63"
    ],
-   "notes": "B 3\u20135\u00b7In, C 5\u201310\u00b7In, D 10\u201316\u00b7In; 1.13/1.45/2.55\u00b7In test points as IEC 60898-1; reference 30 \u00b0C."
+   "notes": "B 3\u20135\u00b7In, C 5\u201310\u00b7In, D 10\u201316\u00b7In; 1.13/1.45/2.55\u00b7In test points as IEC 60898-1; reference 30 \u00b0C.",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     },
+     {
+      "code": "Icn 10 kA",
+      "basis": "datasheet",
+      "icu": 10
+     }
+    ],
+    "source": "chint_nxb63",
+    "note": ""
+   }
   },
   {
    "id": "chint-nb1",
@@ -6697,7 +8331,23 @@
    "sources": [
     "chint_nb1"
    ],
-   "notes": "B 3\u20135\u00b7In, C 5\u201310\u00b7In, D 10\u201314\u00b7In; reference 30 \u00b0C. Thermal band from IEC 60898-1 points (not tabulated in catalogue)."
+   "notes": "B 3\u20135\u00b7In, C 5\u201310\u00b7In, D 10\u201314\u00b7In; reference 30 \u00b0C. Thermal band from IEC 60898-1 points (not tabulated in catalogue).",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA (IEC 60898-1)",
+      "basis": "datasheet",
+      "icu": 6
+     },
+     {
+      "code": "Icu 10 kA (IEC 60947-2)",
+      "basis": "datasheet",
+      "icu": 10
+     }
+    ],
+    "source": "chint_nb1",
+    "note": ""
+   }
   },
   {
    "id": "chint-nxm-tm",
@@ -6786,7 +8436,34 @@
    "sources": [
     "chint_nxm"
    ],
-   "notes": "Thermal fixed; 1.05\u00b7In no trip / 1.30\u00b7In trip (1 h \u226463 A, 2 h >63 A). Magnetic 10\u00b7In fixed \u00b120 %. Motor version 12\u00b7In not included."
+   "notes": "Thermal fixed; 1.05\u00b7In no trip / 1.30\u00b7In trip (1 h \u226463 A, 2 h >63 A). Magnetic 10\u00b7In fixed \u00b120 %. Motor version 12\u00b7In not included.",
+   "bc": {
+    "options": [
+     {
+      "code": "E 15 kA",
+      "basis": "assumed",
+      "icu": 15
+     },
+     {
+      "code": "S 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 56
+     },
+     {
+      "code": "F 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     }
+    ],
+    "source": "chint_nxm",
+    "note": "Only NXM-250S (36/20 kA) is readable in the cited catalogue; E/F/H take the catalogue's 15\u201370 kA range ends (assumed)."
+   }
   },
   {
    "id": "chint-nxm1600-tm",
@@ -6876,7 +8553,23 @@
    "sources": [
     "chint_nxm"
    ],
-   "notes": "Ir 0.7-0.8-0.9-1\u00b7In (1600 frame); Ii 7-8-9-10\u00b7In."
+   "notes": "Ir 0.7-0.8-0.9-1\u00b7In (1600 frame); Ii 7-8-9-10\u00b7In.",
+   "bc": {
+    "options": [
+     {
+      "code": "S 50 kA",
+      "basis": "datasheet",
+      "icu": 50
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "datasheet",
+      "icu": 70
+     }
+    ],
+    "source": "chint_nxm",
+    "note": ""
+   }
   },
   {
    "id": "chint-nxm-etu",
@@ -7066,7 +8759,34 @@
    "sources": [
     "chint_nxm"
    ],
-   "notes": "Rating = frame Inm; Ir dial values in A. Isd 1.5\u20138\u00b7Ir \u00b115 %, tsd 0.3 \u00b10.06 s; Ii 2\u201312\u00b7Ir \u00b115 %."
+   "notes": "Rating = frame Inm; Ir dial values in A. Isd 1.5\u20138\u00b7Ir \u00b115 %, tsd 0.3 \u00b10.06 s; Ii 2\u201312\u00b7Ir \u00b115 %.",
+   "bc": {
+    "options": [
+     {
+      "code": "E 15 kA",
+      "basis": "assumed",
+      "icu": 15
+     },
+     {
+      "code": "S 36 kA",
+      "basis": "datasheet",
+      "icu": 36,
+      "ics": 56
+     },
+     {
+      "code": "F 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "H 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     }
+    ],
+    "source": "chint_nxm",
+    "note": "Only NXM-250S (36/20 kA) is readable in the cited catalogue; E/F/H take the catalogue's 15\u201370 kA range ends (assumed)."
+   }
   },
   {
    "id": "chint-nm8n125-tm",
@@ -7171,7 +8891,38 @@
    "sources": [
     "chint_nm8n"
    ],
-   "notes": "Ir 1.0\u00b7In non-adjustable; Ii 10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+   "notes": "Ir 1.0\u00b7In non-adjustable; Ii 10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used.",
+   "bc": {
+    "options": [
+     {
+      "code": "C 36 kA",
+      "basis": "datasheet",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "Q 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "H 100 kA",
+      "basis": "assumed",
+      "icu": 100
+     },
+     {
+      "code": "R 150 kA",
+      "basis": "datasheet",
+      "icu": 150
+     }
+    ],
+    "source": "chint_nm8n",
+    "note": "Catalogue range C\u2013R 36\u2013150 kA at 400 V; the intermediate letters are assumed."
+   }
   },
   {
    "id": "chint-nm8n250-tm",
@@ -7263,7 +9014,38 @@
    "sources": [
     "chint_nm8n"
    ],
-   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used.",
+   "bc": {
+    "options": [
+     {
+      "code": "C 36 kA",
+      "basis": "datasheet",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "Q 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "H 100 kA",
+      "basis": "assumed",
+      "icu": 100
+     },
+     {
+      "code": "R 150 kA",
+      "basis": "datasheet",
+      "icu": 150
+     }
+    ],
+    "source": "chint_nm8n",
+    "note": "Catalogue range C\u2013R 36\u2013150 kA at 400 V; the intermediate letters are assumed."
+   }
   },
   {
    "id": "chint-nm8n400-630-tm",
@@ -7382,7 +9164,38 @@
    "sources": [
     "chint_nm8n"
    ],
-   "notes": "Ir 1.0\u00b7In non-adjustable; Ii 7-8-9-10-11-12\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+   "notes": "Ir 1.0\u00b7In non-adjustable; Ii 7-8-9-10-11-12\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used.",
+   "bc": {
+    "options": [
+     {
+      "code": "C 36 kA",
+      "basis": "datasheet",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "Q 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "H 100 kA",
+      "basis": "assumed",
+      "icu": 100
+     },
+     {
+      "code": "R 150 kA",
+      "basis": "datasheet",
+      "icu": 150
+     }
+    ],
+    "source": "chint_nm8n",
+    "note": "Catalogue range C\u2013R 36\u2013150 kA at 400 V; the intermediate letters are assumed."
+   }
   },
   {
    "id": "chint-nm8n800-tm",
@@ -7486,7 +9299,38 @@
    "sources": [
     "chint_nm8n"
    ],
-   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 5-6-7-8-9-10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 5-6-7-8-9-10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used.",
+   "bc": {
+    "options": [
+     {
+      "code": "C 36 kA",
+      "basis": "datasheet",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "Q 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "H 100 kA",
+      "basis": "assumed",
+      "icu": 100
+     },
+     {
+      "code": "R 150 kA",
+      "basis": "datasheet",
+      "icu": 150
+     }
+    ],
+    "source": "chint_nm8n",
+    "note": "Catalogue range C\u2013R 36\u2013150 kA at 400 V; the intermediate letters are assumed."
+   }
   },
   {
    "id": "chint-nm8n1600-tm",
@@ -7586,7 +9430,38 @@
    "sources": [
     "chint_nm8n"
    ],
-   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 6-7-8-9-10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 6-7-8-9-10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used.",
+   "bc": {
+    "options": [
+     {
+      "code": "C 36 kA",
+      "basis": "datasheet",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "Q 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "H 100 kA",
+      "basis": "assumed",
+      "icu": 100
+     },
+     {
+      "code": "R 150 kA",
+      "basis": "datasheet",
+      "icu": 150
+     }
+    ],
+    "source": "chint_nm8n",
+    "note": "Catalogue range C\u2013R 36\u2013150 kA at 400 V; the intermediate letters are assumed."
+   }
   },
   {
    "id": "chint-nm8n-en",
@@ -7717,6 +9592,37 @@
     "i2t": false,
     "note": "NM8N EM version (OFF = EN): Ig 0.4\u20131\u00b7In \u00b115 %, tg 0.1\u20130.4 s \u00b120 % or \u00b140 ms.",
     "basis": "datasheet"
+   },
+   "bc": {
+    "options": [
+     {
+      "code": "C 36 kA",
+      "basis": "datasheet",
+      "icu": 36
+     },
+     {
+      "code": "S 50 kA",
+      "basis": "assumed",
+      "icu": 50
+     },
+     {
+      "code": "Q 70 kA",
+      "basis": "assumed",
+      "icu": 70
+     },
+     {
+      "code": "H 100 kA",
+      "basis": "assumed",
+      "icu": 100
+     },
+     {
+      "code": "R 150 kA",
+      "basis": "datasheet",
+      "icu": 150
+     }
+    ],
+    "source": "chint_nm8n",
+    "note": "Catalogue range C\u2013R 36\u2013150 kA at 400 V; the intermediate letters are assumed."
    }
   },
   {
@@ -7810,7 +9716,74 @@
     "chint_nm1_kr",
     "chint_nm1"
    ],
-   "notes": "Thermal fixed; 1.05\u00b7In no trip / 1.30\u00b7In trip (1 h \u226463 A, 2 h >63 A), calibrated at 40 \u00b0C. The magnetic setting is not legible in the available catalogue text: 10\u00b7In \u00b120 % (as on the successor NXM) is assumed."
+   "notes": "Thermal fixed; 1.05\u00b7In no trip / 1.30\u00b7In trip (1 h \u226463 A, 2 h >63 A), calibrated at 40 \u00b0C. The magnetic setting is not legible in the available catalogue text: 10\u00b7In \u00b120 % (as on the successor NXM) is assumed.",
+   "bc": {
+    "options": [
+     {
+      "code": "S",
+      "basis": "datasheet",
+      "icuBy": [
+       [
+        63,
+        20
+       ],
+       [
+        250,
+        25
+       ],
+       [
+        630,
+        35
+       ]
+      ],
+      "ics": 50
+     },
+     {
+      "code": "H",
+      "basis": "datasheet",
+      "icuBy": [
+       [
+        63,
+        42
+       ],
+       [
+        250,
+        50
+       ],
+       [
+        630,
+        50
+       ],
+       [
+        800,
+        60
+       ],
+       [
+        1250,
+        65
+       ]
+      ],
+      "ics": 50
+     },
+     {
+      "code": "R",
+      "basis": "datasheet",
+      "icuBy": [
+       [
+        250,
+        65
+       ],
+       [
+        800,
+        70
+       ]
+      ],
+      "ics": 50
+     }
+    ],
+    "source": "chint_nm1",
+    "note": "Frame-dependent (NM1-63/125-250/400-630/800/1250). The 380/400/415 V column mapping of the extracted catalogue text is uncertain."
+   }
   },
   {
    "id": "chint-nxa",
@@ -7955,7 +9928,31 @@
    "sources": [
     "chint_nxa"
    ],
-   "notes": "Isd: <0.85 no trip / >1.15 trip; 4-step definite time (values assumed 0.1\u20130.4 s); Ii 2\u201315\u00b7In, \u226450 ms."
+   "notes": "Isd: <0.85 no trip / >1.15 trip; 4-step definite time (values assumed 0.1\u20130.4 s); Ii 2\u201315\u00b7In, \u226450 ms.",
+   "bc": {
+    "options": [
+     {
+      "code": "N (as NA8)",
+      "basis": "assumed",
+      "icuBy": [
+       [
+        2500,
+        65
+       ],
+       [
+        3200,
+        85
+       ],
+       [
+        7500,
+        100
+       ]
+      ]
+     }
+    ],
+    "source": "chint_nxa",
+    "note": "NXA Icu not readable in the cited catalogue; NA8 values assumed. Enter the nameplate value."
+   }
   },
   {
    "id": "chint-na8",
@@ -8080,7 +10077,53 @@
    "sources": [
     "chint_na8"
    ],
-   "notes": "Isd <0.9 no trip / >1.15 trip; tsd definite 0.1\u20130.4 s or inverse I\u00b2t = (10\u00b7Ir)\u00b2\u00b7tsd; Ii 2\u201315\u00b7In, \u2264100 ms."
+   "notes": "Isd <0.9 no trip / >1.15 trip; tsd definite 0.1\u20130.4 s or inverse I\u00b2t = (10\u00b7Ir)\u00b2\u00b7tsd; Ii 2\u201315\u00b7In, \u2264100 ms.",
+   "bc": {
+    "options": [
+     {
+      "code": "N",
+      "basis": "datasheet",
+      "icuBy": [
+       [
+        2500,
+        65
+       ],
+       [
+        3200,
+        85
+       ],
+       [
+        7500,
+        100
+       ]
+      ]
+     },
+     {
+      "code": "H",
+      "basis": "datasheet",
+      "icuBy": [
+       [
+        2500,
+        85
+       ],
+       [
+        3200,
+        100
+       ],
+       [
+        4000,
+        135
+       ],
+       [
+        7500,
+        150
+       ]
+      ]
+     }
+    ],
+    "source": "chint_na8",
+    "note": "Frame-dependent Icu at 400/415 V."
+   }
   },
   {
    "id": "se-icv40n",
@@ -8169,7 +10212,18 @@
      "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
     }
    },
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     }
+    ],
+    "source": "se_icv40",
+    "note": ""
+   }
   },
   {
    "id": "se-idpn-vigi",
@@ -8247,7 +10301,18 @@
      "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
     }
    },
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     }
+    ],
+    "source": "se_idpn_vigi",
+    "note": ""
+   }
   },
   {
    "id": "abb-ds201",
@@ -8328,7 +10393,24 @@
     }
    },
    "standard": "IEC/EN 61009-1",
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 4.5 kA (IEC 61009-1)",
+      "basis": "datasheet",
+      "icu": 4.5
+     },
+     {
+      "code": "Icu 6 kA (IEC 60947-2)",
+      "basis": "datasheet",
+      "icu": 6,
+      "ics": 75
+     }
+    ],
+    "source": "abb_ds201",
+    "note": ""
+   }
   },
   {
    "id": "siemens-5su1",
@@ -8416,7 +10498,23 @@
     }
    },
    "standard": "IEC/EN 61009-1",
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     },
+     {
+      "code": "10 kA",
+      "basis": "datasheet",
+      "icu": 10
+     }
+    ],
+    "source": "siemens_5su1",
+    "note": ""
+   }
   },
   {
    "id": "eaton-frbm6",
@@ -8521,7 +10619,18 @@
     }
    },
    "standard": "IEC/EN 61009-1",
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     }
+    ],
+    "source": "eaton_frbm6",
+    "note": ""
+   }
   },
   {
    "id": "legrand-dx3-rcbo",
@@ -8598,7 +10707,18 @@
      "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
     }
    },
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     }
+    ],
+    "source": "legrand_dx3_rcbo",
+    "note": ""
+   }
   },
   {
    "id": "hager-rcbo-10ka",
@@ -8709,7 +10829,18 @@
     "hager_rcbo_ie",
     "eaton_frbm6"
    ],
-   "notes": "Commercial/industrial single pole + solid neutral, 10 kA; 10/30/100 mA. Magnetic ranges not printed: IEC 61009 values used."
+   "notes": "Commercial/industrial single pole + solid neutral, 10 kA; 10/30/100 mA. Magnetic ranges not printed: IEC 61009 values used.",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 10 kA",
+      "basis": "datasheet",
+      "icu": 10
+     }
+    ],
+    "source": "hager_rcbo_ie",
+    "note": ""
+   }
   },
   {
    "id": "hager-ada-au",
@@ -8788,7 +10919,18 @@
      "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
     }
    },
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     }
+    ],
+    "source": "hager_ada_au",
+    "note": ""
+   }
   },
   {
    "id": "chint-nb1l",
@@ -8884,7 +11026,23 @@
     }
    },
    "standard": "IEC/EN 61009-1",
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     },
+     {
+      "code": "Icn 10 kA (NB1L-40/63)",
+      "basis": "datasheet",
+      "icu": 10
+     }
+    ],
+    "source": "chint_nb1l",
+    "note": ""
+   }
   },
   {
    "id": "chint-nxble63",
@@ -8976,7 +11134,18 @@
     }
    },
    "standard": "IEC/EN 61009-1",
-   "refTempC": 30
+   "refTempC": 30,
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 6 kA",
+      "basis": "datasheet",
+      "icu": 6
+     }
+    ],
+    "source": "chint_nxble",
+    "note": ""
+   }
   },
   {
    "id": "iec61009-rcbo",
@@ -9081,7 +11250,33 @@
     "eaton_frbm6",
     "beama_2026"
    ],
-   "notes": "Standard envelope for any RCBO. Residual (earth-fault) band from the IEC 61008-1 / 61009-1 tripping-time table for sinusoidal residual current: no trip below 0.5\u00b7I\u0394n; maximum break time 0.3 / 0.15 / 0.04 s at 1 / 2 / 5\u00b7I\u0394n (type S 0.5 / 0.2 / 0.15 s, minimum non-actuating 0.13 / 0.06 / 0.05 s; type G minimum 10 ms), as reproduced in Eaton's FRBm6 catalogue."
+   "notes": "Standard envelope for any RCBO. Residual (earth-fault) band from the IEC 61008-1 / 61009-1 tripping-time table for sinusoidal residual current: no trip below 0.5\u00b7I\u0394n; maximum break time 0.3 / 0.15 / 0.04 s at 1 / 2 / 5\u00b7I\u0394n (type S 0.5 / 0.2 / 0.15 s, minimum non-actuating 0.13 / 0.06 / 0.05 s; type G minimum 10 ms), as reproduced in Eaton's FRBm6 catalogue.",
+   "bc": {
+    "options": [
+     {
+      "code": "Icn 3 kA",
+      "basis": "standard",
+      "icu": 3
+     },
+     {
+      "code": "Icn 4.5 kA",
+      "basis": "standard",
+      "icu": 4.5
+     },
+     {
+      "code": "Icn 6 kA",
+      "basis": "standard",
+      "icu": 6
+     },
+     {
+      "code": "Icn 10 kA",
+      "basis": "standard",
+      "icu": 10
+     }
+    ],
+    "source": "eaton_frbm6",
+    "note": "IEC 61009-1 standard values; choose the product's rating."
+   }
   },
   {
    "id": "iec61008-rccb",
@@ -9188,7 +11383,8 @@
    },
    "sources": [
     "siemens_3va_ul_manual",
-    "siemens_3va_manual"
+    "siemens_3va_manual",
+    "siemens_no_cat"
    ],
    "notes": "Ir 0.4\u20131\u00b7In; tr 0.5\u201313/15/17/20/25 s @6\u00b7Ir; Isd 0.6\u20139/10\u00b7In; tsd 0.05\u20130.5 s (I\u00b2t switchable, ref. Isd = 8\u00b7Ir); Ii 1.5\u20139/10/12\u00b7In (frame dependent). ETU560 adds G: Ig 0.2/0.25/0.4/0.6\u20131.0\u00b7In, tg 0.05\u20130.8 s referenced at 2\u00b7Ig, I\u00b2t can be deactivated.",
    "G": {
@@ -9211,7 +11407,1084 @@
     "i2tRefBasis": "datasheet",
     "basis": "datasheet",
     "note": "Ig 0.2\u20131\u00b7In (minimum depends on frame), tg 0.05\u20130.8 s with reference point 2\u00b7Ig; G cannot be switched off."
+   },
+   "bc": {
+    "options": [
+     {
+      "code": "M 55 kA (415 V)",
+      "basis": "datasheet",
+      "icu": 55
+     },
+     {
+      "code": "H 85 kA",
+      "basis": "assumed",
+      "icu": 85
+     },
+     {
+      "code": "C 110 kA",
+      "basis": "assumed",
+      "icu": 110
+     },
+     {
+      "code": "L 150 kA",
+      "basis": "assumed",
+      "icu": 150
+     }
+    ],
+    "source": "siemens_no_cat",
+    "note": "Only class M is stated in the cited catalogue; H/C/L are assumed typical values."
    }
+  },
+  {
+   "id": "se-vigipact-nsx",
+   "manufacturer": "Schneider Electric",
+   "series": "VigiPacT add-on \u2014 ComPacT NSX100\u2013630",
+   "ratings": [
+    100,
+    160,
+    250,
+    400,
+    630
+   ],
+   "breaking": "host breaker",
+   "rcd": {
+    "idn": [
+     30,
+     100,
+     300,
+     500,
+     1000,
+     3000,
+     10000,
+     30000
+    ],
+    "types": [
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "datasheet",
+    "delays": [
+     0,
+     0.06,
+     0.15,
+     0.3,
+     0.5,
+     0.8,
+     1.2,
+     4
+    ],
+    "instIdn": 30,
+    "delayHi": "assumed",
+    "typeBasis": "assumed"
+   },
+   "sources": [
+    "se_vigipact",
+    "eaton_frbm6"
+   ],
+   "notes": "I\u0394n 0.03\u201330 A, \u0394t 0\u20134 s; at 30 mA \u0394t is always 0 (instantaneous). Rating = host frame. Residual type not stated on the page (A assumed). Time-delayed setting: non-actuating time = \u0394t; maximum break time drawn as 2\u00b7\u0394t + 40 ms (assumed \u2014 the cited documents give only \u0394t). \u0394t = 0 uses the IEC general-type table.",
+   "category": "RCBO",
+   "model": "rcd",
+   "standard": "IEC 60947-2 Annex B"
+  },
+  {
+   "id": "abb-xt-rcsel",
+   "manufacturer": "ABB",
+   "series": "RC Sel \u2014 residual current release for Tmax XT2\u2013XT4",
+   "ratings": [
+    160,
+    250
+   ],
+   "breaking": "host breaker",
+   "rcd": {
+    "idn": [
+     30,
+     50,
+     100,
+     300,
+     500,
+     1000,
+     3000,
+     5000,
+     10000
+    ],
+    "types": [
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "assumed",
+    "delays": [
+     0,
+     0.1,
+     0.2,
+     0.3,
+     0.5,
+     1,
+     2,
+     3
+    ],
+    "instIdn": 30,
+    "delayHi": "assumed",
+    "typeBasis": "assumed"
+   },
+   "sources": [
+    "abb_rcsel",
+    "eaton_frbm6"
+   ],
+   "notes": "I\u0394n 0.03 A (\u0394t = 0 only) or 0.05\u201310 A with \u0394t 0\u20133 s; intermediate I\u0394n and \u0394t steps assumed. Time-delayed setting: non-actuating time = \u0394t; maximum break time drawn as 2\u00b7\u0394t + 40 ms (assumed \u2014 the cited documents give only \u0394t). \u0394t = 0 uses the IEC general-type table.",
+   "category": "RCBO",
+   "model": "rcd",
+   "standard": "IEC 60947-2 Annex B"
+  },
+  {
+   "id": "siemens-3va-rcd520",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 3VA RCD520 (type A) / RCD520B",
+   "ratings": [
+    160,
+    250,
+    400,
+    630
+   ],
+   "breaking": "host breaker",
+   "rcd": {
+    "idn": [
+     30,
+     100,
+     300,
+     500,
+     1000,
+     3000,
+     5000
+    ],
+    "types": [
+     "A",
+     "B"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "assumed",
+    "delays": [
+     0,
+     0.1,
+     0.25,
+     0.5,
+     1,
+     3
+    ],
+    "delayHi": "assumed"
+   },
+   "sources": [
+    "siemens_3va_lv10",
+    "eaton_frbm6"
+   ],
+   "notes": "Type A 0.03\u20135 A, \u0394t 0\u20133 s (RCD520B type B up to 10 s); intermediate steps and frame list assumed. Time-delayed setting: non-actuating time = \u0394t; maximum break time drawn as 2\u00b7\u0394t + 40 ms (assumed \u2014 the cited documents give only \u0394t). \u0394t = 0 uses the IEC general-type table.",
+   "category": "RCBO",
+   "model": "rcd",
+   "standard": "IEC 60947-2 Annex B"
+  },
+  {
+   "id": "siemens-3va-rcd820",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 3VA RCD820 (type A, up to 30 A)",
+   "ratings": [
+    160,
+    250,
+    400,
+    630
+   ],
+   "breaking": "host breaker",
+   "rcd": {
+    "idn": [
+     30,
+     100,
+     300,
+     500,
+     1000,
+     3000,
+     5000,
+     10000,
+     30000
+    ],
+    "types": [
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "assumed",
+    "delays": [
+     0,
+     0.1,
+     0.25,
+     0.5,
+     1,
+     3,
+     10
+    ],
+    "delayHi": "assumed"
+   },
+   "sources": [
+    "siemens_3va_lv10",
+    "eaton_frbm6"
+   ],
+   "notes": "I\u0394n 0.03\u201330 A (30 A is type AC), \u0394t 0\u201310 s; intermediate steps assumed. Time-delayed setting: non-actuating time = \u0394t; maximum break time drawn as 2\u00b7\u0394t + 40 ms (assumed \u2014 the cited documents give only \u0394t). \u0394t = 0 uses the IEC general-type table.",
+   "category": "RCBO",
+   "model": "rcd",
+   "standard": "IEC 60947-2 Annex B"
+  },
+  {
+   "id": "eaton-nzm1-xfi",
+   "manufacturer": "Eaton",
+   "series": "NZM1-XFI(R) residual-current module",
+   "ratings": [
+    40,
+    63,
+    100,
+    125,
+    160
+   ],
+   "breaking": "host breaker",
+   "rcd": {
+    "idn": [
+     30,
+     100,
+     300,
+     500,
+     1000,
+     3000
+    ],
+    "types": [
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "datasheet",
+    "delays": [
+     0.01,
+     0.06,
+     0.15,
+     0.3,
+     0.45
+    ],
+    "instIdn": 30,
+    "instDelay": 0.01,
+    "delayHi": "assumed",
+    "typeBasis": "assumed"
+   },
+   "sources": [
+    "eaton_xfi",
+    "eaton_frbm6"
+   ],
+   "notes": "I\u0394n 0.03/0.1/0.3/0.5/1/3 A; \u0394t 10/60/150/300/450 ms; I\u0394n 0.03 A forces \u0394t = 10 ms. Frame list assumed. Time-delayed setting: non-actuating time = \u0394t; maximum break time drawn as 2\u00b7\u0394t + 40 ms (assumed \u2014 the cited documents give only \u0394t). \u0394t = 0 uses the IEC general-type table.",
+   "category": "RCBO",
+   "model": "rcd",
+   "standard": "IEC 60947-2 Annex B"
+  },
+  {
+   "id": "se-vigirex-rh99",
+   "manufacturer": "Schneider Electric",
+   "series": "Vigirex RH99M earth-leakage relay (with toroid and shunt trip)",
+   "ratings": [
+    63,
+    250,
+    630,
+    1600,
+    4000
+   ],
+   "breaking": "associated breaker",
+   "rcd": {
+    "idn": [
+     30,
+     100,
+     300,
+     500,
+     1000,
+     3000,
+     5000,
+     10000,
+     30000
+    ],
+    "types": [
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "assumed",
+    "delays": [
+     0,
+     0.06,
+     0.15,
+     0.25,
+     0.31,
+     0.5,
+     0.8,
+     1,
+     4.5
+    ],
+    "instIdn": 30,
+    "delayHi": "assumed",
+    "typeBasis": "assumed"
+   },
+   "sources": [
+    "se_vigirex",
+    "eaton_frbm6"
+   ],
+   "notes": "0.03\u201330 A, instantaneous at 0.03 A, 9 delay settings 0\u20134.5 s (individual steps not printed \u2014 assumed). Rating = associated breaker size. Add the breaker's own opening time. Time-delayed setting: non-actuating time = \u0394t; maximum break time drawn as 2\u00b7\u0394t + 40 ms (assumed \u2014 the cited documents give only \u0394t). \u0394t = 0 uses the IEC general-type table.",
+   "category": "RCBO",
+   "model": "rcd",
+   "standard": "IEC 60947-2 Annex B"
   }
- ]
+ ],
+ "network": {
+  "resistance20": {
+   "Cu": {
+    "0.5": 36.0,
+    "0.75": 24.5,
+    "1": 18.1,
+    "1.5": 12.1,
+    "2.5": 7.41,
+    "4": 4.61,
+    "6": 3.08,
+    "10": 1.83,
+    "16": 1.15,
+    "25": 0.727,
+    "35": 0.524,
+    "50": 0.387,
+    "70": 0.268,
+    "95": 0.193,
+    "120": 0.153,
+    "150": 0.124,
+    "185": 0.0991,
+    "240": 0.0754,
+    "300": 0.0601,
+    "400": 0.047,
+    "500": 0.0366,
+    "630": 0.0283,
+    "800": 0.0221,
+    "1000": 0.0176
+   },
+   "Al": {
+    "10": 3.08,
+    "16": 1.91,
+    "25": 1.2,
+    "35": 0.868,
+    "50": 0.641,
+    "70": 0.443,
+    "95": 0.32,
+    "120": 0.253,
+    "150": 0.206,
+    "185": 0.164,
+    "240": 0.125,
+    "300": 0.1,
+    "400": 0.0778,
+    "500": 0.0605,
+    "630": 0.0469,
+    "800": 0.0367,
+    "1000": 0.0291
+   },
+   "unit": "\u03a9/km at 20 \u00b0C (IEC 60228 class 2 maximum)",
+   "source": "iec60228"
+  },
+  "reactance": {
+   "value": 0.08,
+   "unit": "m\u03a9/m",
+   "source": "eig_isc",
+   "note": "Typical reactance of LV cables when no manufacturer value is known."
+  },
+  "ampacity": {
+   "note": "Three loaded conductors, 30 \u00b0C air / 20 \u00b0C ground. PVC methods A1\u2013D1 up to 300 mm\u00b2 from IEC 60364-5-52 Table B.52.4; other values from NBR 5410 Tables 36\u201339, which use the IEC method basis.",
+   "methods": {
+    "A1": "A1 \u2014 insulated conductors in conduit in a thermally insulated wall",
+    "B1": "B1 \u2014 insulated conductors in conduit on a wall",
+    "B2": "B2 \u2014 multicore cable in conduit on a wall",
+    "C": "C \u2014 cable clipped direct to a wall",
+    "D1": "D \u2014 cable in ducts in the ground",
+    "E": "E \u2014 multicore cable in free air / on perforated tray"
+   },
+   "PVC": {
+    "Cu": {
+     "A1": {
+      "1.5": 13.5,
+      "2.5": 18,
+      "4": 24,
+      "6": 31,
+      "10": 42,
+      "16": 56,
+      "25": 73,
+      "35": 89,
+      "50": 108,
+      "70": 136,
+      "95": 164,
+      "120": 188,
+      "150": 216,
+      "185": 245,
+      "240": 286,
+      "300": 328,
+      "400": 390,
+      "500": 447,
+      "630": 514
+     },
+     "B1": {
+      "1.5": 15.5,
+      "2.5": 21,
+      "4": 28,
+      "6": 36,
+      "10": 50,
+      "16": 68,
+      "25": 89,
+      "35": 110,
+      "50": 134,
+      "70": 171,
+      "95": 207,
+      "120": 239,
+      "150": 262,
+      "185": 296,
+      "240": 346,
+      "300": 394,
+      "400": 510,
+      "500": 587,
+      "630": 678
+     },
+     "B2": {
+      "1.5": 15,
+      "2.5": 20,
+      "4": 27,
+      "6": 34,
+      "10": 46,
+      "16": 62,
+      "25": 80,
+      "35": 99,
+      "50": 118,
+      "70": 149,
+      "95": 179,
+      "120": 206,
+      "150": 225,
+      "185": 255,
+      "240": 297,
+      "300": 339,
+      "400": 425,
+      "500": 486,
+      "630": 559
+     },
+     "C": {
+      "1.5": 17.5,
+      "2.5": 24,
+      "4": 32,
+      "6": 41,
+      "10": 57,
+      "16": 76,
+      "25": 96,
+      "35": 119,
+      "50": 144,
+      "70": 184,
+      "95": 223,
+      "120": 259,
+      "150": 299,
+      "185": 341,
+      "240": 403,
+      "300": 464,
+      "400": 557,
+      "500": 642,
+      "630": 743
+     },
+     "D1": {
+      "1.5": 18,
+      "2.5": 24,
+      "4": 30,
+      "6": 38,
+      "10": 50,
+      "16": 64,
+      "25": 82,
+      "35": 98,
+      "50": 116,
+      "70": 143,
+      "95": 169,
+      "120": 192,
+      "150": 217,
+      "185": 243,
+      "240": 280,
+      "300": 316
+     },
+     "E": {
+      "2.5": 25,
+      "4": 34,
+      "6": 43,
+      "10": 60,
+      "16": 80,
+      "25": 101,
+      "35": 126,
+      "50": 153,
+      "70": 196,
+      "95": 238,
+      "120": 276,
+      "150": 319,
+      "185": 364,
+      "240": 430,
+      "300": 497,
+      "400": 597,
+      "500": 689,
+      "630": 798
+     }
+    },
+    "Al": {
+     "A1": {
+      "2.5": 14,
+      "4": 18.5,
+      "6": 24,
+      "10": 32,
+      "16": 43,
+      "25": 57,
+      "35": 70,
+      "50": 84,
+      "70": 107,
+      "95": 129,
+      "120": 149,
+      "150": 170,
+      "185": 194,
+      "240": 227,
+      "300": 261,
+      "400": 311,
+      "500": 356,
+      "630": 410
+     },
+     "B1": {
+      "2.5": 16.5,
+      "4": 22,
+      "6": 28,
+      "10": 39,
+      "16": 53,
+      "25": 70,
+      "35": 86,
+      "50": 104,
+      "70": 133,
+      "95": 161,
+      "120": 186,
+      "150": 204,
+      "185": 230,
+      "240": 269,
+      "300": 306,
+      "400": 397,
+      "500": 456,
+      "630": 527
+     },
+     "B2": {
+      "2.5": 15.5,
+      "4": 21,
+      "6": 27,
+      "10": 36,
+      "16": 48,
+      "25": 62,
+      "35": 77,
+      "50": 92,
+      "70": 116,
+      "95": 139,
+      "120": 160,
+      "150": 176,
+      "185": 199,
+      "240": 232,
+      "300": 265,
+      "400": 331,
+      "500": 378,
+      "630": 435
+     },
+     "C": {
+      "2.5": 18.5,
+      "4": 25,
+      "6": 32,
+      "10": 44,
+      "16": 59,
+      "25": 73,
+      "35": 90,
+      "50": 110,
+      "70": 140,
+      "95": 170,
+      "120": 197,
+      "150": 227,
+      "185": 259,
+      "240": 305,
+      "300": 351,
+      "400": 422,
+      "500": 486,
+      "630": 562
+     },
+     "D1": {
+      "2.5": 18.5,
+      "4": 24,
+      "6": 30,
+      "10": 39,
+      "16": 50,
+      "25": 64,
+      "35": 77,
+      "50": 91,
+      "70": 112,
+      "95": 132,
+      "120": 150,
+      "150": 169,
+      "185": 190,
+      "240": 218,
+      "300": 247
+     },
+     "E": {
+      "16": 61,
+      "25": 78,
+      "35": 96,
+      "50": 117,
+      "70": 150,
+      "95": 183,
+      "120": 212,
+      "150": 245,
+      "185": 280,
+      "240": 330,
+      "300": 381,
+      "400": 458,
+      "500": 528,
+      "630": 613
+     }
+    }
+   },
+   "XLPE": {
+    "Cu": {
+     "A1": {
+      "2.5": 23,
+      "4": 31,
+      "6": 40,
+      "10": 54,
+      "16": 73,
+      "25": 95,
+      "35": 117,
+      "50": 141,
+      "70": 179,
+      "95": 216,
+      "120": 249,
+      "150": 285,
+      "185": 324,
+      "240": 380,
+      "300": 435,
+      "400": 519,
+      "500": 595,
+      "630": 685
+     },
+     "B1": {
+      "2.5": 28,
+      "4": 37,
+      "6": 48,
+      "10": 66,
+      "16": 88,
+      "25": 117,
+      "35": 144,
+      "50": 175,
+      "70": 222,
+      "95": 269,
+      "120": 312,
+      "150": 358,
+      "185": 408,
+      "240": 481,
+      "300": 553,
+      "400": 661,
+      "500": 760,
+      "630": 879
+     },
+     "B2": {
+      "2.5": 26,
+      "4": 35,
+      "6": 44,
+      "10": 60,
+      "16": 80,
+      "25": 105,
+      "35": 128,
+      "50": 154,
+      "70": 194,
+      "95": 233,
+      "120": 268,
+      "150": 307,
+      "185": 348,
+      "240": 407,
+      "300": 465,
+      "400": 552,
+      "500": 631,
+      "630": 725
+     },
+     "C": {
+      "2.5": 30,
+      "4": 40,
+      "6": 52,
+      "10": 71,
+      "16": 96,
+      "25": 119,
+      "35": 147,
+      "50": 179,
+      "70": 229,
+      "95": 278,
+      "120": 322,
+      "150": 371,
+      "185": 424,
+      "240": 500,
+      "300": 576,
+      "400": 692,
+      "500": 797,
+      "630": 923
+     },
+     "D1": {
+      "2.5": 29,
+      "4": 37,
+      "6": 46,
+      "10": 61,
+      "16": 79,
+      "25": 101,
+      "35": 122,
+      "50": 144,
+      "70": 178,
+      "95": 211,
+      "120": 240,
+      "150": 271,
+      "185": 304,
+      "240": 351,
+      "300": 396,
+      "400": 464,
+      "500": 525,
+      "630": 596
+     },
+     "E": {
+      "2.5": 32,
+      "4": 42,
+      "6": 54,
+      "10": 75,
+      "16": 100,
+      "25": 127,
+      "35": 158,
+      "50": 192,
+      "70": 246,
+      "95": 298,
+      "120": 346,
+      "150": 399,
+      "185": 456,
+      "240": 538,
+      "300": 621,
+      "400": 745,
+      "500": 859,
+      "630": 995
+     }
+    },
+    "Al": {
+     "A1": {
+      "16": 58,
+      "25": 76,
+      "35": 94,
+      "50": 113,
+      "70": 142,
+      "95": 171,
+      "120": 197,
+      "150": 226,
+      "185": 256,
+      "240": 300,
+      "300": 344,
+      "400": 409,
+      "500": 468,
+      "630": 538
+     },
+     "B1": {
+      "16": 71,
+      "25": 93,
+      "35": 116,
+      "50": 140,
+      "70": 179,
+      "95": 217,
+      "120": 251,
+      "150": 289,
+      "185": 330,
+      "240": 389,
+      "300": 447,
+      "400": 536,
+      "500": 617,
+      "630": 714
+     },
+     "B2": {
+      "16": 64,
+      "25": 84,
+      "35": 103,
+      "50": 124,
+      "70": 156,
+      "95": 188,
+      "120": 216,
+      "150": 248,
+      "185": 281,
+      "240": 329,
+      "300": 377,
+      "400": 448,
+      "500": 513,
+      "630": 590
+     },
+     "C": {
+      "16": 76,
+      "25": 90,
+      "35": 112,
+      "50": 136,
+      "70": 174,
+      "95": 211,
+      "120": 245,
+      "150": 283,
+      "185": 323,
+      "240": 382,
+      "300": 440,
+      "400": 529,
+      "500": 610,
+      "630": 707
+     },
+     "D1": {
+      "16": 61,
+      "25": 78,
+      "35": 94,
+      "50": 112,
+      "70": 138,
+      "95": 164,
+      "120": 186,
+      "150": 210,
+      "185": 236,
+      "240": 272,
+      "300": 308,
+      "400": 361,
+      "500": 408,
+      "630": 464
+     },
+     "E": {
+      "16": 77,
+      "25": 97,
+      "35": 120,
+      "50": 146,
+      "70": 187,
+      "95": 227,
+      "120": 263,
+      "150": 304,
+      "185": 347,
+      "240": 409,
+      "300": 471,
+      "400": 566,
+      "500": 652,
+      "630": 755
+     }
+    }
+   },
+   "sources": [
+    "iec60364_552_pvc",
+    "nbr5410_ampacity"
+   ]
+  },
+  "insulation": {
+   "PVC": {
+    "thetaMax": 70,
+    "k": {
+     "Cu": 115,
+     "Al": 76
+    },
+    "kLarge": {
+     "Cu": 103,
+     "Al": 68
+    },
+    "thetaFinal": 160
+   },
+   "XLPE": {
+    "thetaMax": 90,
+    "k": {
+     "Cu": 143,
+     "Al": 94
+    },
+    "thetaFinal": 250
+   },
+   "source": "bs7671_k",
+   "note": "k for a protective conductor incorporated in a cable (BS 7671 Table 54.3 / IEC 60364-5-54 Table A.54.3); PVC k drops to 103/68 above 300 mm\u00b2."
+  },
+  "alpha": {
+   "Cu": 0.00393,
+   "Al": 0.00403,
+   "basis": "standard",
+   "note": "Temperature coefficient of resistance used to correct R20 to conductor temperature."
+  },
+  "voltageFactor": {
+   "cmax": {
+    "6": 1.05,
+    "10": 1.1
+   },
+   "cmin": {
+    "6": 0.95,
+    "10": 0.9
+   },
+   "source": "iec60909_c",
+   "note": "LV 100\u20131000 V, voltage tolerance +6 % or +10 %."
+  },
+  "transformerKT": {
+   "formula": "KT = 0.95\u00b7cmax / (1 + 0.6\u00b7xT)",
+   "source": "iec60909_kt"
+  },
+  "transformers": {
+   "source": "eig_isc",
+   "note": "Typical 400 V distribution transformers (no-load 420 V), MV \u2264 20 kV.",
+   "rows": [
+    [
+     100,
+     4,
+     37.9,
+     59.5,
+     6,
+     37.0,
+     99.1
+    ],
+    [
+     160,
+     4,
+     16.2,
+     41.0,
+     6,
+     18.6,
+     63.5
+    ],
+    [
+     200,
+     4,
+     11.9,
+     33.2,
+     6,
+     14.1,
+     51.0
+    ],
+    [
+     250,
+     4,
+     9.2,
+     26.7,
+     6,
+     10.7,
+     41.0
+    ],
+    [
+     315,
+     4,
+     6.2,
+     21.5,
+     6,
+     8.0,
+     32.6
+    ],
+    [
+     400,
+     4,
+     5.1,
+     16.9,
+     6,
+     6.1,
+     25.8
+    ],
+    [
+     500,
+     4,
+     3.8,
+     13.6,
+     6,
+     4.6,
+     20.7
+    ],
+    [
+     630,
+     4,
+     2.9,
+     10.8,
+     6,
+     3.5,
+     16.4
+    ],
+    [
+     800,
+     6,
+     2.9,
+     12.9,
+     6,
+     2.6,
+     13.0
+    ],
+    [
+     1000,
+     6,
+     2.3,
+     10.3,
+     6,
+     1.9,
+     10.4
+    ],
+    [
+     1250,
+     6,
+     1.8,
+     8.3,
+     6,
+     1.5,
+     8.3
+    ],
+    [
+     1600,
+     6,
+     1.4,
+     6.5,
+     6,
+     1.1,
+     6.5
+    ],
+    [
+     2000,
+     6,
+     1.1,
+     5.2,
+     6,
+     0.9,
+     5.2
+    ]
+   ],
+   "columns": [
+    "kVA",
+    "oil uk %",
+    "oil R m\u03a9",
+    "oil X m\u03a9",
+    "cast-resin uk %",
+    "cast-resin R m\u03a9",
+    "cast-resin X m\u03a9"
+   ],
+   "approx": "Without load-loss data: R = 0.31\u00b7Z, X = 0.95\u00b7Z (CENELEC 50480 guideline quoted in the guide)."
+  },
+  "upstream": {
+   "Ra/Xa": 0.1,
+   "defaultMVA": 500,
+   "source": "eig_isc"
+  },
+  "disconnection": {
+   "TN": {
+    "120": 0.8,
+    "230": 0.4,
+    "400": 0.2,
+    "inf": 0.1
+   },
+   "TT": {
+    "120": 0.3,
+    "230": 0.2,
+    "400": 0.07,
+    "inf": 0.04
+   },
+   "distribution": {
+    "TN": 5,
+    "TT": 1
+   },
+   "source": "iec60364_41",
+   "note": "Table 41.1 applies to final circuits up to 63 A with sockets and 32 A fixed loads; 5 s (TN) / 1 s (TT) for distribution and other circuits."
+  }
+ }
 }

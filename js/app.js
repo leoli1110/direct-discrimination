@@ -1,4 +1,5 @@
 import * as E from './engine.js';
+import * as F from './fault.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -8,7 +9,7 @@ const fmtI = (I) => (I >= 1e4 ? `${(I / 1000).toFixed(1)} kA` : I >= 1000 ? `${(
 const PALETTE = { light: ['#1d5f8a', '#b4441c', '#2c7a4b', '#7b4a9e', '#9a7412', '#0e7783', '#8c2b4b', '#4a5560'], dark: ['#6cb2e0', '#f08a5d', '#6fcf8f', '#b993dd', '#e3bd57', '#4fc4cf', '#e47b9b', '#a5b0ba'] };
 
 let DB = null;
-const S = { items: [], baseKV: 0.4, faultKA: 10, efKA: 1, view: 'phase', efPhase: false, xRange: 'auto', bands: true, uid: 1, cat: 'ALL', brand: '', q: '', collapsed: new Set() };
+const S = { items: [], baseKV: 0.4, faultKA: 10, efKA: 1, view: 'phase', efPhase: false, xRange: 'auto', bands: true, uid: 1, cat: 'ALL', brand: '', q: '', collapsed: new Set(), net: { ...F.DEFAULT_NET } };
 const CUSTOM = new Map(); // user-defined curves: id -> device definition (model 'custom')
 const dev = (id) => CUSTOM.get(id) || DB.devices.find((d) => d.id === id);
 // The characteristic plotted for an item in the current chart view (null = not shown in this view).
@@ -31,7 +32,7 @@ async function boot() {
   document.documentElement.dataset.theme = theme;
   DB = await (await fetch('db/curvedb.json')).json();
   loadMyCurves();
-  initLibrary(); initToolbar(); initTabs(); initCustomCurves(); renderDatabase(); renderMethod();
+  initLibrary(); initToolbar(); initTabs(); initCustomCurves(); initFault(); renderDatabase(); renderMethod();
   if (!loadFromHash()) demoStudy();
   renderStudy(); draw();
   new ResizeObserver(() => draw()).observe($('#chart-wrap'));
@@ -140,9 +141,10 @@ function initTabs() {
     $$('.tab').forEach((x) => x.setAttribute('aria-selected', x === t));
     $$('.view').forEach((v) => { v.hidden = v.id !== `view-${t.dataset.view}`; });
     if (t.dataset.view === 'study') draw();
+    if (t.dataset.view === 'fault') renderFault();
   }));
 }
-function refresh() { renderStudy(); draw(); }
+function refresh() { renderStudy(); draw(); if (!$('#view-fault').hidden) renderFault(); }
 
 // ------------------------------------------------------------ study cards
 function controlHtml(it, d, c) {
@@ -279,6 +281,20 @@ function draw() {
   // fault marker
   const If = faultA();
   if (If > X0 && If < X1) { const x = sx(If); g += `<line x1="${x}" x2="${x}" y1="${m.t}" y2="${m.t + ph}" stroke="${C.fault}" stroke-width="1.2" stroke-dasharray="5 4"/><text x="${x - 4}" y="${m.t + 12}" fill="${C.fault}" font-size="${fs}" font-family="${C.font}" text-anchor="end">If ${fmtI(If)}</text>`; }
+  // fault-analysis markers: maximum fault at each device (phase view) / minimum earth fault at its circuit end (earth view)
+  if (S.net.mark && DB.network) {
+    const fa = faultAnalysis();
+    for (const it of S.items) {
+      const r = fa.byUid.get(it.uid); if (!it.visible || !r || !r.lv) continue;
+      const pts = S.view === 'earth' ? [[r.ik1, 'Ik1 max at device'], [r.ik1Min, 'Ik1 min at circuit end']] : [[r.ireq, 'Ik max at device'], [r.ik2Min, 'Ik2 min at circuit end']];
+      const col = colorFor(it);
+      pts.forEach(([I, what], j) => {
+        if (!(I > X0 && I < X1)) return;
+        const x = sx(I * S.baseKV / (+it.kV || S.baseKV)), y0 = m.t + ph;
+        g += `<g><title>${esc(it.label)} — ${what}: ${fmtI(I)}</title><line x1="${x}" x2="${x}" y1="${y0}" y2="${y0 - 26}" stroke="${col}" stroke-width="1.4" stroke-dasharray="${j ? '2 2' : 'none'}"/><path d="M${x - 5},${y0} L${x + 5},${y0} L${x},${y0 - 8} Z" fill="${j ? C.paper : col}" stroke="${col}" stroke-width="1.2"/></g>`;
+      });
+    }
+  }
   // curves
   const clampT = (t) => Math.min(Y1 * 1.5, Math.max(Y0 / 1.5, t));
   const labels = [];
@@ -397,7 +413,7 @@ function renderSelectivity() {
 function serialize() {
   const usedIds = new Set(S.items.map((i) => i.deviceId));
   const used = [...CUSTOM.values()].filter((d) => d.saved || usedIds.has(d.id)).map((d) => ({ ...d }));
-  return { app: 'tcc-studio', version: DB.meta.version, baseKV: S.baseKV, faultKA: S.faultKA, efKA: S.efKA, view: S.view, efPhase: S.efPhase, customCurves: used, items: S.items.map(({ uid, ...r }) => ({ uid, ...r })) };
+  return { app: 'tcc-studio', version: DB.meta.version, baseKV: S.baseKV, faultKA: S.faultKA, efKA: S.efKA, view: S.view, efPhase: S.efPhase, net: S.net, customCurves: used, items: S.items.map(({ uid, ...r }) => ({ uid, ...r })) };
 }
 function applyStudy(o) {
   if (!o || !Array.isArray(o.items)) throw new Error('not a study file');
@@ -405,6 +421,7 @@ function applyStudy(o) {
   S.baseKV = +o.baseKV || 0.4; S.faultKA = +o.faultKA || 10; S.efKA = o.efKA > 0 ? +o.efKA : 1; S.efPhase = !!o.efPhase;
   $('#base-kv').value = S.baseKV; $('#fault-ka').value = S.faultKA; $('#ef-ka').value = S.efKA; $('#ef-phase').checked = S.efPhase;
   setView(o.view === 'earth' ? 'earth' : 'phase', false);
+  S.net = { ...F.DEFAULT_NET, ...(o.net || {}) }; syncFaultForm();
   S.items = o.items.filter((i) => dev(i.deviceId)).map((i) => E.normalize(dev(i.deviceId), { ...i }));
   S.uid = Math.max(0, ...S.items.map((i) => i.uid)) + 1;
   refresh(); if (DB) renderLibrary();
@@ -495,6 +512,20 @@ function renderMethod() {
   <p>An RCBO is drawn twice. Its overcurrent part is an MCB curve (IEC 61009-1 uses the same thermal and magnetic limits as IEC 60898-1) on the phase-fault chart. Its residual part is drawn on the earth-fault chart. The residual band follows the IEC 61008-1 / 61009-1 tripping-time table for sinusoidal residual current, as reproduced in ${a('eaton_frbm6', "Eaton's FRBm6 catalogue")}: no trip below 0.5·IΔn, and a maximum break time of 0.3 s at IΔn, 0.15 s at 2·IΔn and 0.04 s at 5·IΔn. Type S (selective) devices break within 0.5 / 0.2 / 0.15 s and do not operate before 0.13 / 0.06 / 0.05 s. Type G devices have a 10 ms minimum delay. Where a manufacturer prints a faster time, the band uses it, as with ${a('chint_nb1l', 'CHINT NB1L')} at ≤ 0.1 s at IΔn. The lower edge of non-delayed devices is drawn at 10 ms (assumed). The residual type (AC, A, F, B) is recorded, but the band is for sinusoidal residual current; pulsating or smooth DC thresholds differ.</p>
   <h2>Earth-fault chart</h2>
   <p>The Earth fault button switches the chart to earth-fault (residual) current, which can start in the milliampere range. This view plots RCBO and RCD residual bands, the G (ground-fault) function of electronic trip units, IDMT relays set to the Earth fault function, and custom curves of the Earth fault / RCD type. G uses Ig as a multiple of In with its pick-up tolerance, and tg either as definite time or I²t (t = tg·(Iref/I)² below the reference current). For MicroLogic 6.2, the printed non-trip and maximum break times for each tg setting are used directly. Tick "Phase devices too" to add phase overcurrent curves, which also clear earth faults in TN systems. The coordination check and the fault marker then use the earth-fault current.</p>
+  <h2>Residual add-on modules and relays</h2>
+  <p>MCCB residual-current add-ons and earth-leakage relays are listed with the RCBOs and drawn on the earth-fault chart: ${a('se_vigipact', 'Schneider VigiPacT for NSX100–630')} (IΔn 0.03–30 A, Δt 0–4 s, 30 mA always instantaneous), ${a('abb_rcsel', 'ABB RC Sel for XT2–XT4')} (0.03 A instantaneous, 0.05–10 A with Δt up to 3 s), ${a('siemens_3va_lv10', 'Siemens 3VA RCD520 and RCD820')}, ${a('eaton_xfi', 'Eaton NZM1-XFI')} (Δt 10–450 ms) and ${a('se_vigirex', 'Schneider Vigirex RH99M')}. For a delayed setting, the band starts at the non-actuating time Δt. Its maximum break time is drawn at 2·Δt + 40 ms, which is an assumption, because the documents give only Δt. Intermediate steps the documents do not print are marked as assumed.</p>
+  <h2>Fault analysis</h2>
+  <p>The Fault analysis tab treats the study as a radial network. Each device sits at the end of its upstream device's cable, and each device can feed one cable (conductor, insulation, installation method, phase and PE size, length, parallel runs, load). The source is either a transformer (rating, uk, load losses, MV fault level) or a known fault level at the origin (Ik3, X/R and optionally the external loop impedance Ze). Following ${a('iec60909_c', 'IEC 60909-0')}, maximum currents use cmax (1.05 or 1.10) and conductor resistance at 20 °C. Minimum currents use cmin (0.95 or 0.90) and resistance at the insulation's maximum operating temperature. Transformer impedance comes from uk and the load losses, or from the typical R/X of ${a('eig_isc', "the Electrical Installation Guide's transformer table")} when losses are unknown, with the ${a('iec60909_kt', 'IEC 60909 correction factor KT')}. The MV network adds Z = c·Un²/Sk with R/X = 0.1. Cable resistance follows ${a('iec60228', 'IEC 60228')}, with reactance 0.08 mΩ/m. The earth-fault loop uses the phase and PE conductors, and the transformer is treated as Dyn (Z0 = Z1). In TT systems, the loop adds RA + RB.</p>
+  <p>For each device, the analysis reports:</p>
+  <ul>
+   <li>The maximum fault current at its line terminals, as the larger of Ik3, line–neutral and line–PE. Single-phase circuits use line–neutral and line–PE.</li>
+   <li>A comparison against the breaking capacity of the selected performance version (Icu, warning when above Ics).</li>
+   <li>For its cable: Ib ≤ In ≤ Iz, using ${a('iec60364_552_pvc', 'IEC 60364-5-52')} current-carrying capacities (${a('nbr5410_ampacity', 'NBR 5410 tables')} where the IEC table was not available), the ambient correction √((θmax − θa)/(θmax − θref)) and a grouping factor.</li>
+   <li>Cumulative voltage drop.</li>
+   <li>The clearing time at the minimum earth fault at the end of the circuit, against ${a('iec60364_41', 'IEC 60364-4-41 Table 41.1')}. Final circuits up to 63 A are detected automatically, and distribution circuits get 5 s (TN) or 1 s (TT).</li>
+   <li>The adiabatic check k²S² ≥ I²t, with k from ${a('bs7671_k', 'BS 7671 Table 54.3')}. Below 0.1 s, the device's let-through energy governs, so the check asks for the manufacturer's I²t.</li>
+  </ul>
+  <p>Back-up (cascading) ratings, motor contribution, ring or meshed networks, busbar trunking impedance and generator sources are not modelled.</p>
   <h2>Custom curves</h2>
   <p>Any device that is not in the database, such as a fuse, a motor starting curve, a cable or transformer withstand curve or a relay you digitised from a manufacturer chart, can be entered as a custom curve. This works like Curve Direct's "curve defined by points": give the curve a name, then add, edit or delete current–time points, paste a list, load a <span class="mono">.txt</span> or <span class="mono">.csv</span> points list, or click points straight onto the chart. A curve needs at least two points.</p>
   <p>Between points the curve is interpolated linearly on the log-log chart. Two points at the same current give a vertical step, for example an instantaneous trip. Below the first point the device does not operate. Above the last point it either holds the last time or the curve ends, as you choose. In band mode each row has a minimum and a maximum time, and the coordination check uses the minimum as the earliest operating time and the maximum as the latest clearing time.</p>
@@ -645,3 +676,117 @@ function setView(v, redraw = true) {
   if (redraw) refresh();
 }
 boot();
+
+// ------------------------------------------------------------ fault analysis
+let FA_CACHE = null;
+function faultAnalysis() {
+  const key = JSON.stringify([S.net, S.baseKV, S.items]);
+  if (FA_CACHE && FA_CACHE.key === key) return FA_CACHE.r;
+  const r = F.analyse({ items: S.items, dev, E, N: DB.network, net: S.net, baseKV: S.baseKV });
+  FA_CACHE = { key, r }; return r;
+}
+function syncFaultForm() {
+  const f = $('#fa-form'); if (!f) return;
+  $$('[data-nk]', f).forEach((el) => { const v = S.net[el.dataset.nk]; if (el.type === 'checkbox') el.checked = !!v; else el.value = v ?? ''; });
+  $$('.seg-btn', f).forEach((b) => b.setAttribute('aria-pressed', b.dataset.src === S.net.src));
+  $('.src-tx', f).hidden = S.net.src !== 'tx'; $('.src-supply', f).hidden = S.net.src !== 'supply';
+  $('.src-tt', f).hidden = S.net.earthing !== 'TT';
+}
+function initFault() {
+  const f = $('#fa-form');
+  syncFaultForm();
+  f.addEventListener('change', (e) => {
+    const el = e.target.closest('[data-nk]'); if (!el) return;
+    const k = el.dataset.nk;
+    S.net[k] = el.type === 'checkbox' ? el.checked : el.type === 'number' ? (el.value === '' ? '' : +el.value) : el.value;
+    syncFaultForm(); renderFault(); draw(); saveHash();
+  });
+  f.addEventListener('click', (e) => { const b = e.target.closest('.seg-btn'); if (!b) return; S.net.src = b.dataset.src; syncFaultForm(); renderFault(); draw(); saveHash(); });
+  $('#fa-to-chart').addEventListener('click', () => {
+    const o = faultAnalysis().origin;
+    S.faultKA = +(o.ik3 / 1000).toFixed(2); S.efKA = +(o.ik1 / 1000).toFixed(2);
+    $('#fault-ka').value = S.faultKA; $('#ef-ka').value = S.efKA; renderSelectivity(); draw(); saveHash();
+    $('#fa-to-chart').textContent = `Chart set to ${S.faultKA} kA / ${S.efKA} kA`;
+    setTimeout(() => { $('#fa-to-chart').textContent = 'Use origin levels for the chart markers'; }, 2500);
+  });
+  const host = $('#fa-cards');
+  host.addEventListener('change', (e) => {
+    const el = e.target.closest('[data-fk]'); if (!el) return;
+    const it = S.items.find((i) => i.uid === +el.dataset.uid); if (!it) return;
+    const k = el.dataset.fk, raw = el.type === 'checkbox' ? el.checked : el.value;
+    const val = el.type === 'checkbox' ? raw : el.type === 'number' ? (raw === '' ? '' : +raw) : (/^-?\d+(\.\d+)?$/.test(raw) && !['bcCode', 'kind', 'ph'].includes(k) ? +raw : raw);
+    if (k === 'bcCode' || k === 'icuUser') it[k] = val;
+    else {
+      it.cab = { ...F.DEFAULT_CABLE, ...(it.cab || {}), [k]: k === 'ph' ? +val : val };
+      if (k === 'mat') { const sz = F.cableSizes(DB.network, it.cab.mat); if (!sz.includes(+it.cab.S)) it.cab.S = sz.find((x) => x >= +it.cab.S) || sz[sz.length - 1]; if (!sz.includes(+it.cab.Spe)) it.cab.Spe = it.cab.S; }
+      if (k === 'S' && +it.cab.Spe > +it.cab.S) it.cab.Spe = +it.cab.S;
+    }
+    renderFault(); draw(); saveHash();
+  });
+}
+const BADGE = { ok: 'Pass', warn: 'Check', bad: 'Fail', na: 'n/a', info: 'Note' };
+const CHECK_NAME = { break: 'Breaking capacity', load: 'Ib ≤ In ≤ Iz', vd: 'Voltage drop', disc: 'Disconnection', adiabatic: 'Withstand' };
+const srcLink = (k, t) => (DB.sources[k] ? `<a href="${DB.sources[k].url}" target="_blank" rel="noopener">${t}</a>` : t);
+const fmtKA = (I) => (I == null || !Number.isFinite(I) ? '—' : fmtI(I));
+function renderFault() {
+  if (!DB || !DB.network) return;
+  const fa = faultAnalysis(), N = DB.network, net = fa.net;
+  const o = fa.origin;
+  $('#fa-origin').innerHTML = `<div class="fa-stat"><b>${fmtKA(o.ik3)}</b><span>Ik3 max at origin</span></div><div class="fa-stat"><b>${fmtKA(o.ik1)}</b><span>Ik1 max (L-PE) at origin</span></div>`
+    + (net.src === 'tx' ? `<div class="fa-stat wide"><span>Transformer Z ${(o.info.ZT * 1000).toFixed(2)} mΩ (R ${(o.info.RT * 1000).toFixed(2)}, X ${(o.info.XT * 1000).toFixed(2)}), KT ${o.info.KT.toFixed(3)}; MV network ${(o.info.ZQ * 1000).toFixed(2)} mΩ</span></div>` : '');
+  const rows = fa.rows;
+  const tbl = $('#fa-table');
+  const head = '<thead><tr><th>Device</th><th>Max fault at device</th><th>Breaking capacity</th><th>Circuit</th><th>Ib / In / Iz</th><th>ΔU at end</th><th>Min fault at end</th><th>Result</th></tr></thead>';
+  if (!rows.length) { tbl.innerHTML = head + '<tbody><tr class="empty-row"><td colspan="8">Add devices on the Study tab and link them with “Downstream of”.</td></tr></tbody>'; $('#fa-cards').innerHTML = ''; return; }
+  const ck = (r, k) => r.checks.find((c) => c.k === k);
+  const bdg = (c) => (c ? `<span class="badge ${c.st}">${BADGE[c.st]}</span>` : '<span class="badge na">—</span>');
+  tbl.innerHTML = head + '<tbody>' + rows.map((r) => {
+    const it = S.items.find((i) => i.uid === r.uid);
+    const ind = r.depth ? `<span class="indent">${'·'.repeat(r.depth * 2)} </span>` : '';
+    const name = `<td class="dev">${ind}<span class="swatch" style="background:${colorFor(it)}"></span> ${esc(r.label)}</td>`;
+    if (!r.lv) return `<tr>${name}<td colspan="7" class="sub">${esc(r.skip)}</td></tr>`;
+    const b = ck(r, 'break'), l = ck(r, 'load'), v = ck(r, 'vd'), d = ck(r, 'disc');
+    const c = r.cable;
+    return `<tr>${name}<td class="num"><b class="nw">${fmtKA(r.ireq)}</b><span class="sub">Ik3 ${fmtKA(r.ik3)}<br>Ik1 ${fmtKA(r.ik1)}</span></td>
+      <td class="num">${bdg(b)}<span class="sub">${r.bc ? esc(r.bc.label) : '—'}</span></td>
+      <td class="circ">${c ? `<span class="nw">${c.n > 1 ? c.n + '× ' : ''}${c.S}/${c.Spe} mm²</span> ${c.mat} ${c.ins}<span class="sub">${c.L} m, ${c.ph === 1 ? '1-ph' : '3-ph'}, method ${c.method}${r.final ? ', final' : ''}</span>` : '<span class="sub">no cable entered</span>'}</td>
+      <td class="num">${c ? `${bdg(l)}<span class="sub">${c.Ib || 0} / ${r.In != null ? +r.In.toFixed(1) : '—'} / ${r.Iz != null ? r.Iz.toFixed(0) : '—'} A</span>` : '—'}</td>
+      <td class="num">${c ? `${bdg(v)}<span class="sub">${r.vd.toFixed(2)} %</span>` : '—'}</td>
+      <td class="num">${c ? `${bdg(d)}<span class="sub">${fmtKA(r.ik1Min)} → ${Number.isFinite(r.tDisc) ? fmtT(r.tDisc) : 'not cleared'}<br>required ≤ ${r.tReq} s</span>` : '—'}</td>
+      <td><span class="badge ${r.overall}">${r.overall === 'na' ? 'Incomplete' : BADGE[r.overall]}</span></td></tr>`;
+  }).join('') + '</tbody>';
+  // cards
+  const opt = (vals, cur, fmt = (x) => x) => vals.map((v) => `<option value="${esc(v)}"${String(v) === String(cur) ? ' selected' : ''}>${esc(fmt(v))}</option>`).join('');
+  $('#fa-cards').innerHTML = rows.map((r) => {
+    const it = S.items.find((i) => i.uid === r.uid), d = dev(it.deviceId);
+    const head = `<header><span class="swatch" style="background:${colorFor(it)}"></span><h3>${esc(r.label)}</h3><span class="mono sub">${r.lv ? fmtKA(r.ireq) : ''}</span></header>`;
+    if (!r.lv) return `<article class="fa-card">${head}<p class="fa-skip">${esc(r.skip)}. Fault analysis covers the ${fa.Un} V network.</p></article>`;
+    const c = { ...F.DEFAULT_CABLE, ...(it.cab || {}) }, u = it.uid;
+    const sizes = F.cableSizes(N, c.mat);
+    const bcOpts = d.bc?.options || [];
+    const bcHtml = `<div class="fa-ctls">${bcOpts.length ? `<label class="ctl w2">Breaking version<select data-fk="bcCode" data-uid="${u}">${bcOpts.map((x) => `<option value="${esc(x.code)}"${x.code === (it.bcCode || bcOpts[0].code) ? ' selected' : ''}>${esc(x.code)}${x.icuBy ? ` — ${F.breakingCapacity(d, { ...it, bcCode: x.code, icuUser: '' }).icu} kA at ${it.In} A` : ''}${x.basis === 'assumed' ? ' (assumed)' : ''}</option>`).join('')}</select></label>` : ''}
+      <label class="ctl ${bcOpts.length ? '' : 'w2'}">Icu entered (kA)<input type="number" min="0" step="any" data-fk="icuUser" data-uid="${u}" value="${it.icuUser ?? ''}" placeholder="${bcOpts.length ? 'from list' : 'enter'}"></label></div>`;
+    const ctl = (k, label, inner, cls = '') => `<label class="ctl ${cls}">${label}${inner.replace('<select', `<select data-fk="${k}" data-uid="${u}"`).replace('<input', `<input data-fk="${k}" data-uid="${u}"`)}</label>`;
+    const cab = `<label class="toggle"><input type="checkbox" data-fk="on" data-uid="${u}"${c.on ? ' checked' : ''}> This device feeds a cable</label>
+      <div class="fa-ctls"${c.on ? '' : ' hidden'}>
+        ${ctl('mat', 'Conductor', `<select>${opt(['Cu', 'Al'], c.mat, (x) => (x === 'Cu' ? 'Copper' : 'Aluminium'))}</select>`)}
+        ${ctl('ins', 'Insulation', `<select>${opt(['PVC', 'XLPE'], c.ins, (x) => (x === 'PVC' ? 'PVC 70 °C' : 'XLPE 90 °C'))}</select>`)}
+        ${ctl('method', 'Installation', `<select>${opt(Object.keys(N.ampacity.methods), c.method, (x) => N.ampacity.methods[x])}</select>`, 'w2')}
+        ${ctl('S', 'Phase (mm²)', `<select>${opt(sizes, c.S)}</select>`)}
+        ${ctl('Spe', 'PE (mm²)', `<select>${opt(sizes.filter((x) => x <= +c.S), c.Spe)}</select>`)}
+        ${ctl('L', 'Length (m)', `<input type="number" min="0" step="any" value="${c.L}">`)}
+        ${ctl('n', 'Parallel runs', `<input type="number" min="1" max="12" step="1" value="${c.n}">`)}
+        ${ctl('ph', 'Circuit', `<select>${opt([3, 1], c.ph, (x) => (x === 3 ? '3-phase' : '1-phase'))}</select>`)}
+        ${ctl('Ib', 'Load Ib (A)', `<input type="number" min="0" step="any" value="${c.Ib}">`)}
+        ${ctl('pf', 'Power factor', `<input type="number" min="0.05" max="1" step="0.01" value="${c.pf}">`)}
+        ${ctl('kind', 'Circuit type', `<select>${opt(['auto', 'final', 'distribution'], c.kind, (x) => ({ auto: 'Auto', final: 'Final', distribution: 'Distribution' }[x]))}</select>`)}
+        ${ctl('amb', `Ambient (°C)`, `<input type="number" min="-10" max="80" step="1" value="${c.amb}">`)}
+        ${ctl('kf', 'Grouping factor', `<input type="number" min="0.1" max="1.2" step="0.01" value="${c.kf}">`)}
+        ${ctl('Iz', 'Iz entered (A)', `<input type="number" min="0" step="any" value="${c.Iz ?? ''}" placeholder="from table">`, 'w2')}
+      </div>`;
+    const checks = `<ul class="fa-checks">${r.checks.map((x) => `<li><span class="badge ${x.st}">${CHECK_NAME[x.k]}</span><span>${esc(x.txt)}</span></li>`).join('')}</ul>`;
+    const pts = `<p class="sub mono">At device: Ik3 ${fmtKA(r.ik3)} · Ik1 ${fmtKA(r.ik1)} · L-N ${fmtKA(r.ikLN)}${c.on && r.ik1Min ? ` | Circuit end: Ik3 ${fmtKA(r.ik3End)} · Ik1 min ${fmtKA(r.ik1Min)} · Ik2 min ${fmtKA(r.ik2Min)}` : ''}</p>`;
+    return `<article class="fa-card">${head}<div class="fa-body"><div><h4>Breaking capacity</h4>${bcHtml}</div><div><h4>Outgoing circuit</h4>${cab}</div><div><h4>Results</h4>${pts}${checks}</div></div></article>`;
+  }).join('');
+  $('#fa-notes').innerHTML = `Maximum currents use cmax ${fa.cfac.max} and conductor resistance at 20 °C; minimum currents use cmin ${fa.cfac.min} and resistance at the insulation's maximum operating temperature (${srcLink('iec60909_c', 'IEC 60909-0 voltage factors')}, ${srcLink('iec60228', 'IEC 60228 resistances')}, ${srcLink('eig_isc', 'reactance 0.08 mΩ/m')}). Disconnection times follow ${srcLink('iec60364_41', 'IEC 60364-4-41 Table 41.1')}; ampacity follows ${srcLink('iec60364_552_pvc', 'IEC 60364-5-52')} via ${srcLink('nbr5410_ampacity', 'NBR 5410 tables')}; k values follow ${srcLink('bs7671_k', 'BS 7671 Table 54.3')}.`;
+}

@@ -85,7 +85,7 @@ export function defaultSettings(dev) {
   if (dev.model === 'custom') { st.kI = 1; st.kT = 1; st.base = dev.base || 100; st.kV = dev.kV ?? 0.4; }
   if (dev.model === 'rcd') { const r = dev.ratings; st.In = r.includes(40) ? 40 : r[Math.floor(r.length / 2)]; }
   if (dev.model === 'idmt') st.fn = 'phase';
-  if (dev.rcd) { st.idn = dev.rcd.idn.includes(30) ? 30 : dev.rcd.idn[0]; st.rcdType = dev.rcd.types.includes('A') ? 'A' : dev.rcd.types[0]; st.rcdClass = dev.rcd.classes[0]; }
+  if (dev.rcd) { st.idn = dev.rcd.idn.includes(30) ? 30 : dev.rcd.idn[0]; st.rcdType = dev.rcd.types.includes('A') ? 'A' : dev.rcd.types[0]; st.rcdClass = dev.rcd.classes[0];  if (dev.rcd.delays) st.dt = dev.rcd.delays[0]; }
   if (dev.G) { const v = gIgValues(dev); st.ig = v.includes(0.5) ? 0.5 : v.filter((x) => x > 0)[Math.floor(v.filter((x) => x > 0).length / 2)]; const tv = gTgValues(dev); st.tg = tv.includes(0.2) ? 0.2 : tv[Math.floor(tv.length / 2)]; st.gi2t = !!dev.G.i2tFixed; }
   normalize(dev, st);
   return st;
@@ -145,6 +145,10 @@ export function normalize(dev, st) {
     if (!dev.rcd.idn.includes(+st.idn)) st.idn = nearest(dev.rcd.idn, +st.idn || 30);
     if (!dev.rcd.types.includes(st.rcdType)) st.rcdType = dev.rcd.types[0];
     if (!dev.rcd.classes.includes(st.rcdClass)) st.rcdClass = dev.rcd.classes[0];
+    if (dev.rcd.delays) {
+      if (!dev.rcd.delays.includes(+st.dt)) st.dt = nearest(dev.rcd.delays, +st.dt || 0);
+      if (dev.rcd.instIdn && +st.idn <= dev.rcd.instIdn) st.dt = dev.rcd.instDelay ?? 0;
+    }
   }
   if (dev.G) {
     const v = gIgValues(dev); st.ig = v.some((x) => Math.abs(x - +st.ig) < 1e-9) ? +st.ig : nearest(v, num(st.ig, 0.5));
@@ -217,6 +221,7 @@ export function controlsFor(dev, st) {
     c.push({ key: 'idn', label: 'IΔn (residual)', kind: 'select', values: dev.rcd.idn, fmt: (v) => (v >= 1000 ? `${v / 1000} A` : `${v} mA`) });
     if (dev.rcd.types.length > 1) c.push({ key: 'rcdType', label: 'Residual type', kind: 'select', values: dev.rcd.types, fmt: (v) => `Type ${v}` });
     if (dev.rcd.classes.length > 1) c.push({ key: 'rcdClass', label: 'Time class', kind: 'select', values: dev.rcd.classes, fmt: (v) => RCD_CLASS_NAME[v] });
+    if (dev.rcd.delays) c.push({ key: 'dt', label: 'Time delay Δt', kind: 'select', values: dev.rcd.delays, fmt: (v) => (v === 0 ? 'Instantaneous' : v < 1 ? `${Math.round(v * 1000)} ms` : `${v} s`) });
   }
   if (dev.G) {
     const In = +st.In;
@@ -462,12 +467,24 @@ function evalRcd(dev, st) {
   const idn = +st.idn / 1000, cls = st.rcdClass || 'general', T = RCD_TABLE[cls] || RCD_TABLE.general;
   const cap = dev.rcd.tmaxIdn || INF;
   const tmax = [Math.min(T.max[0], cap), Math.min(T.max[1], cap), T.max[2]];
+  const dt = dev.rcd.delays ? +st.dt || 0 : 0;
+  const idnTxt = st.idn >= 1000 ? st.idn / 1000 + ' A' : st.idn + ' mA';
+  if (dt > 0.011) {
+    // Time-delayed (IEC 60947-2 Annex B): non-actuating time Δt; maximum break time 2·Δt + 40 ms (assumed).
+    const tHi = round(2 * dt + 0.04, 3);
+    return {
+      lo: (I) => (I < 0.5 * idn ? INF : dt), hi: (I) => (I < idn ? INF : tHi), nom: null, breaks: [0.5 * idn, idn], pickup: 0.5 * idn, isRelay: false,
+      summary: `${dev.series} ${idnTxt} Δt ${dt} s`,
+      settingsText: `IΔn ${idnTxt} type ${st.rcdType}, Δt ${dt < 1 ? Math.round(dt * 1000) + ' ms' : dt + ' s'}; no trip < ${round(0.5 * idn * 1000, 1)} mA; non-actuating ${dt} s, break ≤ ${tHi} s (assumed)`,
+    };
+  }
+  const tMin = dt > 0 ? [dt, dt, dt] : T.min;
   const hi = (I) => (I < idn ? INF : I < 2 * idn ? tmax[0] : I < 5 * idn ? tmax[1] : tmax[2]);
-  const lo = (I) => (I < 0.5 * idn ? INF : I < 2 * idn ? T.min[0] : I < 5 * idn ? T.min[1] : T.min[2]);
+  const lo = (I) => (I < 0.5 * idn ? INF : I < 2 * idn ? tMin[0] : I < 5 * idn ? tMin[1] : tMin[2]);
   return {
     lo, hi, nom: null, breaks: [0.5 * idn, idn, 2 * idn, 5 * idn], pickup: 0.5 * idn, isRelay: false,
     summary: `${dev.series} ${st.idn} mA`,
-    settingsText: `IΔn ${st.idn >= 1000 ? st.idn / 1000 + ' A' : st.idn + ' mA'} type ${st.rcdType}, ${RCD_CLASS_NAME[cls]}; no trip < ${round(0.5 * idn * 1000, 1)} mA; ≤ ${tmax[0]} / ${tmax[1]} / ${tmax[2]} s at 1 / 2 / 5·IΔn`,
+    settingsText: `IΔn ${idnTxt} type ${st.rcdType}, ${dt > 0 ? `Δt ${Math.round(dt * 1000)} ms` : RCD_CLASS_NAME[cls]}; no trip < ${round(0.5 * idn * 1000, 1)} mA; ≤ ${tmax[0]} / ${tmax[1]} / ${tmax[2]} s at 1 / 2 / 5·IΔn`,
   };
 }
 function evalG(dev, st) {

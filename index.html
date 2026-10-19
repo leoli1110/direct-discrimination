@@ -21,6 +21,7 @@
   </div>
   <nav class="tabs" role="tablist" aria-label="Views">
     <button role="tab" class="tab" data-view="study" aria-selected="true">Study</button>
+    <button role="tab" class="tab" data-view="fault" aria-selected="false"><span class="tab-long">Fault analysis</span><span class="tab-short">Faults</span></button>
     <button role="tab" class="tab" data-view="database" aria-selected="false">Database</button>
     <button role="tab" class="tab" data-view="method" aria-selected="false">Method</button>
   </nav>
@@ -130,6 +131,50 @@
     </div>
     <div class="study-list" id="study-list"></div>
   </aside>
+</main>
+
+<main id="view-fault" class="view fault" data-active="false" hidden>
+  <aside class="panel fa-source" aria-label="Supply">
+    <div class="panel-head"><h2>Supply</h2></div>
+    <div class="fa-form" id="fa-form">
+      <div class="seg" role="group" aria-label="Source type">
+        <button type="button" class="seg-btn" data-src="tx" aria-pressed="true">Transformer</button>
+        <button type="button" class="seg-btn" data-src="supply" aria-pressed="false">Known fault level</button>
+      </div>
+      <div class="fa-grid src-tx">
+        <label class="ctl">Rating (kVA)<input type="number" data-nk="kVA" min="25" step="any"></label>
+        <label class="ctl">Impedance uk (%)<input type="number" data-nk="uk" min="1" max="20" step="any"></label>
+        <label class="ctl">Load losses (kW)<input type="number" data-nk="pk" min="0" step="any" placeholder="typical"></label>
+        <label class="ctl">Construction<select data-nk="txType"><option value="oil">Oil-immersed</option><option value="resin">Cast resin</option></select></label>
+        <label class="ctl wide">Upstream MV fault level (MVA)<input type="number" data-nk="mva" min="1" step="any"></label>
+      </div>
+      <div class="fa-grid src-supply" hidden>
+        <label class="ctl">Ik3 at origin (kA)<input type="number" data-nk="ik3" min="0.1" step="any"></label>
+        <label class="ctl">X/R at origin<input type="number" data-nk="xr" min="0.05" step="any"></label>
+        <label class="ctl wide">External loop impedance Ze (Ω)<input type="number" data-nk="ze" min="0" step="any" placeholder="same as phase source"></label>
+      </div>
+      <div class="fa-grid">
+        <label class="ctl">Nominal voltage (V)<input type="number" data-nk="Un" min="100" max="1000" step="any"></label>
+        <label class="ctl">Voltage tolerance<select data-nk="tol"><option value="6">+6 % (cmax 1.05)</option><option value="10">+10 % (cmax 1.10)</option></select></label>
+        <label class="ctl">Earthing system<select data-nk="earthing"><option value="TN">TN-S / TN-C-S</option><option value="TT">TT</option></select></label>
+        <label class="ctl src-tt">RA + RB (Ω)<input type="number" data-nk="raRb" min="0" step="any"></label>
+        <label class="ctl">Voltage-drop limit (%)<input type="number" data-nk="vdLimit" min="0.5" max="20" step="any"></label>
+        <label class="toggle"><input type="checkbox" data-nk="mark"> Mark fault levels on the chart</label>
+      </div>
+      <div class="fa-origin" id="fa-origin"></div>
+      <button class="btn small" id="fa-to-chart" type="button">Use origin levels for the chart markers</button>
+    </div>
+  </aside>
+  <section class="fa-main">
+    <div class="fa-head">
+      <h1>Fault analysis</h1>
+      <p class="lead">The network follows the study's “Downstream of” links. Each device sits at the end of its upstream device's cable. Enter the cable each device feeds to get the maximum fault current at every device, check its breaking capacity, and check the circuit for disconnection time, conductor withstand, current-carrying capacity and voltage drop.</p>
+    </div>
+    <div class="table-scroll"><table class="grid-table fa-table" id="fa-table"></table></div>
+    <h2 class="mt">Circuits</h2>
+    <div class="fa-cards" id="fa-cards"></div>
+    <p class="fine" id="fa-notes"></p>
+  </section>
 </main>
 
 <main id="view-database" class="view database" data-active="false" hidden>

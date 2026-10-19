@@ -368,14 +368,16 @@ add(id="ieee-c37112", manufacturer="Generic (standard)", series="IEEE C37.112 re
 
 exec(open(os.path.join(HERE, "additions_2026b.py"), encoding="utf-8").read())
 exec(open(os.path.join(HERE, "additions_2026c.py"), encoding="utf-8").read())
+exec(open(os.path.join(HERE, "additions_2026d.py"), encoding="utf-8").read())
 
 db = {
- "meta": {"name": "Open TCC curve database", "version": "2026.3", "built": ACCESSED,
+ "meta": {"name": "Open TCC curve database", "version": "2026.4", "built": ACCESSED,
           "basisLegend": {"datasheet": "value printed in the cited manufacturer document", "standard": "value defined by the governing standard",
                           "assumed": "modelling assumption — see note", "user": "user entered"},
           "disclaimer": "Parametric curves reconstructed from published setting ranges and test points. Not a substitute for manufacturer-certified curves or selectivity tables."},
  "sources": {k: {"title": t, "url": u, "publisher": p, "accessed": ACCESSED} for k, (t, u, p) in SOURCES.items()},
  "devices": devices,
+ "network": network,
 }
 # self-check of thermal fits
 chk = {}
