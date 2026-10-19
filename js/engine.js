@@ -83,6 +83,10 @@ export function defaultSettings(dev) {
     st.hs = !!(dev.highset && dev.highset.enabled); st.hsX = dev.highset ? dev.highset.default : 10; st.hsT = dev.highset ? dev.highset.time : 0.05;
   }
   if (dev.model === 'custom') { st.kI = 1; st.kT = 1; st.base = dev.base || 100; st.kV = dev.kV ?? 0.4; }
+  if (dev.model === 'rcd') { const r = dev.ratings; st.In = r.includes(40) ? 40 : r[Math.floor(r.length / 2)]; }
+  if (dev.model === 'idmt') st.fn = 'phase';
+  if (dev.rcd) { st.idn = dev.rcd.idn.includes(30) ? 30 : dev.rcd.idn[0]; st.rcdType = dev.rcd.types.includes('A') ? 'A' : dev.rcd.types[0]; st.rcdClass = dev.rcd.classes[0]; }
+  if (dev.G) { const v = gIgValues(dev); st.ig = v.includes(0.5) ? 0.5 : v.filter((x) => x > 0)[Math.floor(v.filter((x) => x > 0).length / 2)]; const tv = gTgValues(dev); st.tg = tv.includes(0.2) ? 0.2 : tv[Math.floor(tv.length / 2)]; st.gi2t = !!dev.G.i2tFixed; }
   normalize(dev, st);
   return st;
 }
@@ -134,6 +138,18 @@ export function normalize(dev, st) {
     } else st.plug = Math.min(2000, Math.max(5, num(st.plug, 100)));
     st.tms = Math.min(dev.tms.max, Math.max(dev.tms.min, num(st.tms, dev.tms.min)));
     st.ctPri = Math.max(1, num(st.ctPri, 400)); if (!dev.ctSec.includes(+st.ctSec)) st.ctSec = dev.ctSec[0];
+  }
+  if (dev.model === 'rcd') { if (!dev.ratings.includes(+st.In)) st.In = nearest(dev.ratings, +st.In || 40); }
+  if (dev.model === 'idmt' && st.fn !== 'earth') st.fn = 'phase';
+  if (dev.rcd) {
+    if (!dev.rcd.idn.includes(+st.idn)) st.idn = nearest(dev.rcd.idn, +st.idn || 30);
+    if (!dev.rcd.types.includes(st.rcdType)) st.rcdType = dev.rcd.types[0];
+    if (!dev.rcd.classes.includes(st.rcdClass)) st.rcdClass = dev.rcd.classes[0];
+  }
+  if (dev.G) {
+    const v = gIgValues(dev); st.ig = v.some((x) => Math.abs(x - +st.ig) < 1e-9) ? +st.ig : nearest(v, num(st.ig, 0.5));
+    const tv = gTgValues(dev); st.tg = nearest(tv, num(st.tg, tv[0]));
+    st.gi2t = dev.G.i2tFixed ? true : (dev.G.i2t ? !!st.gi2t : false);
   }
   st.kV = Math.max(0.01, num(st.kV, 0.4));
   return st;
@@ -195,6 +211,21 @@ export function controlsFor(dev, st) {
       if (st.hs) { c.push({ key: 'hsX', label: 'High-set ×Is', kind: 'number', min: 1, max: 40, step: 0.5 }); c.push({ key: 'hsT', label: 'High-set time', kind: 'number', min: 0.01, max: 2, step: 0.01, unit: 's' }); }
     }
   }
+  if (dev.model === 'rcd') c.push({ key: 'In', label: 'Rating In', kind: 'select', values: dev.ratings, fmt: (v) => `${v} A` });
+  if (dev.model === 'idmt') c.push({ key: 'fn', label: 'Protection function', kind: 'select', values: ['phase', 'earth'], fmt: (v) => (v === 'earth' ? 'Earth fault' : 'Phase overcurrent') });
+  if (dev.rcd) {
+    c.push({ key: 'idn', label: 'IΔn (residual)', kind: 'select', values: dev.rcd.idn, fmt: (v) => (v >= 1000 ? `${v / 1000} A` : `${v} mA`) });
+    if (dev.rcd.types.length > 1) c.push({ key: 'rcdType', label: 'Residual type', kind: 'select', values: dev.rcd.types, fmt: (v) => `Type ${v}` });
+    if (dev.rcd.classes.length > 1) c.push({ key: 'rcdClass', label: 'Time class', kind: 'select', values: dev.rcd.classes, fmt: (v) => RCD_CLASS_NAME[v] });
+  }
+  if (dev.G) {
+    const In = +st.In;
+    c.push({ key: 'ig', label: 'Ig (earth fault)', kind: 'select', values: gIgValues(dev), fmt: (v) => (+v === 0 ? 'OFF' : `${round(v, 3)}×In  (${round(gIgA(dev, v, In), 1)} A)`) });
+    if (+st.ig > 0) {
+      c.push({ key: 'tg', label: 'tg', kind: 'select', values: gTgValues(dev), fmt: (v) => `${round(v, 3)} s` });
+      if (dev.G.i2t && !dev.G.i2tFixed) c.push({ key: 'gi2t', label: 'I²t ON (G)', kind: 'toggle' });
+    }
+  }
   c.push({ key: 'kV', label: 'Device voltage', kind: 'number', min: 0.01, step: 0.01, unit: 'kV' });
   return c;
 }
@@ -208,6 +239,7 @@ export function evaluate(dev, st) {
   if (dev.model === 'etu') return evalEtu(dev, st);
   if (dev.model === 'idmt') return evalIdmt(dev, st);
   if (dev.model === 'custom') return evalCustom(dev, st);
+  if (dev.model === 'rcd') return { none: true, lo: () => INF, hi: () => INF, breaks: [], pickup: INF, summary: dev.series, settingsText: `In ${st.In} A (no overcurrent release)` };
   throw new Error('unknown model ' + dev.model);
 }
 
@@ -404,3 +436,68 @@ function evalCustom(dev, st) {
       + `${dev.unit === 'x' ? `, base ${round(base, 2)} A` : ''}${kI !== 1 ? `, current ×${kI}` : ''}${kT !== 1 ? `, time ×${kT}` : ''}${ext ? '' : ', ends at last point'}`,
   };
 }
+
+// ------------------------------------------------------------ earth fault: residual-current devices and G functions
+export const RCD_CLASS_NAME = { general: 'General (instantaneous)', S: 'S (selective)', G: 'G (10 ms delayed)' };
+// IEC 61008-1 / 61009-1 tripping-time table for sinusoidal residual current (multiples of IΔn).
+const RCD_TABLE = {
+  general: { max: [0.3, 0.15, 0.04], min: [0.01, 0.01, 0.01] },
+  G: { max: [0.3, 0.15, 0.04], min: [0.01, 0.01, 0.01] },
+  S: { max: [0.5, 0.2, 0.15], min: [0.13, 0.06, 0.05] },
+};
+function gIgValues(dev) {
+  const g = dev.G.ig;
+  if (g.steps) return g.steps.slice();
+  const v = []; for (let x = g.min; x <= g.max + 1e-9; x += g.step) v.push(round(x, 4));
+  return g.off ? [0, ...v] : v;
+}
+function gTgValues(dev) {
+  const t = dev.G.tg;
+  if (t.steps) return t.steps.slice();
+  const v = []; for (let x = t.min; x <= t.max + 1e-9; x += t.step) v.push(round(x, 4));
+  return v;
+}
+function gIgA(dev, x, In) { const a = x * In; return dev.G.ig.maxA ? Math.min(a, dev.G.ig.maxA) : a; }
+function evalRcd(dev, st) {
+  const idn = +st.idn / 1000, cls = st.rcdClass || 'general', T = RCD_TABLE[cls] || RCD_TABLE.general;
+  const cap = dev.rcd.tmaxIdn || INF;
+  const tmax = [Math.min(T.max[0], cap), Math.min(T.max[1], cap), T.max[2]];
+  const hi = (I) => (I < idn ? INF : I < 2 * idn ? tmax[0] : I < 5 * idn ? tmax[1] : tmax[2]);
+  const lo = (I) => (I < 0.5 * idn ? INF : I < 2 * idn ? T.min[0] : I < 5 * idn ? T.min[1] : T.min[2]);
+  return {
+    lo, hi, nom: null, breaks: [0.5 * idn, idn, 2 * idn, 5 * idn], pickup: 0.5 * idn, isRelay: false,
+    summary: `${dev.series} ${st.idn} mA`,
+    settingsText: `IΔn ${st.idn >= 1000 ? st.idn / 1000 + ' A' : st.idn + ' mA'} type ${st.rcdType}, ${RCD_CLASS_NAME[cls]}; no trip < ${round(0.5 * idn * 1000, 1)} mA; ≤ ${tmax[0]} / ${tmax[1]} / ${tmax[2]} s at 1 / 2 / 5·IΔn`,
+  };
+}
+function evalG(dev, st) {
+  const g = dev.G, In = +st.In, Ig = gIgA(dev, +st.ig, In), tol = g.tol ?? 0.1, tg = +st.tg;
+  const band = g.tgBands && g.tgBands[String(tg)];
+  const tLo = band ? band[0] : tg * (1 - (g.tTol ?? 0.15)), tHi = band ? band[1] : tg * (1 + (g.tTol ?? 0.15));
+  const i2t = !!st.gi2t;
+  const ref = !i2t ? 0 : g.i2tRefUnit === 'xIn' ? (g.i2tRef || 1) * In : (g.i2tRef || 2) * Ig;
+  const shape = (I) => (i2t && I < ref ? (ref / I) ** 2 : 1);
+  const lo = (I) => (I < Ig * (1 - tol) ? INF : tLo * shape(I * (1 + tol)));
+  const hi = (I) => (I < Ig * (1 + tol) ? INF : tHi * shape(I));
+  return {
+    lo, hi, nom: (I) => (I < Ig ? INF : tg * shape(I)), breaks: [Ig * (1 - tol), Ig * (1 + tol)].concat(ref ? [ref] : []), pickup: Ig * (1 - tol), isRelay: false,
+    summary: `${dev.series} G`,
+    settingsText: `G: Ig ${round(Ig, 1)} A (${round(+st.ig, 3)}×In) ±${Math.round(tol * 100)} %, tg ${tg} s${i2t ? `, I²t (ref ${round(ref, 1)} A)` : ', definite time'}`,
+  };
+}
+// Earth-fault characteristic of a study item, or null when the device has none.
+export function evaluateEF(dev, st) {
+  if (dev.rcd) return evalRcd(dev, st);
+  if (dev.G) return +st.ig > 0 ? evalG(dev, st) : null;
+  if (dev.model === 'idmt' && st.fn === 'earth') return evaluate(dev, st);
+  if (dev.model === 'custom' && dev.category === 'EARTH') return evaluate(dev, st);
+  return null;
+}
+// Whether the item's phase curve belongs on the phase-fault chart.
+export function inPhaseView(dev, st) {
+  if (dev.model === 'rcd') return false;
+  if (dev.model === 'idmt' && st.fn === 'earth') return false;
+  if (dev.model === 'custom' && dev.category === 'EARTH') return false;
+  return true;
+}
+export function hasEF(dev) { return !!(dev.rcd || dev.G || dev.model === 'idmt' || (dev.model === 'custom' && dev.category === 'EARTH')); }

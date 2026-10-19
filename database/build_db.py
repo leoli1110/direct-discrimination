@@ -367,9 +367,10 @@ add(id="ieee-c37112", manufacturer="Generic (standard)", series="IEEE C37.112 re
     sources=["ieee_c37112"], notes="MI A=0.0515 B=0.114 p=0.02; VI A=19.61 B=0.491 p=2; EI A=28.2 B=0.1217 p=2.")
 
 exec(open(os.path.join(HERE, "additions_2026b.py"), encoding="utf-8").read())
+exec(open(os.path.join(HERE, "additions_2026c.py"), encoding="utf-8").read())
 
 db = {
- "meta": {"name": "Open TCC curve database", "version": "2026.2", "built": ACCESSED,
+ "meta": {"name": "Open TCC curve database", "version": "2026.3", "built": ACCESSED,
           "basisLegend": {"datasheet": "value printed in the cited manufacturer document", "standard": "value defined by the governing standard",
                           "assumed": "modelling assumption — see note", "user": "user entered"},
           "disclaimer": "Parametric curves reconstructed from published setting ranges and test points. Not a substitute for manufacturer-certified curves or selectivity tables."},

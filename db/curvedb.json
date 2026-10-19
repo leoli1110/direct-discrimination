@@ -1,7 +1,7 @@
 {
  "meta": {
   "name": "Open TCC curve database",
-  "version": "2026.2",
+  "version": "2026.3",
   "built": "2026-10-19",
   "basisLegend": {
    "datasheet": "value printed in the cited manufacturer document",
@@ -401,6 +401,66 @@
   "chint_na8": {
    "title": "CHINT NA8 air circuit breaker catalogue 2023",
    "url": "https://chintglobal.vn/wp-content/uploads/2023/04/na8-catalog-2023-en-1-compressed-1.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "eaton_frbm6": {
+   "title": "Eaton xEffect FRBm6 RCBO catalogue (CA003015EN) \u2014 includes the IEC 61008/61009 tripping-time tables",
+   "url": "https://www.eaton.com/content/dam/eaton/products/electrical-circuit-protection/circuit-breakers/xeffect-rcbo-frbm6m/eaton-xeffect-frbm6-rcbo-catalog-ca003015en-en-us.pdf",
+   "publisher": "Eaton",
+   "accessed": "2026-10-19"
+  },
+  "se_idpn_vigi": {
+   "title": "Schneider Electric Acti9 iDPN N Vigi RCBO product data sheet",
+   "url": "https://www.farnell.com/datasheets/3126244.pdf",
+   "publisher": "Schneider Electric",
+   "accessed": "2026-10-19"
+  },
+  "se_icv40": {
+   "title": "Schneider Electric Acti9 iCV40N RCBO product page (A9DC3616)",
+   "url": "https://www.se.com/ie/en/product/A9DC3616/residual-current-breaker-with-overcurrent-protection-rcbo-acti9-icv40n-1p+n-16a-c-curve-6000a-a-type-30ma/",
+   "publisher": "Schneider Electric",
+   "accessed": "2026-10-19"
+  },
+  "abb_ds201": {
+   "title": "ABB DS201 L H RCBO data sheet (9AKK107492A6648, Sept 2025)",
+   "url": "https://library.e.abb.com/public/f0185ed3587d43019e2711110e85e678/DS201%20L%20H_9AKK107492A6648_Tech%20Datasheet_Sept25.pdf?x-sign=b8nKR7CxJmrWLROsHX/iVrSpW/lpNGgS/sNANsozcTo9eL9P8DVZ0Y3gZRGfuJPb",
+   "publisher": "ABB",
+   "accessed": "2026-10-19"
+  },
+  "siemens_5su1": {
+   "title": "Siemens 5SU1 RCBO guide",
+   "url": "https://assets.new.siemens.com/siemens/assets/api/uuid:47293844-ab7b-49ae-a11c-5ba393f7de60/5SU1-RCBO-Guide_original.pdf",
+   "publisher": "Siemens",
+   "accessed": "2026-10-19"
+  },
+  "legrand_dx3_rcbo": {
+   "title": "Legrand DX3 1P+N type A C16 30 mA 6 kA RCBO (411131)",
+   "url": "https://www.legrand.com.au/en/catalog/products/dx3-1pn-type-c16a-30ma-6ka-rcbo-411131",
+   "publisher": "Legrand",
+   "accessed": "2026-10-19"
+  },
+  "hager_rcbo_ie": {
+   "title": "Hager Ireland RCBO range (1P+N 6 kA / 10 kA, 2P/4P)",
+   "url": "https://www.hager.ie/files/download/0/24901_1/0/RCBOs",
+   "publisher": "Hager",
+   "accessed": "2026-10-19"
+  },
+  "hager_ada_au": {
+   "title": "Hager ADA1xxT RCBO 6 kA C-curve (AS/NZS 61009.1)",
+   "url": "https://assets.hager.com/step-content/P/HA_22827059/Document/std.lang.all/ADA1XXT_RCBOS_6KA_C.pdf",
+   "publisher": "Hager",
+   "accessed": "2026-10-19"
+  },
+  "chint_nb1l": {
+   "title": "CHINT NB1L RCBO catalogue",
+   "url": "https://www.chintglobal.kr/upload/file/Catalogue/NB1L%20catalog.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "chint_nxble": {
+   "title": "CHINT NXBLE-63 RCBO product page",
+   "url": "https://www.chintglobal.com/global/en/products/low-voltage/iec/final-power-distribution/nxble-63.html",
    "publisher": "CHINT",
    "accessed": "2026-10-19"
   }
@@ -2764,7 +2824,58 @@
     ]
    },
    "G": {
-    "note": "MicroLogic 6: Ig 0.2\u20131\u00b7In, tg 0\u20130.4 s (not plotted)"
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tg": {
+     "steps": [
+      0,
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    },
+    "tgBands": {
+     "0": [
+      0.02,
+      0.08
+     ],
+     "0.1": [
+      0.08,
+      0.14
+     ],
+     "0.2": [
+      0.14,
+      0.2
+     ],
+     "0.3": [
+      0.23,
+      0.32
+     ],
+     "0.4": [
+      0.35,
+      0.5
+     ]
+    },
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "assumed",
+    "note": "MicroLogic 6.2 E only (OFF = 5.2). Ig \u00b110 % (In > 40 A dial; In = 40 A starts at 0.4); tg non-trip / max break 20/80, 80/140, 140/200, 230/320, 350/500 ms.",
+    "basis": "datasheet"
    },
    "sources": [
     "se_nsx_cat"
@@ -2877,7 +2988,35 @@
    "sources": [
     "abb_xt"
    ],
-   "notes": "I1 0.4\u20131\u00b7In step 0.02 (manual); t1 3/12/36/60 s @3\u00b7I1, \u00b110 % (\u22644\u00b7In); I2 1\u201310\u00b7In, t2 0.05\u20130.4 s @10\u00b7In, I\u00b2t ON/OFF; I3 1\u201310\u00b7In \u00b110 %, \u226440 ms. In ratings listed are typical XT2/XT4 values \u2014 not extracted from the cited page."
+   "notes": "I1 0.4\u20131\u00b7In step 0.02 (manual); t1 3/12/36/60 s @3\u00b7I1, \u00b110 % (\u22644\u00b7In); I2 1\u201310\u00b7In, t2 0.05\u20130.4 s @10\u00b7In, I\u00b2t ON/OFF; I3 1\u201310\u00b7In \u00b110 %, \u226440 ms. In ratings listed are typical XT2/XT4 values \u2014 not extracted from the cited page.",
+   "G": {
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.25,
+      0.45,
+      0.55,
+      0.75,
+      0.8,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tg": {
+     "steps": [
+      0.1,
+      0.2,
+      0.4,
+      0.8
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": false,
+    "note": "Ekip LSIG (OFF = LSI). I4 \u00b110 %, t4 \u00b115 %, t = k. G is inhibited at high currents (not modelled).",
+    "basis": "datasheet"
+   }
   },
   {
    "id": "siemens-3va-etu350",
@@ -3209,7 +3348,28 @@
    "sources": [
     "legrand_dpx3"
    ],
-   "notes": "DPX3 630 (250\u2013630 A) instantaneous If = 5 kA; DPX3 1600 (630\u20131600 A) If = 20 kA. S1 version: tr fixed 5 s, tsd fixed 0.05 s."
+   "notes": "DPX3 630 (250\u2013630 A) instantaneous If = 5 kA; DPX3 1600 (630\u20131600 A) If = 20 kA. S1 version: tr fixed 5 s, tsd fixed 0.05 s.",
+   "G": {
+    "ig": {
+     "min": 0.2,
+     "max": 1.0,
+     "step": 0.1,
+     "unit": "xIn",
+     "off": true
+    },
+    "tol": 0.1,
+    "tolBasis": "assumed",
+    "tg": {
+     "min": 0.1,
+     "max": 1.0,
+     "step": 0.1
+    },
+    "tTol": 0.15,
+    "i2t": false,
+    "source": "legrand_dpx3",
+    "note": "DPX3 Sg versions (OFF = S2): Ig 0.2\u20131\u00b7In and OFF, tg 0.1\u20131 s. Tolerances not printed (assumed \u00b110 % / \u00b115 %).",
+    "basis": "datasheet"
+   }
   },
   {
    "id": "hager-h3-lsni",
@@ -3333,7 +3493,50 @@
    "sources": [
     "hager_h3"
    ],
-   "notes": "Ir = Ir1 \u00d7 Ir2 (0.91\u20131); tr 5 s @6\u00b7Ir (\u221221 %/+1 %); Isd 1.5\u201310\u00b7Ir \u00b110 %, tsd 100 ms fixed; Ii 15\u00b7In (40/100 A) or 11\u00b7In (160/250 A) \u00b115 %, 10/50 ms."
+   "notes": "Ir = Ir1 \u00d7 Ir2 (0.91\u20131); tr 5 s @6\u00b7Ir (\u221221 %/+1 %); Isd 1.5\u201310\u00b7Ir \u00b110 %, tsd 100 ms fixed; Ii 15\u00b7In (40/100 A) or 11\u00b7In (160/250 A) \u00b115 %, 10/50 ms.",
+   "G": {
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tolBasis": "assumed",
+    "tg": {
+     "steps": [
+      0.05,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 2,
+    "i2tRefBasis": "assumed",
+    "note": "Ig OFF or 20\u2013100 % In in 5 % steps (40\u2013100 % for In = 40 A); tg 50\u2013500 ms with I\u00b2t ON/OFF.",
+    "basis": "datasheet"
+   }
   },
   {
    "id": "cdg11-3s",
@@ -4912,7 +5115,35 @@
     ]
    },
    "G": {
-    "note": "LSIG: I4 0.2\u20131\u00b7In, t4 0.1\u20130.8 s (not plotted)"
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tolBasis": "assumed",
+    "tg": {
+     "min": 0.1,
+     "max": 0.8,
+     "step": 0.01
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tFixed": true,
+    "i2tRef": 2,
+    "i2tRefBasis": "assumed",
+    "note": "PR222DS/P LSIG (OFF = LSI). I4 0.2\u20131\u00b7In step 0.1, t4 0.1\u20130.8 s, t = k/I\u00b2 (reference point assumed at 2\u00b7I4).",
+    "basis": "datasheet"
    },
    "sources": [
     "abb_tmax_t"
@@ -5237,7 +5468,25 @@
     ]
    },
    "G": {
-    "note": "I4 0.2\u20131\u00b7In, t4 0.1\u20131 s (not plotted)"
+    "ig": {
+     "min": 0.2,
+     "max": 1.0,
+     "step": 0.02,
+     "unit": "xIn",
+     "off": true
+    },
+    "tol": 0.07,
+    "tg": {
+     "min": 0.1,
+     "max": 1.0,
+     "step": 0.05
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 2,
+    "i2tRefBasis": "assumed",
+    "note": "PR332/P LSIG: I4 0.2\u20131\u00b7In \u00b17 %, t4 0.1\u20131 s; definite time min(\u00b110 %, \u00b140 ms) or t = k/I\u00b2 \u00b115 %.",
+    "basis": "datasheet"
    },
    "sources": [
     "abb_tmax_t"
@@ -5758,7 +6007,32 @@
     ]
    },
    "G": {
-    "note": "LSIG versions: G not plotted"
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.25,
+      0.45,
+      0.55,
+      0.75,
+      0.8,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tg": {
+     "steps": [
+      0.1,
+      0.2,
+      0.4,
+      0.8
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": false,
+    "basis": "assumed",
+    "note": "LSIG version (OFF = LSI). Settings taken from the XT2/XT4 Ekip LSIG table (assumed for this frame)."
    },
    "sources": [
     "abb_xt_iec_2020"
@@ -5869,7 +6143,32 @@
     ]
    },
    "G": {
-    "note": "LSIG versions: G not plotted"
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.25,
+      0.45,
+      0.55,
+      0.75,
+      0.8,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tg": {
+     "steps": [
+      0.1,
+      0.2,
+      0.4,
+      0.8
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": false,
+    "basis": "assumed",
+    "note": "LSIG version (OFF = LSI). Settings taken from the XT2/XT4 Ekip LSIG table (assumed for this frame)."
    },
    "sources": [
     "abb_xt_iec_2020"
@@ -6014,7 +6313,35 @@
    "sources": [
     "abb_xt_iec_2020"
    ],
-   "notes": "I3 1.5\u201315\u00b7In, \u226430 ms."
+   "notes": "I3 1.5\u201315\u00b7In, \u226430 ms.",
+   "G": {
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.25,
+      0.45,
+      0.55,
+      0.75,
+      0.8,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tg": {
+     "steps": [
+      0.1,
+      0.2,
+      0.4,
+      0.8
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": false,
+    "basis": "assumed",
+    "note": "LSIG version (OFF = LSI). Settings taken from the XT2/XT4 Ekip LSIG table (assumed for this frame)."
+   }
   },
   {
    "id": "abb-xt5-ekiptouch",
@@ -6083,7 +6410,25 @@
     ]
    },
    "G": {
-    "note": "LSIG versions: G not plotted"
+    "ig": {
+     "min": 0.1,
+     "max": 1.0,
+     "step": 0.01,
+     "unit": "xIn",
+     "off": true
+    },
+    "tol": 0.07,
+    "tg": {
+     "min": 0.1,
+     "max": 1.0,
+     "step": 0.05
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 2,
+    "i2tRefBasis": "assumed",
+    "basis": "assumed",
+    "note": "I4 0.1\u20131\u00b7In, t4 0.1\u20131 s (XT7 Ekip Touch manual; XT5 assumed equal). Curves t = k or t = k/I\u00b2."
    },
    "sources": [
     "abb_xt_iec_2020"
@@ -6157,7 +6502,25 @@
     ]
    },
    "G": {
-    "note": "LSIG versions: G not plotted"
+    "ig": {
+     "min": 0.1,
+     "max": 1.0,
+     "step": 0.01,
+     "unit": "xIn",
+     "off": true
+    },
+    "tol": 0.07,
+    "tg": {
+     "min": 0.1,
+     "max": 1.0,
+     "step": 0.05
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 2,
+    "i2tRefBasis": "assumed",
+    "basis": "datasheet",
+    "note": "I4 0.1\u20131\u00b7In, t4 0.1\u20131 s (XT7 Ekip Touch manual; XT5 assumed equal). Curves t = k or t = k/I\u00b2."
    },
    "sources": [
     "abb_xt_iec_2020",
@@ -7326,7 +7689,35 @@
    "sources": [
     "chint_nm8n"
    ],
-   "notes": "Isd \u00b115 %, tsd \u00b120 % or \u00b140 ms; Ii 2\u201312\u00b7In \u00b115 %, \u226460 ms. EM version adds G (0.4\u20131\u00b7In, not plotted)."
+   "notes": "Isd \u00b115 %, tsd \u00b120 % or \u00b140 ms; Ii 2\u201312\u00b7In \u00b115 %, \u226460 ms. EM version adds G (0.4\u20131\u00b7In, not plotted).",
+   "G": {
+    "ig": {
+     "steps": [
+      0,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.15,
+    "tg": {
+     "steps": [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    },
+    "tTol": 0.2,
+    "i2t": false,
+    "note": "NM8N EM version (OFF = EN): Ig 0.4\u20131\u00b7In \u00b115 %, tg 0.1\u20130.4 s \u00b120 % or \u00b140 ms.",
+    "basis": "datasheet"
+   }
   },
   {
    "id": "chint-nm1-tm",
@@ -7529,7 +7920,37 @@
     "bandBasis": "datasheet"
    },
    "G": {
-    "note": "Ig 0.5\u00b7In (NXA16/20) or 800 A (NXA32+), inverse/definite (not plotted)"
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      1.0
+     ],
+     "unit": "xIn",
+     "maxA": 1200
+    },
+    "tol": 0.15,
+    "tolBasis": "assumed",
+    "tg": {
+     "steps": [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 1,
+    "i2tRefUnit": "xIn",
+    "basis": "assumed",
+    "note": "Catalogue gives Ig = 0.5\u00b7In (NXA16/20) or 800 A (NXA32+), Ig \u2264 1200 A, inverse t = (In or 1200 A / I)\u00b2\u00b7Tg; the selectable steps are assumed."
    },
    "sources": [
     "chint_nxa"
@@ -7623,12 +8044,1174 @@
     ]
    },
    "G": {
-    "note": "Ig 0.2\u20131\u00b7In (\u22642500 frame) / 500\u20131200 A (not plotted)"
+    "ig": {
+     "steps": [
+      0,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+     ],
+     "unit": "xIn",
+     "maxA": 1200
+    },
+    "tol": 0.15,
+    "tolBasis": "assumed",
+    "tg": {
+     "steps": [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 1,
+    "i2tRefUnit": "xIg",
+    "basis": "datasheet",
+    "note": "Ig 0.2\u20131\u00b7In (\u2264 2500 frame) or 500\u20131200 A; inverse t = (Ig/I)\u00b2\u00b7tg. tg steps assumed equal to the short-time steps."
    },
    "sources": [
     "chint_na8"
    ],
    "notes": "Isd <0.9 no trip / >1.15 trip; tsd definite 0.1\u20130.4 s or inverse I\u00b2t = (10\u00b7Ir)\u00b2\u00b7tsd; Ii 2\u201315\u00b7In, \u2264100 ms."
+  },
+  {
+   "id": "se-icv40n",
+   "manufacturer": "Schneider Electric",
+   "series": "Acti9 iCV40N RCBO 1P+N",
+   "standard": "IEC/EN 61009-2-1",
+   "ratings": [
+    6,
+    10,
+    16,
+    20,
+    25,
+    32,
+    40
+   ],
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 6 kA",
+   "rcd": {
+    "idn": [
+     30,
+     100,
+     300
+    ],
+    "types": [
+     "A",
+     "A-SI"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "se_icv40",
+    "eaton_frbm6"
+   ],
+   "notes": "Ratings 6\u201340 A, B and C curves, 30/100/300 mA, type A or A-SI. Magnetic ranges not printed: IEC 61009 B 3\u20135\u00b7In, C 5\u201310\u00b7In used.",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "refTempC": 30
+  },
+  {
+   "id": "se-idpn-vigi",
+   "manufacturer": "Schneider Electric",
+   "series": "Acti9 iDPN N Vigi RCBO 1P+N",
+   "standard": "IEC/EN 61009-2-1",
+   "ratings": [
+    6,
+    10,
+    16,
+    20,
+    25,
+    32,
+    40
+   ],
+   "curves": {
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 6 kA",
+   "rcd": {
+    "idn": [
+     30
+    ],
+    "types": [
+     "AC"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "se_idpn_vigi",
+    "eaton_frbm6"
+   ],
+   "notes": "Data sheet: C 5\u201310\u00b7In, 30 mA type AC, instantaneous earth-leakage. Only the 40 A sheet was read; 6\u201340 A list is the typical range (assumed).",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "refTempC": 30
+  },
+  {
+   "id": "abb-ds201",
+   "manufacturer": "ABB",
+   "series": "DS201 L H RCBO 1P+N",
+   "ratings": [
+    6,
+    10,
+    16,
+    20,
+    25,
+    32,
+    40
+   ],
+   "curves": {
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 4.5 kA (IEC 61009-1); Icu 6 kA / Ics 4.5 kA (IEC 60947-2)",
+   "rcd": {
+    "idn": [
+     30
+    ],
+    "types": [
+     "AC",
+     "A",
+     "APR",
+     "F"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "abb_ds201",
+    "eaton_frbm6"
+   ],
+   "notes": "C 5\u201310\u00b7In; 30 mA; AC (6\u201340 A), A (10, 16 A), F (10, 16, 25 A); I\u0394m 3 kA; thermal reference 30 \u00b0C.",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "standard": "IEC/EN 61009-1",
+   "refTempC": 30
+  },
+  {
+   "id": "siemens-5su1",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 5SU1 RCBO",
+   "ratings": [
+    6,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32
+   ],
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "6 kA / 10 kA",
+   "rcd": {
+    "idn": [
+     30,
+     300
+    ],
+    "types": [
+     "A",
+     "A super-resistant"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "siemens_5su1",
+    "eaton_frbm6"
+   ],
+   "notes": "2-, 3- and 4-pole; B and C; 30 mA (300 mA on 3P/4P). Magnetic ranges not printed: IEC 61009 values used.",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "standard": "IEC/EN 61009-1",
+   "refTempC": 30
+  },
+  {
+   "id": "eaton-frbm6",
+   "manufacturer": "Eaton",
+   "series": "xEffect FRBm6 RCBO",
+   "ratings": [
+    2,
+    4,
+    6,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40
+   ],
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 20,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 6 kA",
+   "rcd": {
+    "idn": [
+     10,
+     30,
+     100,
+     300
+    ],
+    "types": [
+     "AC",
+     "A",
+     "Super A",
+     "G/A",
+     "F"
+    ],
+    "classes": [
+     "general",
+     "G"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "eaton_frbm6",
+    "eaton_frbm6"
+   ],
+   "notes": "1+N 2\u201340 A (B, C, D), 2P 6\u201340 A, 3+N 6\u201332 A. Types G/A and F are 10 ms time-delayed (class G). Rating steps between 2 and 40 A are typical (assumed).",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "standard": "IEC/EN 61009-1",
+   "refTempC": 30
+  },
+  {
+   "id": "legrand-dx3-rcbo",
+   "manufacturer": "Legrand",
+   "series": "DX3 RCBO 1P+N 6 kA",
+   "standard": "IEC 61009-1; IEC 60947-2",
+   "ratings": [
+    6,
+    10,
+    16,
+    20,
+    25,
+    32
+   ],
+   "curves": {
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 6 kA",
+   "rcd": {
+    "idn": [
+     30
+    ],
+    "types": [
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "legrand_dx3_rcbo",
+    "eaton_frbm6"
+   ],
+   "notes": "C curve 6\u201332 A (AU range 411128\u2013411134), 30 mA type A.",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "refTempC": 30
+  },
+  {
+   "id": "hager-rcbo-10ka",
+   "manufacturer": "Hager",
+   "series": "RCBO 1P+N 10 kA (ADB/ADC/ACB/AEC)",
+   "category": "RCBO",
+   "model": "mcb",
+   "standard": "BS EN / IEC 61009-1",
+   "refTempC": 30,
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "ratings": [
+    6,
+    10,
+    16,
+    20,
+    25,
+    32,
+    40,
+    45
+   ],
+   "ratingsByCurve": {
+    "B": [
+     6,
+     10,
+     16,
+     20,
+     25,
+     32,
+     40,
+     45
+    ],
+    "C": [
+     6,
+     10,
+     16,
+     20,
+     25,
+     32,
+     40
+    ]
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "10 kA",
+   "rcd": {
+    "idn": [
+     10,
+     30,
+     100
+    ],
+    "types": [
+     "A",
+     "AC"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "hager_rcbo_ie",
+    "eaton_frbm6"
+   ],
+   "notes": "Commercial/industrial single pole + solid neutral, 10 kA; 10/30/100 mA. Magnetic ranges not printed: IEC 61009 values used."
+  },
+  {
+   "id": "hager-ada-au",
+   "manufacturer": "Hager",
+   "series": "ADA1xxT RCBO 6 kA (AS/NZS)",
+   "standard": "AS/NZS 61009.1",
+   "ratings": [
+    6,
+    10,
+    16,
+    20,
+    25,
+    32,
+    40,
+    45
+   ],
+   "curves": {
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "6 kA",
+   "rcd": {
+    "idn": [
+     30
+    ],
+    "types": [
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "hager_ada_au",
+    "eaton_frbm6"
+   ],
+   "notes": "C 5\u201310\u00b7In, 6\u201345 A, 30 mA type A.",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "refTempC": 30
+  },
+  {
+   "id": "chint-nb1l",
+   "manufacturer": "CHINT",
+   "series": "NB1L RCBO",
+   "ratings": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    8,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40
+   ],
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 6 kA (10 kA NB1L-40/63)",
+   "rcd": {
+    "idn": [
+     30,
+     100,
+     300
+    ],
+    "types": [
+     "AC",
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "datasheet",
+    "timeBasis": "standard",
+    "note": "",
+    "tmaxIdn": 0.1
+   },
+   "sources": [
+    "chint_nb1l",
+    "eaton_frbm6"
+   ],
+   "notes": "B 3\u20135\u00b7In, C 5\u201310\u00b7In; 30/100/300 mA; break time at I\u0394n \u2264 0.1 s (catalogue), so the band uses 0.1 s instead of the standard 0.3 s; reference 30 \u00b0C. NB1L-63 adds 50/63 A.",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "standard": "IEC/EN 61009-1",
+   "refTempC": 30
+  },
+  {
+   "id": "chint-nxble63",
+   "manufacturer": "CHINT",
+   "series": "NXBLE-63 RCBO",
+   "ratings": [
+    6,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 6 kA",
+   "rcd": {
+    "idn": [
+     30,
+     100,
+     300
+    ],
+    "types": [
+     "AC",
+     "A"
+    ],
+    "classes": [
+     "general"
+    ],
+    "basis": "assumed",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "chint_nxble",
+    "eaton_frbm6"
+   ],
+   "notes": "B 3\u20135\u00b7In, C 5\u201310\u00b7In; 30/100/300 mA. Residual type not stated on the page (AC/A assumed).",
+   "category": "RCBO",
+   "model": "mcb",
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "standard": "IEC/EN 61009-1",
+   "refTempC": 30
+  },
+  {
+   "id": "iec61009-rcbo",
+   "manufacturer": "Generic (standard)",
+   "series": "IEC 61009-1 RCBO",
+   "category": "RCBO",
+   "model": "mcb",
+   "standard": "IEC 61009-1",
+   "refTempC": 30,
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "ratings": [
+    6,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 20,
+     "basis": "standard",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn per product",
+   "rcd": {
+    "idn": [
+     10,
+     30,
+     100,
+     300,
+     500
+    ],
+    "types": [
+     "AC",
+     "A",
+     "F",
+     "B"
+    ],
+    "classes": [
+     "general",
+     "S"
+    ],
+    "basis": "standard",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "eaton_frbm6",
+    "beama_2026"
+   ],
+   "notes": "Standard envelope for any RCBO. Residual (earth-fault) band from the IEC 61008-1 / 61009-1 tripping-time table for sinusoidal residual current: no trip below 0.5\u00b7I\u0394n; maximum break time 0.3 / 0.15 / 0.04 s at 1 / 2 / 5\u00b7I\u0394n (type S 0.5 / 0.2 / 0.15 s, minimum non-actuating 0.13 / 0.06 / 0.05 s; type G minimum 10 ms), as reproduced in Eaton's FRBm6 catalogue."
+  },
+  {
+   "id": "iec61008-rccb",
+   "manufacturer": "Generic (standard)",
+   "series": "IEC 61008-1 RCCB (residual only)",
+   "category": "RCBO",
+   "model": "rcd",
+   "standard": "IEC 61008-1",
+   "ratings": [
+    16,
+    25,
+    40,
+    63,
+    80,
+    100,
+    125
+   ],
+   "breaking": "no overcurrent protection",
+   "rcd": {
+    "idn": [
+     10,
+     30,
+     100,
+     300,
+     500,
+     1000
+    ],
+    "types": [
+     "AC",
+     "A",
+     "F",
+     "B"
+    ],
+    "classes": [
+     "general",
+     "S",
+     "G"
+    ],
+    "basis": "standard",
+    "timeBasis": "standard",
+    "note": ""
+   },
+   "sources": [
+    "eaton_frbm6"
+   ],
+   "notes": "Residual-current circuit breaker without overcurrent release: plotted on the earth-fault chart only. Residual (earth-fault) band from the IEC 61008-1 / 61009-1 tripping-time table for sinusoidal residual current: no trip below 0.5\u00b7I\u0394n; maximum break time 0.3 / 0.15 / 0.04 s at 1 / 2 / 5\u00b7I\u0394n (type S 0.5 / 0.2 / 0.15 s, minimum non-actuating 0.13 / 0.06 / 0.05 s; type G minimum 10 ms), as reproduced in Eaton's FRBm6 catalogue."
+  },
+  {
+   "id": "siemens-3va-etu560",
+   "manufacturer": "Siemens",
+   "series": "SENTRON 3VA2 ETU560 (LSIG)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    63,
+    100,
+    160,
+    250,
+    400,
+    630
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "unit": "xIn"
+    },
+    "tr": {
+     "min": 0.5,
+     "max": 13
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": null,
+    "tTol": null,
+    "note": "I\u00b2t = constant, tr at 6\u00b7Ir; tolerances not stated (nominal line only)."
+   },
+   "S": {
+    "isd": {
+     "min": 0.6,
+     "max": 10,
+     "unit": "xIn"
+    },
+    "tol": null,
+    "tsd": {
+     "min": 0.05,
+     "max": 0.5
+    },
+    "i2t": true,
+    "i2tRef": 8,
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInMin": 1.5,
+    "xInMaxAll": 12,
+    "tol": null,
+    "band": [
+     0.01,
+     0.05
+    ],
+    "bandBasis": "assumed"
+   },
+   "sources": [
+    "siemens_3va_ul_manual",
+    "siemens_3va_manual"
+   ],
+   "notes": "Ir 0.4\u20131\u00b7In; tr 0.5\u201313/15/17/20/25 s @6\u00b7Ir; Isd 0.6\u20139/10\u00b7In; tsd 0.05\u20130.5 s (I\u00b2t switchable, ref. Isd = 8\u00b7Ir); Ii 1.5\u20139/10/12\u00b7In (frame dependent). ETU560 adds G: Ig 0.2/0.25/0.4/0.6\u20131.0\u00b7In, tg 0.05\u20130.8 s referenced at 2\u00b7Ig, I\u00b2t can be deactivated.",
+   "G": {
+    "ig": {
+     "min": 0.2,
+     "max": 1.0,
+     "step": 0.05,
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tolBasis": "assumed",
+    "tg": {
+     "min": 0.05,
+     "max": 0.8,
+     "step": 0.01
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 2,
+    "i2tRefBasis": "datasheet",
+    "basis": "datasheet",
+    "note": "Ig 0.2\u20131\u00b7In (minimum depends on frame), tg 0.05\u20130.8 s with reference point 2\u00b7Ig; G cannot be switched off."
+   }
   }
  ]
 }

@@ -256,3 +256,9 @@ input[type=search], select, input[type=number], input[type=text] { width: 100%; 
 .cc-body { grid-template-columns: minmax(0, 1fr); }
 .cc-dialog { overflow-x: hidden; }
 @media (max-width: 640px) { .cc-table input { min-width: 62px; } .cc-table td { padding: 3px 3px; } .cc-table td.idx { width: 22px; } }
+.card-foot .mono { white-space: pre-line; }
+.seg { display: inline-flex; border: 1px solid var(--border-strong); border-radius: var(--radius); overflow: hidden; flex: none; }
+.seg button { border: 0; background: var(--surface); color: var(--muted); font: inherit; font-size: var(--text-xs); font-weight: 600; padding: 6px 11px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--border-strong); }
+.seg button[aria-pressed="true"] { background: var(--text); color: var(--surface); }
+.an-view { font-size: var(--text-xs); font-weight: 500; color: var(--muted); margin-left: 6px; text-transform: none; letter-spacing: 0; }

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TCC Studio 2026 — multi-manufacturer time-current curves</title>
-<meta name="description" content="Time-current curve generator and viewer for MCB, MCCB, ACB and CDG / IEC / IEEE IDMT relays, built from a source-cited 2026 datasheet database.">
+<meta name="description" content="Time-current curve generator and viewer for MCB, RCBO, MCCB, ACB and CDG / IEC / IEEE IDMT relays, built from a source-cited 2026 datasheet database.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -59,6 +59,7 @@
         <button class="chip" data-cat="MCB" aria-pressed="false">MCB</button>
         <button class="chip" data-cat="MCCB" aria-pressed="false">MCCB</button>
         <button class="chip" data-cat="ACB" aria-pressed="false">ACB</button>
+        <button class="chip" data-cat="RCBO" aria-pressed="false">RCBO</button>
         <button class="chip" data-cat="RELAY" aria-pressed="false">Relay</button>
         <button class="chip" data-cat="CUSTOM" aria-pressed="false">My curves</button>
       </div>
@@ -74,9 +75,14 @@
   <section class="center">
     <div class="chart-card">
       <div class="chart-toolbar">
+        <div class="seg" role="group" aria-label="Chart view">
+          <button type="button" data-view="phase" aria-pressed="true">Phase fault</button>
+          <button type="button" data-view="earth" aria-pressed="false">Earth fault</button>
+        </div>
         <div class="tb-group">
           <label>Base voltage <span class="inp-unit"><input type="number" id="base-kv" step="0.01" min="0.01" value="0.4"><i>kV</i></span></label>
-          <label>Fault level <span class="inp-unit"><input type="number" id="fault-ka" step="0.1" min="0" value="10"><i>kA</i></span></label>
+          <label class="v-phase">Fault level <span class="inp-unit"><input type="number" id="fault-ka" step="0.1" min="0" value="10"><i>kA</i></span></label>
+          <label class="v-earth" hidden>Earth-fault current <span class="inp-unit"><input type="number" id="ef-ka" step="0.01" min="0" value="1"><i>kA</i></span></label>
         </div>
         <div class="tb-group">
           <label>Current axis
@@ -85,10 +91,13 @@
               <option value="1,5">10 A – 100 kA</option>
               <option value="-1,4">0.1 A – 10 kA</option>
               <option value="1,6">10 A – 1 MA</option>
+              <option value="-3,4">1 mA – 10 kA</option>
+              <option value="-2,5">10 mA – 100 kA</option>
               <option value="auto" selected>Auto</option>
             </select>
           </label>
           <label class="check"><input type="checkbox" id="show-bands" checked> Tolerance bands</label>
+          <label class="check v-earth" hidden title="Also plot phase overcurrent curves, which respond to earth faults in TN systems"><input type="checkbox" id="ef-phase"> Phase devices too</label>
         </div>
       </div>
       <div class="pick-banner" id="pick-banner" hidden>
@@ -106,7 +115,7 @@
 
     <section class="analysis">
       <div class="an-head">
-        <h2>Coordination check</h2>
+        <h2>Coordination check <span class="an-view" id="an-view">phase fault</span></h2>
         <button class="btn small" id="btn-autochain" title="Link devices into an upstream→downstream chain ordered by pick-up current">Auto-chain by pick-up</button>
       </div>
       <div class="table-scroll"><table class="grid-table" id="sel-table"></table></div>
@@ -156,7 +165,7 @@
         <label class="ctl wide">Curve name<input type="text" id="cc-name" required maxlength="80" placeholder="e.g. 160 A gG fuse (digitised)"></label>
         <label class="ctl">Type<select id="cc-cat">
           <option value="FUSE">Fuse</option><option value="MCB">MCB</option><option value="MCCB">MCCB</option><option value="ACB">ACB</option>
-          <option value="RELAY">Relay</option><option value="DAMAGE">Damage / withstand</option><option value="OTHER">Other</option></select></label>
+          <option value="RELAY">Relay</option><option value="DAMAGE">Damage / withstand</option><option value="EARTH">Earth fault / RCD</option><option value="OTHER">Other</option></select></label>
         <label class="ctl">Device voltage (kV)<input type="number" id="cc-kv" min="0.01" step="0.01" value="0.4"></label>
         <label class="ctl">Times<select id="cc-mode"><option value="line">Single line</option><option value="band">Min / max band</option></select></label>
         <label class="ctl">Current values<select id="cc-unit"><option value="A">Amperes</option><option value="x">Multiples of a base current</option></select></label>

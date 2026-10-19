@@ -8,7 +8,7 @@ const DB = JSON.parse(fs.readFileSync(new URL('../db/curvedb.json', import.meta.
 
 test('every device references known sources and has a supported model', () => {
   for (const d of DB.devices) {
-    assert.ok(['mcb', 'tm', 'etu', 'idmt'].includes(d.model), `${d.id}: model ${d.model}`);
+    assert.ok(['mcb', 'tm', 'etu', 'idmt', 'rcd'].includes(d.model), `${d.id}: model ${d.model}`);
     assert.ok(d.sources.length > 0, `${d.id}: no sources`);
     for (const s of d.sources) assert.ok(DB.sources[s], `${d.id}: unknown source ${s}`);
   }
@@ -22,16 +22,20 @@ test('every selectable setting gives a valid, ordered band', () => {
     const ctrls = E.controlsFor(dev, E.defaultSettings(dev));
     const variants = [{}];
     for (const c of ctrls) if (c.kind === 'select') for (const v of c.values) variants.push({ [c.key]: v });
+    if (dev.G) variants.push({ gi2t: true });
     for (const v of variants) {
       const st = { ...E.defaultSettings(dev), ...v };
       E.normalize(dev, st);
-      const pts = E.sample(E.evaluate(dev, st), 1, 1, 2e5, 120);
-      for (const p of pts) {
-        assert.ok(!Number.isNaN(p.lo) && !Number.isNaN(p.hi), `${dev.id} ${JSON.stringify(v)}: NaN at ${p.I}`);
-        assert.ok(p.hi >= p.lo - 1e-9, `${dev.id} ${JSON.stringify(v)}: hi < lo at ${p.I}`);
+      for (const ev of [E.evaluate(dev, st), E.evaluateEF(dev, st)]) {
+        if (!ev || ev.none) continue;
+        const pts = E.sample(ev, 1, 0.001, 2e5, 140);
+        for (const p of pts) {
+          assert.ok(!Number.isNaN(p.lo) && !Number.isNaN(p.hi), `${dev.id} ${JSON.stringify(v)}: NaN at ${p.I}`);
+          assert.ok(p.hi >= p.lo - 1e-9, `${dev.id} ${JSON.stringify(v)}: hi < lo at ${p.I}`);
+        }
+        assert.ok(pts.some((p) => Number.isFinite(p.hi)), `${dev.id}: never trips`);
+        n++;
       }
-      assert.ok(pts.some((p) => Number.isFinite(p.hi)), `${dev.id}: never trips`);
-      n++;
     }
   }
   assert.ok(n > 1000);
@@ -80,4 +84,37 @@ test('custom curves: parse, interpolate log-log, vertical steps, band and extens
   assert.ok(Math.abs(ex.lo(200 * 50 * 2) - 500) < 1e-6);
   assert.deepEqual(E.parsePoints(E.formatPoints({ ...d, series: 'x' })), E.sortPts(pts));
   assert.equal(E.checkPoints({ ...d, points: pts.slice(0, 1) })[0].level, 'error');
+});
+
+test('RCD residual band follows the IEC 61008/61009 table', () => {
+  const d = DB.devices.find((x) => x.id === 'iec61008-rccb');
+  const st = { ...E.defaultSettings(d), idn: 30, rcdClass: 'general' }; E.normalize(d, st);
+  const ev = E.evaluateEF(d, st);
+  assert.equal(ev.lo(0.014), Infinity, 'no trip below 0.5·IΔn');
+  assert.equal(ev.hi(0.03), 0.3); assert.equal(ev.hi(0.06), 0.15); assert.equal(ev.hi(0.15), 0.04);
+  const s2 = { ...st, rcdClass: 'S', idn: 300 }; E.normalize(d, s2);
+  const es = E.evaluateEF(d, s2);
+  assert.equal(es.lo(0.3), 0.13); assert.equal(es.hi(0.3), 0.5); assert.equal(es.hi(1.5), 0.15);
+  assert.ok(E.evaluate(d, st).none, 'an RCCB has no phase curve');
+});
+
+test('RCBO keeps its MCB curve and adds the residual band; NB1L caps IΔn time at 0.1 s', () => {
+  const d = DB.devices.find((x) => x.id === 'chint-nb1l');
+  const st = E.defaultSettings(d);
+  assert.ok(Number.isFinite(E.evaluate(d, st).hi(10 * st.In)));
+  assert.equal(E.evaluateEF(d, st).hi(0.03), 0.1);
+});
+
+test('G function: OFF, definite time and I²t', () => {
+  const d = DB.devices.find((x) => x.id === 'se-ml52');
+  const st = { ...E.defaultSettings(d), In: 160, ig: 0.5, tg: 0.2 }; E.normalize(d, st);
+  const ev = E.evaluateEF(d, st);
+  assert.equal(ev.hi(80 * 1.05), Infinity);
+  assert.equal(ev.hi(200), 0.2); assert.equal(ev.lo(200), 0.14);
+  assert.equal(E.evaluateEF(d, { ...st, ig: 0 }), null);
+  const i2 = E.evaluateEF(d, { ...st, gi2t: true });
+  assert.ok(i2.hi(200) > 0.2);
+  const r = DB.devices.find((x) => x.id === 'cdg11-3s');
+  const rs = { ...E.defaultSettings(r), fn: 'earth' }; E.normalize(r, rs);
+  assert.ok(E.evaluateEF(r, rs) && !E.inPhaseView(r, rs));
 });

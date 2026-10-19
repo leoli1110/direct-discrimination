@@ -4,14 +4,23 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fmtT = (t) => (!Number.isFinite(t) ? '—' : t >= 100 ? `${t.toFixed(0)} s` : t >= 1 ? `${t.toFixed(2)} s` : t >= 0.1 ? `${t.toFixed(3)} s` : `${(t * 1000).toFixed(0)} ms`);
-const fmtI = (I) => (I >= 1e4 ? `${(I / 1000).toFixed(1)} kA` : I >= 1000 ? `${(I / 1000).toFixed(2)} kA` : I >= 10 ? `${I.toFixed(0)} A` : `${I.toFixed(2)} A`);
+const fmtI = (I) => (I >= 1e4 ? `${(I / 1000).toFixed(1)} kA` : I >= 1000 ? `${(I / 1000).toFixed(2)} kA` : I >= 10 ? `${I.toFixed(0)} A` : I >= 1 ? `${I.toFixed(2)} A` : `${+(I * 1000).toPrecision(3)} mA`);
 const PALETTE = { light: ['#1d5f8a', '#b4441c', '#2c7a4b', '#7b4a9e', '#9a7412', '#0e7783', '#8c2b4b', '#4a5560'], dark: ['#6cb2e0', '#f08a5d', '#6fcf8f', '#b993dd', '#e3bd57', '#4fc4cf', '#e47b9b', '#a5b0ba'] };
 
 let DB = null;
-const S = { items: [], baseKV: 0.4, faultKA: 10, xRange: 'auto', bands: true, uid: 1, cat: 'ALL', brand: '', q: '', collapsed: new Set() };
+const S = { items: [], baseKV: 0.4, faultKA: 10, efKA: 1, view: 'phase', efPhase: false, xRange: 'auto', bands: true, uid: 1, cat: 'ALL', brand: '', q: '', collapsed: new Set() };
 const CUSTOM = new Map(); // user-defined curves: id -> device definition (model 'custom')
 const dev = (id) => CUSTOM.get(id) || DB.devices.find((d) => d.id === id);
-const CC_TYPES = { FUSE: 'Fuse', MCB: 'MCB', MCCB: 'MCCB', ACB: 'ACB', RELAY: 'Relay', DAMAGE: 'Damage / withstand', OTHER: 'Other' };
+// The characteristic plotted for an item in the current chart view (null = not shown in this view).
+function curveOf(it, d = dev(it.deviceId)) {
+  if (S.view === 'earth') {
+    const ef = E.evaluateEF(d, it); if (ef) return ef;
+    if (!S.efPhase || !E.inPhaseView(d, it)) return null;
+  } else if (!E.inPhaseView(d, it)) return null;
+  const ev = E.evaluate(d, it); return ev.none ? null : ev;
+}
+const faultA = () => (S.view === 'earth' ? S.efKA : S.faultKA) * 1000;
+const CC_TYPES = { FUSE: 'Fuse', MCB: 'MCB', MCCB: 'MCCB', ACB: 'ACB', RELAY: 'Relay', DAMAGE: 'Damage / withstand', EARTH: 'Earth fault / RCD', OTHER: 'Other' };
 const LS_KEY = 'tcc-studio.mycurves.v1';
 function loadMyCurves() {
   try { const arr = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); for (const d of arr) if (d && d.id && Array.isArray(d.points)) CUSTOM.set(d.id, { ...d, saved: true }); } catch { /* storage unavailable */ }
@@ -79,9 +88,12 @@ function initLibrary() {
   renderLibrary();
 }
 function devMeta(d) {
-  if (d.model === 'mcb') return `${Object.keys(d.curves).join(' · ')} curves · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A`;
+  const mA = (v) => (v >= 1000 ? `${v / 1000} A` : `${v} mA`);
+  const rc = d.rcd ? ` · ${d.rcd.idn.map(mA).join('/')}` : '';
+  if (d.model === 'rcd') return `Residual only · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A${rc}`;
+  if (d.model === 'mcb') return `${Object.keys(d.curves).join(' · ')} curves · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A${rc}`;
   if (d.model === 'tm') return `Thermal-magnetic · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A`;
-  if (d.model === 'etu') return `Electronic ${d.S ? 'LSI' : 'LI'} · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A`;
+  if (d.model === 'etu') return `Electronic ${d.S ? 'LSI' : 'LI'}${d.G ? '(G)' : ''} · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A`;
   if (d.model === 'custom') { const p = E.sortPts(d.points); return `${CC_TYPES[d.category] || 'Custom'} · ${p.length} points${d.mode === 'band' ? ' · band' : ''}${p.length ? ` · ${fmtI(p[0].I * (d.unit === 'x' ? d.base : 1))}–${fmtI(p[p.length - 1].I * (d.unit === 'x' ? d.base : 1))}` : ''}`; }
   return `IDMT · ${Object.keys(d.curves).map((k) => k.split(' ')[0]).join(' · ')}`;
 }
@@ -93,13 +105,13 @@ function renderLibrary() {
   $('#lib-count').textContent = `${list.length + myList.length} / ${DB.devices.length + mine.length}`;
   const groups = {};
   for (const d of list) (groups[d.category] ||= []).push(d);
-  const names = { MCB: 'Miniature circuit breakers', MCCB: 'Moulded-case circuit breakers', ACB: 'Air circuit breakers', RELAY: 'Overcurrent relays (IDMT)' };
+  const names = { MCB: 'Miniature circuit breakers', RCBO: 'RCBOs and RCDs (residual current)', MCCB: 'Moulded-case circuit breakers', ACB: 'Air circuit breakers', RELAY: 'Overcurrent relays (IDMT)' };
   const myHtml = myList.length ? `<div class="lib-group"><h3>My curves</h3>${myList.map((d) => `<div class="lib-item" data-add="${d.id}" role="button" tabindex="0" title="Add to study">
       <span class="li-name">${esc(d.series)}</span><span class="li-add" aria-hidden="true">+</span>
       <span class="li-meta">${esc(devMeta(d))}${d.saved ? '' : ' · this study only'}</span>
       <span class="li-edit"><span data-edit="${d.id}" role="button" tabindex="0">Edit</span>${d.saved ? `<span data-forget="${d.id}" role="button" tabindex="0">Remove</span>` : ''}</span></div>`).join('')}</div>`
     : S.cat === 'CUSTOM' ? `<p class="study-empty">No custom curves yet. Use “+ Custom curve” to enter current–time points, paste a list or load a .txt / .csv file.</p>` : '';
-  $('#lib-list').innerHTML = (list.length || myHtml) ? myHtml + ['MCB', 'MCCB', 'ACB', 'RELAY'].filter((g) => groups[g]).map((g) => `
+  $('#lib-list').innerHTML = (list.length || myHtml) ? myHtml + ['MCB', 'RCBO', 'MCCB', 'ACB', 'RELAY'].filter((g) => groups[g]).map((g) => `
     <div class="lib-group"><h3>${names[g]}</h3>
     ${groups[g].map((d) => `<button class="lib-item" data-add="${d.id}" title="Add to study">
       <span class="li-name">${esc(d.manufacturer.startsWith('Generic') ? d.series : `${d.manufacturer.replace(' Electric', '')} · ${d.series}`)}</span>
@@ -112,6 +124,9 @@ function renderLibrary() {
 function initToolbar() {
   $('#base-kv').addEventListener('change', (e) => { S.baseKV = Math.max(0.01, +e.target.value || 0.4); refresh(); });
   $('#fault-ka').addEventListener('change', (e) => { S.faultKA = Math.max(0, +e.target.value || 0); refresh(); });
+  $('#ef-ka').addEventListener('change', (e) => { S.efKA = Math.max(0, +e.target.value || 0); refresh(); });
+  $('#ef-phase').addEventListener('change', (e) => { S.efPhase = e.target.checked; refresh(); });
+  $$('[data-view]').forEach((b) => b.addEventListener('click', () => setView(b.dataset.view)));
   $('#x-range').addEventListener('change', (e) => { S.xRange = e.target.value; draw(); });
   $('#show-bands').addEventListener('change', (e) => { S.bands = e.target.checked; draw(); });
   $('#btn-clear').addEventListener('click', () => { S.items = []; refresh(); });
@@ -148,7 +163,7 @@ function renderStudy() {
   const host = $('#study-list');
   if (!S.items.length) { host.innerHTML = `<p class="study-empty">No devices yet. Pick a breaker or relay from the library — each one is plotted with its tolerance band and linked to its datasheet.</p>`; renderSelectivity(); return; }
   host.innerHTML = S.items.map((it) => {
-    const d = dev(it.id ?? it.deviceId), ev = E.evaluate(d, it);
+    const d = dev(it.id ?? it.deviceId), ev = E.evaluate(d, it), efv = E.evaluateEF(d, it);
     const ctls = E.controlsFor(d, it).map((c) => controlHtml(it, d, c)).join('');
     const others = S.items.filter((o) => o.uid !== it.uid);
     const src = d.sources.map((s) => `<a href="${DB.sources[s].url}" target="_blank" rel="noopener">${esc(DB.sources[s].publisher)}${d.sources.length > 1 ? ' · ' + esc(DB.sources[s].title.slice(0, 28)) + '…' : ''}</a>`).join('');
@@ -167,7 +182,7 @@ function renderStudy() {
       <div class="card-body${collapsed ? ' collapsed' : ''}">
         ${ctls}
         <label class="ctl wide">Downstream of<select data-k="downOf"><option value="">— none (top of chain) —</option>${others.map((o) => `<option value="${o.uid}"${o.uid === it.downOf ? ' selected' : ''}>${esc(o.label)}</option>`).join('')}</select></label>
-        <div class="card-foot"><span class="mono">${esc(ev.settingsText)}</span></div>
+        <div class="card-foot"><span class="mono">${esc(settingsLine(d, it, ev, efv))}</span></div>
         <div class="card-foot">${d.model === 'custom' ? `<span class="tag user">user-defined</span> <button class="btn small" data-act="edit">Edit points</button>` : `${basisTags(d)} ${src}`}</div>
       </div></div>`;
   }).join('');
@@ -190,7 +205,7 @@ function bindCards() {
       el.addEventListener(evt, () => {
         let v = el.type === 'checkbox' ? el.checked : el.value;
         if (k === 'downOf') v = v ? +v : null;
-        else if (!['label', 'color', 'curve', 'plugRange'].includes(k) && el.type !== 'checkbox') v = +v;
+        else if (!['label', 'color', 'curve', 'plugRange', 'rcdType', 'rcdClass', 'fn'].includes(k) && el.type !== 'checkbox') v = +v;
         if (el.type === 'number' && !(v > 0) && k !== 'downOf') return;
         it[k] = v;
         if (k === 'io') it.Ir = v;
@@ -199,7 +214,7 @@ function bindCards() {
         if (el.type === 'range') { // live update without rebuilding (keeps drag)
           const c = E.controlsFor(d, it).find((x) => x.key === k); const rv = el.parentElement.querySelector('.rv');
           if (rv && c) rv.textContent = (c.fmt || ((x) => x))(+it[k]);
-          card.querySelector('.card-foot .mono').textContent = E.evaluate(d, it).settingsText;
+          card.querySelector('.card-foot .mono').textContent = settingsLine(d, it);
           draw(); renderSelectivity(); clearTimeout(bindCards.t); bindCards.t = setTimeout(saveHash, 300); return;
         }
         refresh();
@@ -232,11 +247,12 @@ function xDomain() {
   const vis = S.items.filter((i) => i.visible);
   if (!vis.length) return [1, 1e5];
   let lo = Infinity;
-  for (const it of vis) { const ev = E.evaluate(dev(it.deviceId), it); lo = Math.min(lo, ev.pickup * kScale(it)); }
+  for (const it of vis) { const ev = curveOf(it); if (ev) lo = Math.min(lo, ev.pickup * kScale(it)); }
+  if (!Number.isFinite(lo)) return S.view === 'earth' ? [0.01, 1e5] : [1, 1e5];
   const a = Math.floor(Math.log10(lo * 0.8));
-  const hiNeed = Math.max(S.faultKA * 1000 * 1.5, lo * 1000);
+  const hiNeed = Math.max(faultA() * 1.5, lo * 1000);
   const b = Math.max(a + 3, Math.ceil(Math.log10(hiNeed)));
-  return [10 ** a, 10 ** Math.min(b, a + 6)];
+  return [10 ** a, 10 ** Math.min(b, a + (S.view === 'earth' ? 7 : 6))];
 }
 function cssVar(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
 
@@ -258,21 +274,22 @@ function draw() {
   for (let d = -3; d <= 4; d++) for (let k = 1; k < 10; k++) { const t = k * 10 ** d; if (t < Y0 || t > Y1) continue; const y = sy(t).toFixed(1); g += `<line x1="${m.l}" x2="${m.l + pw}" y1="${y}" y2="${y}" stroke="${k === 1 ? C.major : C.minor}" stroke-width="${k === 1 ? 1 : 0.7}"/>`; }
   // axis labels
   const fs = narrow ? 9 : 10.5;
-  for (let d = d0; d <= d1; d++) { const I = 10 ** d; if (I < X0 * 0.999 || I > X1 * 1.001) continue; const lab = I >= 1e6 ? `${I / 1e6}M` : I >= 1000 ? `${I / 1000}k` : `${I}`; g += `<text x="${sx(I)}" y="${m.t + ph + 15}" fill="${C.text}" font-size="${fs}" font-family="${C.font}" text-anchor="middle">${lab}</text>`; }
+  for (let d = d0; d <= d1; d++) { const I = 10 ** d; if (I < X0 * 0.999 || I > X1 * 1.001) continue; const lab = I >= 1e6 ? `${I / 1e6}M` : I >= 1000 ? `${I / 1000}k` : I < 1 ? `${+(I * 1000).toPrecision(3)}m` : `${I}`; g += `<text x="${sx(I)}" y="${m.t + ph + 15}" fill="${C.text}" font-size="${fs}" font-family="${C.font}" text-anchor="middle">${lab}</text>`; }
   for (let d = -3; d <= 4; d++) { const t = 10 ** d; const lab = t >= 1 ? `${t}` : `${t}`; g += `<text x="${m.l - 6}" y="${sy(t) + 3.5}" fill="${C.text}" font-size="${fs}" font-family="${C.font}" text-anchor="end">${lab}</text>`; }
-  g += `<text x="${m.l + pw / 2}" y="${H - 8}" fill="${C.text}" font-size="${fs + 0.5}" font-family="Geist, sans-serif" text-anchor="middle">Current (A) at ${S.baseKV} kV base</text>`;
+  g += `<text x="${m.l + pw / 2}" y="${H - 8}" fill="${C.text}" font-size="${fs + 0.5}" font-family="Geist, sans-serif" text-anchor="middle">${S.view === 'earth' ? 'Earth-fault / residual current' : 'Current'} (A) at ${S.baseKV} kV base</text>`;
   g += `<text transform="translate(${narrow ? 11 : 14},${m.t + ph / 2}) rotate(-90)" fill="${C.text}" font-size="${fs + 0.5}" font-family="Geist, sans-serif" text-anchor="middle">Time (s)</text>`;
   g += `<rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}" fill="none" stroke="${C.axis}" stroke-width="1"/>`;
   g += `<defs><clipPath id="plotclip"><rect x="${m.l}" y="${m.t}" width="${pw}" height="${ph}"/></clipPath></defs><g clip-path="url(#plotclip)">`;
   // fault marker
-  const If = S.faultKA * 1000;
+  const If = faultA();
   if (If > X0 && If < X1) { const x = sx(If); g += `<line x1="${x}" x2="${x}" y1="${m.t}" y2="${m.t + ph}" stroke="${C.fault}" stroke-width="1.2" stroke-dasharray="5 4"/><text x="${x - 4}" y="${m.t + 12}" fill="${C.fault}" font-size="${fs}" font-family="${C.font}" text-anchor="end">If ${fmtI(If)}</text>`; }
   // curves
   const clampT = (t) => Math.min(Y1 * 1.5, Math.max(Y0 / 1.5, t));
   const labels = [];
   for (const it of S.items) {
     if (!it.visible) continue;
-    const d = dev(it.deviceId), ev = E.evaluate(d, it), k = kScale(it), col = colorFor(it);
+    const d = dev(it.deviceId), ev = curveOf(it, d), k = kScale(it), col = colorFor(it);
+    if (!ev) continue;
     const pts = E.sample(ev, k, X0, X1, Math.round(Math.max(260, pw)));
     const path = (key) => { let s = '', on = false; for (const p of pts) { const t = p[key]; if (!Number.isFinite(t)) { on = false; continue; } s += `${on ? 'L' : 'M'}${sx(p.I).toFixed(1)},${sy(clampT(t)).toFixed(1)}`; on = true; } return s; };
     const same = pts.every((p) => p.lo === p.hi || (!Number.isFinite(p.lo) && !Number.isFinite(p.hi)) || Math.abs(p.lo - p.hi) / p.hi < 1e-9);
@@ -301,7 +318,7 @@ function draw() {
   g += `</g><g id="cursor"></g>`;
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   svg.innerHTML = g;
-  $('#empty-chart').hidden = S.items.some((i) => i.visible);
+  $('#empty-chart').hidden = S.items.some((i) => i.visible && curveOf(i));
   showLegend();
   bindCursor();
 }
@@ -318,7 +335,8 @@ function bindCursor() {
     const parts = [`<span class="ro-i">${fmtI(I)}</span>`];
     for (const it of S.items) {
       if (!it.visible) continue;
-      const d = dev(it.deviceId), ev = E.evaluate(d, it), k = kScale(it);
+      const d = dev(it.deviceId), ev = curveOf(it, d), k = kScale(it);
+      if (!ev) continue;
       const lo = ev.lo(I / k), hi = ev.hi(I / k), col = colorFor(it);
       for (const t of [lo, hi]) if (Number.isFinite(t) && t > Y0 && t < Y1) g += `<circle cx="${x}" cy="${sy(t)}" r="3" fill="${col}"/>`;
       const txt = !Number.isFinite(hi) && !Number.isFinite(lo) ? 'no trip' : lo === hi ? fmtT(hi) : `${fmtT(lo)} – ${Number.isFinite(hi) ? fmtT(hi) : 'no trip'}`;
@@ -333,26 +351,27 @@ function bindCursor() {
 }
 
 function showLegend() {
-  const vis = S.items.filter((i) => i.visible);
+  const vis = S.items.filter((i) => i.visible && curveOf(i));
   $('#readout').innerHTML = vis.length ? vis.map((it) => `<span class="ro-item"><span class="swatch" style="background:${colorFor(it)}"></span>${esc(it.label)}</span>`).join('') + `<span class="ro-hint">· hover or tap the chart for operating times</span>`
     : `<span class="ro-hint">Hover the chart to read operating times at any current.</span>`;
 }
 
 // ------------------------------------------------------------ coordination
 function autoChain() {
-  const evs = S.items.map((it) => ({ it, pu: E.evaluate(dev(it.deviceId), it).pickup * kScale(it) })).sort((a, b) => b.pu - a.pu);
+  const evs = S.items.map((it) => { const ev = curveOf(it) || E.evaluateEF(dev(it.deviceId), it) || E.evaluate(dev(it.deviceId), it); return { it, pu: (Number.isFinite(ev.pickup) ? ev.pickup : 0) * kScale(it) }; }).sort((a, b) => b.pu - a.pu);
   evs.forEach((e, i) => { e.it.downOf = i === 0 ? null : evs[i - 1].it.uid; });
 }
 const isEM = (d) => d.model === 'idmt' && d.id.startsWith('cdg');
 function renderSelectivity() {
   const tbl = $('#sel-table');
-  const pairs = S.items.filter((i) => i.downOf && S.items.some((u) => u.uid === i.downOf)).map((dn) => ({ dn, up: S.items.find((u) => u.uid === dn.downOf) }));
-  const head = `<thead><tr><th>Upstream</th><th>Downstream</th><th>Pick-up ratio</th><th>Selective up to</th><th>At fault ${fmtI(S.faultKA * 1000)}</th><th>Result</th></tr></thead>`;
-  if (!pairs.length) { tbl.innerHTML = head + `<tbody><tr class="empty-row"><td colspan="6">Link devices with “Downstream of” on each card, or use Auto-chain.</td></tr></tbody>`; return; }
-  const If = S.faultKA * 1000;
+  $('#an-view').textContent = S.view === 'earth' ? 'earth fault' : 'phase fault';
+  const pairs = S.items.filter((i) => i.downOf && S.items.some((u) => u.uid === i.downOf)).map((dn) => ({ dn, up: S.items.find((u) => u.uid === dn.downOf) })).filter(({ dn, up }) => curveOf(dn) && curveOf(up));
+  const head = `<thead><tr><th>Upstream</th><th>Downstream</th><th>Pick-up ratio</th><th>Selective up to</th><th>At ${S.view === 'earth' ? 'earth fault' : 'fault'} ${fmtI(faultA())}</th><th>Result</th></tr></thead>`;
+  if (!pairs.length) { tbl.innerHTML = head + `<tbody><tr class="empty-row"><td colspan="6">${S.view === 'earth' ? 'No linked pair has an earth-fault characteristic on both devices. Link RCBOs, RCDs, trip units with G or earth-fault relays with “Downstream of”, or tick “Phase devices too”.' : 'Link devices with “Downstream of” on each card, or use Auto-chain.'}</td></tr></tbody>`; return; }
+  const If = faultA();
   const rows = pairs.map(({ up, dn }) => {
     const du = dev(up.deviceId), dd = dev(dn.deviceId);
-    const eu = E.evaluate(du, up), ed = E.evaluate(dd, dn), ku = kScale(up), kd = kScale(dn);
+    const eu = curveOf(up, du), ed = curveOf(dn, dd), ku = kScale(up), kd = kScale(dn);
     const puR = (eu.pickup * ku) / (ed.pickup * kd);
     const [X0, X1] = xDomain();
     const lim = E.selectivity(eu, ku, ed, kd, Math.max(X0, ed.pickup * kd), Math.max(If, X0 * 10));
@@ -381,13 +400,14 @@ function renderSelectivity() {
 // ------------------------------------------------------------ persistence (file + URL hash)
 function serialize() {
   const used = [...new Set(S.items.map((i) => i.deviceId))].filter((id) => CUSTOM.has(id)).map((id) => { const { saved, ...d } = CUSTOM.get(id); return d; });
-  return { app: 'tcc-studio', version: DB.meta.version, baseKV: S.baseKV, faultKA: S.faultKA, customCurves: used, items: S.items.map(({ uid, ...r }) => ({ uid, ...r })) };
+  return { app: 'tcc-studio', version: DB.meta.version, baseKV: S.baseKV, faultKA: S.faultKA, efKA: S.efKA, view: S.view, efPhase: S.efPhase, customCurves: used, items: S.items.map(({ uid, ...r }) => ({ uid, ...r })) };
 }
 function applyStudy(o) {
   if (!o || !Array.isArray(o.items)) throw new Error('not a study file');
   for (const d of o.customCurves || []) if (d && d.id && Array.isArray(d.points)) CUSTOM.set(d.id, { ...d, model: 'custom', saved: CUSTOM.get(d.id)?.saved || false });
-  S.baseKV = +o.baseKV || 0.4; S.faultKA = +o.faultKA || 10;
-  $('#base-kv').value = S.baseKV; $('#fault-ka').value = S.faultKA;
+  S.baseKV = +o.baseKV || 0.4; S.faultKA = +o.faultKA || 10; S.efKA = o.efKA > 0 ? +o.efKA : 1; S.efPhase = !!o.efPhase;
+  $('#base-kv').value = S.baseKV; $('#fault-ka').value = S.faultKA; $('#ef-ka').value = S.efKA; $('#ef-phase').checked = S.efPhase;
+  setView(o.view === 'earth' ? 'earth' : 'phase', false);
   S.items = o.items.filter((i) => dev(i.deviceId)).map((i) => E.normalize(dev(i.deviceId), { ...i }));
   S.uid = Math.max(0, ...S.items.map((i) => i.uid)) + 1;
   refresh(); if (DB) renderLibrary();
@@ -418,7 +438,7 @@ function doExport(kind) {
   }
   if (kind === 'csv') {
     const [X0, X1] = xDomain(); const lines = ['label,current_A_at_base,t_min_s,t_max_s,t_nominal_s'];
-    for (const it of S.items) { const ev = E.evaluate(dev(it.deviceId), it); for (const p of E.sample(ev, kScale(it), X0, X1, 200)) lines.push([`"${it.label.replace(/"/g, "'")}"`, p.I.toPrecision(5), Number.isFinite(p.lo) ? p.lo.toPrecision(5) : '', Number.isFinite(p.hi) ? p.hi.toPrecision(5) : '', p.nom != null && Number.isFinite(p.nom) ? p.nom.toPrecision(5) : ''].join(',')); }
+    for (const it of S.items) { const ev = curveOf(it); if (!ev) continue; for (const p of E.sample(ev, kScale(it), X0, X1, 200)) lines.push([`"${it.label.replace(/"/g, "'")}"`, p.I.toPrecision(5), Number.isFinite(p.lo) ? p.lo.toPrecision(5) : '', Number.isFinite(p.hi) ? p.hi.toPrecision(5) : '', p.nom != null && Number.isFinite(p.nom) ? p.nom.toPrecision(5) : ''].join(',')); }
     return download('tcc-curves.csv', lines.join('\n'), 'text/csv');
   }
   if (kind === 'report') {
@@ -432,9 +452,13 @@ function doExport(kind) {
 
 // ------------------------------------------------------------ database & method views
 function keyRanges(d) {
-  if (d.model === 'mcb') return Object.entries(d.curves).map(([k, v]) => `${k} ${v.lo}–${v.hi}×In`).join(', ');
+  const mA = (v) => (v >= 1000 ? `${v / 1000} A` : `${v} mA`);
+  const rc = d.rcd ? ` · IΔn ${d.rcd.idn.map(mA).join('/')} type ${d.rcd.types.join('/')}${d.rcd.classes.length > 1 ? ` (${d.rcd.classes.join('/')})` : ''}` : '';
+  const g = d.G ? (() => { const v = d.G.ig.steps ? d.G.ig.steps.filter((x) => x > 0) : [d.G.ig.min, d.G.ig.max]; const t = d.G.tg.steps || [d.G.tg.min, d.G.tg.max]; return ` · G ${v[0]}–${v[v.length - 1]}×In, tg ${t[0]}–${t[t.length - 1]} s`; })() : '';
+  if (d.model === 'rcd') return rc.slice(3);
+  if (d.model === 'mcb') return Object.entries(d.curves).map(([k, v]) => `${k} ${v.lo}–${v.hi}×In`).join(', ') + rc;
   if (d.model === 'tm') return `Ir ${d.ir.steps ? d.ir.steps.join('/') : `${d.ir.min}–${d.ir.max}`}×In`;
-  if (d.model === 'etu') return `L ${d.L.form === 'thermal-image' ? 'thermal image' : 'I²t'} @${d.L.ref}×Ir${d.S ? ' · S' : ''}${d.I ? ' · I' : ''}`;
+  if (d.model === 'etu') return `L ${d.L.form === 'thermal-image' ? 'thermal image' : 'I²t'} @${d.L.ref}×Ir${d.S ? ' · S' : ''}${d.I ? ' · I' : ''}${g}`;
   return Object.entries(d.curves).map(([k, v]) => `${k}: k=${v.k}, α=${v.alpha}${v.L ? `, B=${v.L}` : ''}${v.scale && v.scale !== 1 ? `, ×${v.scale}` : ''}`).join('; ');
 }
 function renderDatabase() {
@@ -470,13 +494,17 @@ function renderMethod() {
   <p>The CDG11 3 s relay follows BS 142, which uses the same equation as IEC SI (2.97 s at 10× setting). It has error class E7.5, which gives a ±7.5 % band, and plug settings of 50–200 %, 20–80 % or 10–40 %, per ${a('cdg_brochure', 'the CDG11 brochure')}. CDG12, CDG13 and CDG14 map to LTI, VI and EI per ${a('cdg_ops', 'the operating instructions')}. CDG12's 30 s at 5× tap matches IEC LTI exactly. The 1.3 s CDG11 is approximated by scaling SI and is tagged assumed. CDG21 adds a high-set instantaneous element. Relay current is converted to primary amps with Is = plug % × CT primary. All devices are then referred to the study base voltage by multiplying by kV<sub>device</sub>/kV<sub>base</sub>.</p>
   <h2>Coordination check</h2>
   <p>For each linked pair, the check scans current from the downstream pick-up up to the fault level. It returns the first current where the downstream latest clearing time reaches the upstream earliest operating time. Relay pairs are also checked against a CTI of 0.4 s if either relay is electromechanical, otherwise 0.3 s. This tool does not model current-limiting energy selectivity (I²t let-through). For breaker-to-breaker selectivity at short-circuit levels, use the manufacturer's selectivity tables.</p>
+  <h2>RCBOs and RCDs</h2>
+  <p>An RCBO is drawn twice. Its overcurrent part is an MCB curve (IEC 61009-1 uses the same thermal and magnetic limits as IEC 60898-1) on the phase-fault chart. Its residual part is drawn on the earth-fault chart. The residual band follows the IEC 61008-1 / 61009-1 tripping-time table for sinusoidal residual current, as reproduced in ${a('eaton_frbm6', "Eaton's FRBm6 catalogue")}: no trip below 0.5·IΔn, and a maximum break time of 0.3 s at IΔn, 0.15 s at 2·IΔn and 0.04 s at 5·IΔn. Type S (selective) devices break within 0.5 / 0.2 / 0.15 s and do not operate before 0.13 / 0.06 / 0.05 s. Type G devices have a 10 ms minimum delay. Where a manufacturer prints a faster time, the band uses it, as with ${a('chint_nb1l', 'CHINT NB1L')} at ≤ 0.1 s at IΔn. The lower edge of non-delayed devices is drawn at 10 ms (assumed). The residual type (AC, A, F, B) is recorded, but the band is for sinusoidal residual current; pulsating or smooth DC thresholds differ.</p>
+  <h2>Earth-fault chart</h2>
+  <p>The Earth fault button switches the chart to earth-fault (residual) current, which can start in the milliampere range. This view plots RCBO and RCD residual bands, the G (ground-fault) function of electronic trip units, IDMT relays set to the Earth fault function, and custom curves of the Earth fault / RCD type. G uses Ig as a multiple of In with its pick-up tolerance, and tg either as definite time or I²t (t = tg·(Iref/I)² below the reference current). For MicroLogic 6.2, the printed non-trip and maximum break times for each tg setting are used directly. Tick "Phase devices too" to add phase overcurrent curves, which also clear earth faults in TN systems. The coordination check and the fault marker then use the earth-fault current.</p>
   <h2>Custom curves</h2>
   <p>Any device that is not in the database, such as a fuse, a motor starting curve, a cable or transformer withstand curve or a relay you digitised from a manufacturer chart, can be entered as a custom curve. This works like Curve Direct's "curve defined by points": give the curve a name, then add, edit or delete current–time points, paste a list, load a <span class="mono">.txt</span> or <span class="mono">.csv</span> points list, or click points straight onto the chart. A curve needs at least two points.</p>
   <p>Between points the curve is interpolated linearly on the log-log chart. Two points at the same current give a vertical step, for example an instantaneous trip. Below the first point the device does not operate. Above the last point it either holds the last time or the curve ends, as you choose. In band mode each row has a minimum and a maximum time, and the coordination check uses the minimum as the earliest operating time and the maximum as the latest clearing time.</p>
   <p>Currents can be entered in amperes or as multiples of a base current, which is useful when you copy points from a chart drawn in multiples of In or Ir. On the study card, the current and time multipliers shift the whole curve, for example ×0.577 to move a curve across a delta-star transformer for a phase-to-phase fault. Custom curves are saved inside the study file and its link. Ticking "Save to My curves" also keeps them in this browser for reuse in other studies.</p>
   <p>Points list format: one point per line, giving current, then time, then an optional maximum time. Values can be separated by spaces, tabs, commas or semicolons. When the separator is a tab or semicolon, decimal commas are accepted. Lines starting with <span class="mono">#</span> and header lines are ignored.</p>
   <h2>Limits</h2>
-  <ul><li>Ambient derating is not applied. Each entry records its calibration reference temperature (20–50 °C).</li><li>Ground-fault (G) functions are stored in the database but not plotted.</li><li>Some rating lists marked in notes are typical values that were not extracted from the cited page. Check catalogue numbers before use.</li></ul>
+  <ul><li>Ambient derating is not applied. Each entry records its calibration reference temperature (20–50 °C).</li><li>G functions are plotted only for trip units whose G settings were found in the cited documents. Inhibition of G at high currents, and DC or pulsating residual thresholds, are not modelled.</li><li>Some rating lists marked in notes are typical values that were not extracted from the cited page. Check catalogue numbers before use.</li></ul>
   <p><b>${esc(DB.meta.disclaimer)}</b></p>`;
 }
 
@@ -606,4 +634,17 @@ function previewSvg(sx, sy, m, pw, ph) {
   return g;
 }
 
+function settingsLine(d, it, ev = E.evaluate(d, it), ef = E.evaluateEF(d, it)) {
+  const parts = [];
+  if (!ev.none && !(d.model === 'idmt' && it.fn === 'earth')) parts.push(ev.settingsText);
+  if (ef) parts.push(d.model === 'idmt' ? `Earth-fault relay: ${ef.settingsText}` : d.rcd ? `Residual: ${ef.settingsText}` : ef.settingsText);
+  return parts.join('\n');
+}
+function setView(v, redraw = true) {
+  S.view = v;
+  $$('[data-view]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+  $$('.v-phase').forEach((e) => { e.hidden = v !== 'phase'; });
+  $$('.v-earth').forEach((e) => { e.hidden = v !== 'earth'; });
+  if (redraw) refresh();
+}
 boot();

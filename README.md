@@ -1,12 +1,13 @@
-# TCC Studio 2026
+# Direct Discrimination — TCC Studio 2026
 
-A browser-based time-current curve (TCC) generator and viewer for low-voltage breakers and IDMT overcurrent relays from several manufacturers. Every curve is built from a source-cited database of published manufacturer datasheets and standards, and you can add your own curves from current–time points.
+A browser-based time-current curve (TCC) generator and viewer for low-voltage breakers, RCBOs/RCDs and IDMT overcurrent relays from several manufacturers, with phase-fault and earth-fault charts. Every curve is built from a source-cited database of published manufacturer datasheets and standards, and you can add your own curves from current–time points.
 
 > **Engineering aid only.** Curves are parametric reconstructions from published setting ranges and standard test points, not digitised manufacturer curves. Check against manufacturer software and selectivity tables before design or settings work.
 
 ## Features
 
 - Log-log time-current chart (0.001–10 000 s) with tolerance bands, a fault-level marker and a hover readout.
+- Phase-fault and earth-fault views. The earth-fault chart plots RCBO/RCD residual bands (IEC 61008-1 / 61009-1, general, S and G types), trip-unit G functions (definite time or I²t), relays set to earth fault, and custom earth-fault curves, with its own earth-fault current and coordination check.
 - Per-device settings using each datasheet's own dials: In, Ir, tr, Isd, tsd, I²t, Ii; CT ratio, plug setting, TMS/TD and high-set for relays. Settings that can be switched off offer OFF.
 - Device-voltage scaling to a study base kV, so an 11 kV relay plots correctly against 0.4 kV breakers.
 - Coordination check for upstream/downstream pairs: time-current selectivity limit, and for relays a coordination time interval (CTI) of 0.4 s for electromechanical and 0.3 s for numerical relays.
@@ -21,13 +22,14 @@ A browser-based time-current curve (TCC) generator and viewer for low-voltage br
 - Export the chart as PNG or SVG, the curve points as CSV, or a Markdown settings report.
 - Database and Method tabs, dark mode and a phone layout.
 
-## Database coverage (v2026.2: 74 device families, 37 sources)
+## Database coverage (v2026.3: 87 device families, 47 sources)
 
 | Type | Coverage |
 |---|---|
 | MCB | Schneider Acti9 iC60N/iK60N · ABB S200/S200M · Siemens 5SL/5SY · Eaton FAZ · Legrand DX3 · Hager NBN/NCN/NDN · CHINT NXB-63, NB1-63 · generic IEC 60898-1 |
+| RCBO / RCD | Schneider Acti9 iCV40N, iDPN N Vigi · ABB DS201 L H · Siemens 5SU1 · Eaton xEffect FRBm6 · Legrand DX3 RCBO · Hager 10 kA RCBO, ADA1xxT · CHINT NB1L, NXBLE-63 · generic IEC 61009-1 RCBO and IEC 61008-1 RCCB |
 | MCCB thermal-magnetic | Schneider NSX TM-D, NSXm · ABB Tmax T1–T6 (TMD/TMA/TMG) and Tmax XT1–XT6 · Siemens 3VA1 · Eaton NZM A · Legrand DPX3 · Hager h3+ · CHINT NXM, NM8N, NM1 |
-| MCCB electronic | Schneider MicroLogic 2.2, 5.2/6.2 · ABB PR221DS, PR222DS, PR231/P, PR232/P, PR331/P–PR332/P (Tmax T), Ekip LSI, Ekip Dip, Ekip Touch (Tmax XT2–XT7) · Siemens ETU350/550 · Eaton NZM VE · Legrand DPX3 S2 · Hager h3+ LSnI · CHINT NXM, NM8N EN |
+| MCCB electronic (G where published) | Schneider MicroLogic 2.2, 5.2/6.2 · ABB PR221DS, PR222DS, PR231/P, PR232/P, PR331/P–PR332/P (Tmax T), Ekip LSI, Ekip Dip, Ekip Touch (Tmax XT2–XT7) · Siemens ETU350/550/560 · Eaton NZM VE · Legrand DPX3 S2 · Hager h3+ LSnI · CHINT NXM, NM8N EN |
 | ACB | CHINT NXA, NA8 |
 | Relays | GEC/Alstom/GE CDG11 (3 s, 1.3 s), CDG12, CDG13, CDG14, CDG21/61 · IEC 60255-151 (SI/VI/EI/LTI) · IEEE C37.112 (MI/VI/EI) |
 
@@ -56,6 +58,7 @@ js/engine.js                  curve maths: settings, bands, sampling, selectivit
 db/curvedb.json               generated curve database (committed)
 database/build_db.py          builds db/curvedb.json (fits thermal bands with SciPy)
 database/additions_2026b.py   ABB Tmax T/XT and CHINT entries (executed by build_db.py)
+database/additions_2026c.py   RCBO/RCD entries and trip-unit G functions
 tests/engine.test.mjs         engine and database tests (node --test)
 ```
 
@@ -88,5 +91,5 @@ Between points the curve is interpolated linearly on log-log axes. Two points at
 ## Known limitations
 
 - No let-through energy (I²t) selectivity during short circuits. Use the manufacturer's selectivity tables when both devices are in their instantaneous region.
-- Ground-fault (G) functions are stored but not plotted. Ambient derating is not applied.
+- G is plotted only where the settings were found in the cited documents; G inhibition at high current and DC/pulsating residual thresholds are not modelled. Ambient derating is not applied.
 - Where a manufacturer publishes no thermal trip times, the thermal-magnetic bands use a reference shape and are tagged `assumed`. The database notes list each case, for example CHINT NM1's magnetic setting and NXA's delay steps.
