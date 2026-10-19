@@ -46,13 +46,15 @@ function etuIrSpec(dev, In) {
   return { kind: 'range', min: ir.min * In, max: ir.max * In, step };
 }
 
-function etuIiSpec(dev, In) {
+const offFmt = (base, unit) => (a) => (a === 0 ? 'OFF' : `${round(a / base, 2)}×${unit}  (${Math.round(a)} A)`);
+function etuIiSpec(dev, In, Ir) {
   const I = dev.I || {};
   const k = String(In);
+  if (I.xIrSteps) { const b = Ir || In; return { kind: 'select', values: I.xIrSteps.map((m) => round(m * b, 3)), fmt: offFmt(b, 'Ir') }; }
   if (I.fixedA && pick(I.fixedA, k)) return { kind: 'fixed', value: pick(I.fixedA, k) };
   if (I.fixedXIn && pick(I.fixedXIn, k)) return { kind: 'fixed', value: pick(I.fixedXIn, k) * In };
   if (I.fixedAByFrame) return { kind: 'fixed', value: In <= 630 ? I.fixedAByFrame['630'] : I.fixedAByFrame['1600'] };
-  if (I.xInSteps) return { kind: 'select', values: I.xInSteps.map((m) => m * In), fmt: (a) => `${round(a / In, 2)}×In  (${Math.round(a)} A)` };
+  if (I.xInSteps) return { kind: 'select', values: I.xInSteps.map((m) => m * In), fmt: offFmt(In, 'In') };
   if (I.xInMax && pick(I.xInMax, k)) return { kind: 'range', min: (I.xInMin || 1.5) * In, max: pick(I.xInMax, k) * In, step: (I.step || 0.5) * In };
   if (I.xInRange && pick(I.xInRange, k)) { const [a, b] = pick(I.xInRange, k); return { kind: 'range', min: a * In, max: b * In, step: 0.5 * In }; }
   if (I.xInMaxAll) return { kind: 'range', min: (I.xInMin || 1.5) * In, max: I.xInMaxAll * In, step: 0.5 * In };
@@ -112,14 +114,14 @@ export function normalize(dev, st) {
     if (tr.kind === 'fixed') st.tr = tr.value; else if (tr.kind === 'select') st.tr = tr.values.includes(+st.tr) ? +st.tr : tr.values[Math.min(1, tr.values.length - 1)]; else st.tr = clampR(st.tr ?? Math.min(tr.max, 6), tr);
     if (dev.S) {
       const S = dev.S, isd = S.isd;
-      if (isd.xIr || isd.steps) { const v = isd.xIr || isd.steps; st.isd = v.includes(+st.isd) ? +st.isd : v[Math.floor(v.length / 2)]; }
+      if (isd.xIr || isd.steps) { const v = isd.xIr || isd.steps; st.isd = v.includes(+st.isd) ? +st.isd : (S.defaultOff && st.isd === undefined && v.includes(0) ? 0 : v[Math.floor(v.length / 2)]); }
       else st.isd = clampR(st.isd ?? Math.min(isd.max, 6), isd);
       const tsd = valuesSpec(S.tsd);
       if (tsd.kind === 'fixed') st.tsd = tsd.value; else if (tsd.kind === 'select') st.tsd = tsd.values.includes(+st.tsd) ? +st.tsd : tsd.values[Math.min(1, tsd.values.length - 1)]; else st.tsd = clampR(st.tsd ?? tsd.min, tsd);
-      st.i2t = S.i2t ? !!st.i2t : false;
+      st.i2t = S.i2tFixed ? true : S.i2t ? !!st.i2t : false;
     }
-    const iis = etuIiSpec(dev, In);
-    if (iis) { if (iis.kind === 'fixed') st.Ii = iis.value; else if (iis.kind === 'select') st.Ii = iis.values.includes(+st.Ii) ? +st.Ii : iis.values[iis.values.length - 1]; else st.Ii = clampR(st.Ii, iis); }
+    const iis = etuIiSpec(dev, In, st.Ir);
+    if (iis) { if (iis.kind === 'fixed') st.Ii = iis.value; else if (iis.kind === 'select') st.Ii = iis.values.some((v) => Math.abs(v - st.Ii) < 1e-6) ? iis.values.find((v) => Math.abs(v - st.Ii) < 1e-6) : (st.IiX !== undefined && iis.values[st.IiX] !== undefined ? iis.values[st.IiX] : iis.values[iis.values.length - 1]); else st.Ii = clampR(st.Ii, iis); }
     else st.Ii = null;
   }
   if (dev.model === 'idmt') {
@@ -162,13 +164,13 @@ export function controlsFor(dev, st) {
     if (dev.S) {
       const isd = dev.S.isd, unit = isd.unit || 'xIr';
       const base = unit === 'xIn' ? In : st.Ir;
-      if (isd.xIr || isd.steps) c.push({ key: 'isd', label: `Isd (${unit === 'xIn' ? '×In' : '×Ir'})`, kind: 'select', values: isd.xIr || isd.steps, fmt: (v) => `${v}  (${Math.round(v * base)} A)` });
+      if (isd.xIr || isd.steps) c.push({ key: 'isd', label: `Isd (${unit === 'xIn' ? '×In' : '×Ir'})`, kind: 'select', values: isd.xIr || isd.steps, fmt: (v) => (+v === 0 ? 'OFF' : `${v}  (${Math.round(v * base)} A)`) });
       else c.push({ key: 'isd', label: `Isd (${unit === 'xIn' ? '×In' : '×Ir'})`, kind: 'range', min: isd.min, max: isd.max, step: isd.step || 0.1, fmt: (v) => `${round(v, 2)} = ${Math.round(v * base)} A` });
       const tsd = valuesSpec(dev.S.tsd, 's');
       c.push({ key: 'tsd', label: 'tsd', ...tsd, fmt: (v) => `${round(v, 3)} s` });
-      if (dev.S.i2t) c.push({ key: 'i2t', label: 'I²t ON (S)', kind: 'toggle' });
+      if (dev.S.i2t && !dev.S.i2tFixed) c.push({ key: 'i2t', label: 'I²t ON (S)', kind: 'toggle' });
     }
-    const iis = etuIiSpec(dev, In);
+    const iis = etuIiSpec(dev, In, st.Ir);
     if (iis) c.push({ key: 'Ii', label: 'Ii (instantaneous)', ...iis, fmt: iis.fmt || ((a) => `${Math.round(a)} A  (${round(a / In, 2)}×In)`) });
   } else if (dev.model === 'idmt') {
     c.push({ key: 'curve', label: 'Characteristic', kind: 'select', values: Object.keys(dev.curves) });
@@ -242,7 +244,7 @@ function evalEtu(dev, st) {
   // L
   parts.push({ lo: (I) => (I >= pick[0] * Ir ? lTime(L, I / Ir, tr) * (1 + tTol[0]) : INF), hi: (I) => (I >= pick[1] * Ir ? lTime(L, I / Ir, tr) * (1 + tTol[1]) : INF) });
   let sTxt = '';
-  if (dev.S) {
+  if (dev.S && +st.isd > 0) {
     const S = dev.S, unit = S.isd.unit || 'xIr';
     const Isd = st.isd * (unit === 'xIn' ? In : Ir), tol = S.tol ?? 0;
     const sa = Isd * (1 - tol), sb = Isd * (1 + tol);

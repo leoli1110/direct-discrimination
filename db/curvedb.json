@@ -1,7 +1,7 @@
 {
  "meta": {
   "name": "Open TCC curve database",
-  "version": "2026.1",
+  "version": "2026.2",
   "built": "2026-10-19",
   "basisLegend": {
    "datasheet": "value printed in the cited manufacturer document",
@@ -330,6 +330,78 @@
    "title": "IEEE Std C37.112-1996 - inverse-time characteristic equations",
    "url": "http://rfc.nop.hu/ieee2/IEEE%20Std%20C37.112-1996%20(2).pdf",
    "publisher": "IEEE",
+   "accessed": "2026-10-19"
+  },
+  "abb_tmax_t": {
+   "title": "ABB SACE Tmax T generation technical catalogue (1SDC210015D0208)",
+   "url": "https://library.e.abb.com/public/66d794a3c839491d8d95b1aed96e1a71/1SDC210015D0208.pdf",
+   "publisher": "ABB",
+   "accessed": "2026-10-19"
+  },
+  "abb_tmax_t_0202": {
+   "title": "ABB Tmax T generation technical catalogue (1SDC210015D0202)",
+   "url": "https://library.e.abb.com/public/0b4f0e5be0152a69c12572c2002fb9ae/1SDC210015D0202.pdf",
+   "publisher": "ABB",
+   "accessed": "2026-10-19"
+  },
+  "abb_xt_iec_2020": {
+   "title": "ABB SACE Tmax XT IEC technical catalogue 2020 (1SDC210100D0205)",
+   "url": "https://library.e.abb.com/public/af51e01127ae485581c3024eaedbf30c/Tmax%20XT_IEC_CATALOG_2020_1SDC210100D0205.pdf",
+   "publisher": "ABB",
+   "accessed": "2026-10-19"
+  },
+  "abb_xt7_manual": {
+   "title": "ABB Ekip Touch trip unit manual for SACE Tmax XT7 (1SDH001821A1002)",
+   "url": "https://library.e.abb.com/public/7b2d001cc1d44e7aa758691dfcab2298/1SDH001821A1002-B.pdf",
+   "publisher": "ABB",
+   "accessed": "2026-10-19"
+  },
+  "chint_nxb63": {
+   "title": "CHINT NXB-63 miniature circuit breaker catalogue",
+   "url": "https://www.chintglobal.com/content/dam/chint/global/product-center/low-voltage/iec/final-power-distribution/mcb/nxb-63/catalog/NXB-63-MCB-Catalog.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "chint_nb1": {
+   "title": "CHINT NB1-63 miniature circuit breaker catalogue",
+   "url": "https://www.chintglobal.com/content/dam/chint/global/product-center/low-voltage/iec/final-power-distribution/mcb/nb1-63/catalog/NB1-63-MCB-Catalog.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "chint_nxm": {
+   "title": "CHINT NXM moulded case circuit breaker catalogue",
+   "url": "https://www.chintglobal.com/content/dam/chint/global/product-center/low-voltage/iec/secondary-power-distribution/mccb/nxm/catalog/NXM-MCCB-Catalog.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "chint_nm8n": {
+   "title": "CHINT NM8N moulded case circuit breaker catalogue",
+   "url": "https://www.chintglobal.com/content/dam/chint/global/product-center/low-voltage/iec/secondary-power-distribution/mccb/nm8n/catalog/NM8N-MCCB-Catalog.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "chint_nm1": {
+   "title": "CHINT NM1 moulded case circuit breaker catalogue",
+   "url": "https://www.chintglobal.com/content/dam/chint/global/product-center/low-voltage/iec/secondary-power-distribution/mccb/nm1/catalog/NM1-MCCB-Catalog.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "chint_nm1_kr": {
+   "title": "CHINT NM1 catalogue 2024 (Korea)",
+   "url": "https://www.chintglobal.kr/upload/file/0%202024%20Catalog/NM1_%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "chint_nxa": {
+   "title": "CHINT NXA air circuit breaker catalogue (2501)",
+   "url": "https://www.chintglobal.com/content/dam/chint/global/product-center/low-voltage/iec/main-power-distribution/acb/nxa/catalog/2501-NXA-ACB-Catalog.pdf",
+   "publisher": "CHINT",
+   "accessed": "2026-10-19"
+  },
+  "chint_na8": {
+   "title": "CHINT NA8 air circuit breaker catalogue 2023",
+   "url": "https://chintglobal.vn/wp-content/uploads/2023/04/na8-catalog-2023-en-1-compressed-1.pdf",
+   "publisher": "CHINT",
    "accessed": "2026-10-19"
   }
  },
@@ -3755,6 +3827,3528 @@
     "ieee_c37112"
    ],
    "notes": "MI A=0.0515 B=0.114 p=0.02; VI A=19.61 B=0.491 p=2; EI A=28.2 B=0.1217 p=2."
+  },
+  {
+   "id": "abb-t1-tmd",
+   "manufacturer": "ABB",
+   "series": "Tmax T1 160 TMD",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsA": {
+     "16": [
+      500,
+      630
+     ],
+     "20": [
+      500,
+      630
+     ],
+     "25": [
+      500,
+      630
+     ],
+     "32": [
+      500,
+      630
+     ],
+     "40": [
+      500,
+      630
+     ],
+     "50": [
+      500,
+      630
+     ]
+    },
+    "fixedA": {
+     "63": 630,
+     "80": 800,
+     "100": 1000,
+     "125": 1250,
+     "160": 1600
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T1 B/C/N",
+   "sources": [
+    "abb_tmax_t_0202",
+    "abb_tmax_t"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 fixed: 630 A for 16\u201363 A (500 A version on T1B/C/N), 10\u00b7In above. Magnetic \u00b120 % (IEC 60947-2 \u00a78.3.3.1.2)."
+  },
+  {
+   "id": "abb-t2-tmd",
+   "manufacturer": "ABB",
+   "series": "Tmax T2 160 TMD",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    1.6,
+    2,
+    2.5,
+    3.2,
+    4,
+    5,
+    6.3,
+    8,
+    10,
+    12.5,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "1.6": 16,
+     "2": 20,
+     "2.5": 25,
+     "3.2": 32,
+     "4": 40,
+     "5": 50,
+     "6.3": 63,
+     "8": 80,
+     "10": 100,
+     "12.5": 125,
+     "16": 500,
+     "20": 500,
+     "25": 500,
+     "32": 500,
+     "40": 500,
+     "50": 500,
+     "63": 630,
+     "80": 800,
+     "100": 1000,
+     "125": 1250,
+     "160": 1600
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T2 N/S/H/L",
+   "sources": [
+    "abb_tmax_t_0202",
+    "abb_tmax_t"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 fixed: 10\u00b7In up to 12.5 A, 500 A for 16\u201350 A, 10\u00b7In for 63\u2013160 A. \u00b120 %."
+  },
+  {
+   "id": "abb-t2-tmg",
+   "manufacturer": "ABB",
+   "series": "Tmax T2 160 TMG (generator)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    16,
+    25,
+    40,
+    63,
+    80,
+    100,
+    125,
+    160
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "16": 160,
+     "25": 160,
+     "40": 200,
+     "63": 200,
+     "80": 240,
+     "100": 300,
+     "125": 375,
+     "160": 480
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T2 N/S/H/L",
+   "sources": [
+    "abb_tmax_t_0202"
+   ],
+   "notes": "Generator protection: I3 = 3\u00b7In (minimum 160/200 A on low ratings)."
+  },
+  {
+   "id": "abb-t3-tmd",
+   "manufacturer": "ABB",
+   "series": "Tmax T3 250 TMD",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    63,
+    80,
+    100,
+    125,
+    160,
+    200,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "xIn": 10,
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T3 N/S",
+   "sources": [
+    "abb_tmax_t_0202",
+    "abb_tmax_t"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 = 10\u00b7In fixed (630\u20132500 A)."
+  },
+  {
+   "id": "abb-t3-tmg",
+   "manufacturer": "ABB",
+   "series": "Tmax T3 250 TMG (generator)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    63,
+    80,
+    100,
+    125,
+    160,
+    200,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "63": 400,
+     "80": 400,
+     "100": 400,
+     "125": 400,
+     "160": 480,
+     "200": 600,
+     "250": 750
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T3 N/S",
+   "sources": [
+    "abb_tmax_t_0202"
+   ],
+   "notes": "Generator protection: I3 = 3\u00b7In (400 A minimum)."
+  },
+  {
+   "id": "abb-t4-tm",
+   "manufacturer": "ABB",
+   "series": "Tmax T4 250/320 TMD/TMA",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    20,
+    32,
+    50,
+    80,
+    100,
+    125,
+    160,
+    200,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "20": 320,
+     "32": 320,
+     "50": 500
+    },
+    "rangeA": {
+     "80": [
+      400,
+      800
+     ],
+     "100": [
+      500,
+      1000
+     ],
+     "125": [
+      625,
+      1250
+     ],
+     "160": [
+      800,
+      1600
+     ],
+     "200": [
+      1000,
+      2000
+     ],
+     "250": [
+      1250,
+      2500
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T4 N/S/H/L/V",
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "TMD 20\u201350 A: I3 fixed 320/320/500 A. TMA 80\u2013250 A: I3 5\u201310\u00b7In. Thermal band uses the catalogue's T4N 250 example (2\u00b7I1: 105.3\u2013357.8 s cold)."
+  },
+  {
+   "id": "abb-t5-tma",
+   "manufacturer": "ABB",
+   "series": "Tmax T5 400/630 TMA",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    320,
+    400,
+    500
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "rangeA": {
+     "320": [
+      1600,
+      3200
+     ],
+     "400": [
+      2000,
+      4000
+     ],
+     "500": [
+      2500,
+      5000
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T5 N/S/H/L/V",
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (1600\u20135000 A) \u00b120 %."
+  },
+  {
+   "id": "abb-t5-tmg",
+   "manufacturer": "ABB",
+   "series": "Tmax T5 400/630 TMG (generator)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    320,
+    400,
+    500
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "rangeA": {
+     "320": [
+      800.0,
+      1600
+     ],
+     "400": [
+      1000.0,
+      2000
+     ],
+     "500": [
+      1250.0,
+      2500
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T5 N/S/H/L/V",
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "Generator protection: I3 2.5\u20135\u00b7In."
+  },
+  {
+   "id": "abb-t6-tma",
+   "manufacturer": "ABB",
+   "series": "Tmax T6 630/800 TMA",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    630,
+    800
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "datasheet",
+     "note": "Cold-state band through the Tmax T catalogue example (2\u00b7I1: 105.3\u2013357.8 s) and IEC 60947-2 conventional currents 1.05/1.30\u00b7I1. Curve shape between points follows the TM-D reference exponent (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "rangeA": {
+     "630": [
+      3150,
+      6300
+     ],
+     "800": [
+      4000,
+      8000
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "T6 N/S/H/L",
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (3150\u20138000 A). No thermal-magnetic unit for 1000 A."
+  },
+  {
+   "id": "abb-t2-pr221",
+   "manufacturer": "ABB",
+   "series": "Tmax T2 PR221DS-LS/I",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    10,
+    25,
+    63,
+    100,
+    160
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.44,
+      0.48,
+      0.52,
+      0.56,
+      0.6,
+      0.64,
+      0.68,
+      0.72,
+      0.76,
+      0.8,
+      0.84,
+      0.88,
+      0.92,
+      0.96,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      3,
+      6,
+      12
+     ]
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 at 6\u00b7I1; \u00b110 % up to 2\u00b7In."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4.5,
+      5.5,
+      6.5,
+      7,
+      7.5,
+      8,
+      8.5,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.25
+     ]
+    },
+    "tTol": 0.2,
+    "i2t": true,
+    "i2tFixed": true,
+    "defaultOff": true,
+    "i2tRef": 8,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     1,
+     1.5,
+     2,
+     2.5,
+     3,
+     3.5,
+     4.5,
+     5.5,
+     6.5,
+     7,
+     7.5,
+     8,
+     8.5,
+     9,
+     10
+    ],
+    "tol": 0.2,
+    "band": [
+     0.01,
+     0.04
+    ]
+   },
+   "sources": [
+    "abb_tmax_t_0202"
+   ],
+   "notes": "I1 0.4\u20131\u00b7In step 0.04; t1 3/6/12 s @6\u00b7I1; I2 1\u201310\u00b7In, t2 0.1/0.25 s @8\u00b7In (I\u00b2t); I3 1\u201310\u00b7In \u00b120 %, \u226440 ms. PR221DS-LS/I: S and I are alternatives \u2014 S defaults to OFF; switch I to OFF if you use S."
+  },
+  {
+   "id": "abb-t456-pr221",
+   "manufacturer": "ABB",
+   "series": "Tmax T4/T5/T6 PR221DS-LS/I",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    100,
+    160,
+    250,
+    320,
+    400,
+    630,
+    800,
+    1000
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.44,
+      0.48,
+      0.52,
+      0.56,
+      0.6,
+      0.64,
+      0.68,
+      0.72,
+      0.76,
+      0.8,
+      0.84,
+      0.88,
+      0.92,
+      0.96,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "fixed": 12
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.1,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 = 12 s at 6\u00b7I1; trip 1.1\u20131.3\u00b7I1."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4.5,
+      5.5,
+      6.5,
+      7,
+      7.5,
+      8,
+      8.5,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.25
+     ]
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tFixed": true,
+    "defaultOff": true,
+    "i2tRef": 8,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     1,
+     1.5,
+     2,
+     2.5,
+     3,
+     3.5,
+     4.5,
+     5.5,
+     6.5,
+     7,
+     7.5,
+     8,
+     8.5,
+     9,
+     10
+    ],
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.04
+    ]
+   },
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "T4 In 320, T5 630, T6 1000 A: 10\u00b7In setting = 9.5\u00b7In. PR221DS-LS/I: S and I are alternatives \u2014 S defaults to OFF; switch I to OFF if you use S."
+  },
+  {
+   "id": "abb-t456-pr222",
+   "manufacturer": "ABB",
+   "series": "Tmax T4/T5/T6 PR222DS/P LSI(G)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    100,
+    160,
+    250,
+    320,
+    400,
+    630,
+    800,
+    1000
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "step": 0.01,
+     "unit": "xIn"
+    },
+    "tr": {
+     "min": 3,
+     "max": 18,
+     "step": 0.5
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.1,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 3\u201318 s (max 10.5 s on T4 320 / T5 630 / T6 1000) at 6\u00b7I1."
+   },
+   "S": {
+    "isd": {
+     "min": 0.6,
+     "max": 10,
+     "step": 0.1,
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "min": 0.05,
+     "max": 0.5,
+     "step": 0.01
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 8,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInMin": 1.5,
+    "xInMaxAll": 12,
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.05
+    ]
+   },
+   "G": {
+    "note": "LSIG: I4 0.2\u20131\u00b7In, t4 0.1\u20130.8 s (not plotted)"
+   },
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "Electronic setting values (PR010/T or dialogue). I2 0.6\u201310\u00b7In, t2 0.05\u20130.5 s (t=k or t=k/I\u00b2 @8\u00b7In); I3 1.5\u201312\u00b7In \u00b110 %."
+  },
+  {
+   "id": "abb-t7-pr231",
+   "manufacturer": "ABB",
+   "series": "Tmax T7 PR231/P LS/I",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.44,
+      0.48,
+      0.52,
+      0.56,
+      0.6,
+      0.64,
+      0.68,
+      0.72,
+      0.76,
+      0.8,
+      0.84,
+      0.88,
+      0.92,
+      0.96,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      3,
+      6,
+      9,
+      12
+     ]
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.1,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 3\u201312 s at 6\u00b7I1 (intermediate steps assumed)."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4.5,
+      5.5,
+      6.5,
+      7,
+      7.5,
+      8,
+      8.5,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.25
+     ]
+    },
+    "tTol": 0.2,
+    "i2t": true,
+    "defaultOff": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     1,
+     1.5,
+     2,
+     2.5,
+     3,
+     3.5,
+     4.5,
+     5.5,
+     6.5,
+     7,
+     7.5,
+     8,
+     8.5,
+     9,
+     10
+    ],
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.06
+    ]
+   },
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "S (t=k or k/I\u00b2 @10\u00b7In) and I are alternatives \u2014 set the unused one to OFF."
+  },
+  {
+   "id": "abb-t7-pr232",
+   "manufacturer": "ABB",
+   "series": "Tmax T7 PR232/P LSI",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.44,
+      0.48,
+      0.52,
+      0.56,
+      0.6,
+      0.64,
+      0.68,
+      0.72,
+      0.76,
+      0.8,
+      0.84,
+      0.88,
+      0.92,
+      0.96,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      3,
+      6,
+      12,
+      18
+     ]
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.1,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 at 6\u00b7I1."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      0.6,
+      0.8,
+      1.2,
+      1.8,
+      2.4,
+      3,
+      3.6,
+      4.2,
+      5,
+      5.8,
+      6.6,
+      7.4,
+      8.2,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.25,
+      0.5,
+      0.8
+     ]
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     1.5,
+     2.5,
+     3,
+     4,
+     4.5,
+     5,
+     5.5,
+     6.5,
+     7,
+     7.5,
+     8,
+     9,
+     9.5,
+     10.5,
+     12
+    ],
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.06
+    ]
+   },
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "I1 0.4\u20131\u00b7In step 0.04; t1 3/6/12/18 s @6\u00b7I1; I2 0.6\u201310\u00b7In, t2 0.1\u20130.8 s; I3 1.5\u201312\u00b7In \u00b110 %."
+  },
+  {
+   "id": "abb-t7-pr332",
+   "manufacturer": "ABB",
+   "series": "Tmax T7 PR331/P \u00b7 PR332/P LSI(G)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "step": 0.01,
+     "unit": "xIn"
+    },
+    "tr": {
+     "min": 3,
+     "max": 144,
+     "step": 3
+    },
+    "form": "i2t",
+    "ref": 3,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.2
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 at 3\u00b7I1 (PR331/P steps 3-12-24-36-48-72-108-144 s)."
+   },
+   "S": {
+    "isd": {
+     "min": 0.6,
+     "max": 10,
+     "step": 0.1,
+     "unit": "xIn"
+    },
+    "tol": 0.07,
+    "tsd": {
+     "min": 0.05,
+     "max": 0.8,
+     "step": 0.01
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInMin": 1.5,
+    "xInMaxAll": 15,
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.03
+    ]
+   },
+   "G": {
+    "note": "I4 0.2\u20131\u00b7In, t4 0.1\u20131 s (not plotted)"
+   },
+   "sources": [
+    "abb_tmax_t"
+   ],
+   "notes": "I2 \u00b17 % (\u22646\u00b7In); I3 1.5\u201315\u00b7In \u00b110 %, \u226430 ms. PR331/P uses discrete steps of the same ranges."
+  },
+  {
+   "id": "abb-xt2-tm",
+   "manufacturer": "ABB",
+   "series": "Tmax XT2 160 TMD/TMA",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    1.6,
+    2,
+    2.5,
+    3.2,
+    4,
+    5,
+    6.3,
+    8,
+    10,
+    12.5,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Tmax XT catalogue gives no thermal times; the Tmax T published cold band (2\u00b7I1: 105.3\u2013357.8 s) is applied as ABB reference shape (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Tmax XT catalogue gives no thermal times; the Tmax T published cold band (2\u00b7I1: 105.3\u2013357.8 s) is applied as ABB reference shape (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "fixedA": {
+     "1.6": 16,
+     "2": 20,
+     "2.5": 25,
+     "3.2": 32,
+     "4": 40,
+     "5": 50,
+     "6.3": 63,
+     "8": 80,
+     "10": 100,
+     "12.5": 125,
+     "16": 300,
+     "20": 300,
+     "25": 300,
+     "32": 320
+    },
+    "rangeA": {
+     "40": [
+      300,
+      400
+     ],
+     "50": [
+      300,
+      500
+     ],
+     "63": [
+      300,
+      630
+     ],
+     "80": [
+      400,
+      800
+     ],
+     "100": [
+      500,
+      1000
+     ],
+     "125": [
+      625,
+      1250
+     ],
+     "160": [
+      800,
+      1600
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "XT2 N/S/H/L/V",
+   "sources": [
+    "abb_xt_iec_2020"
+   ],
+   "notes": "TMD 1.6\u201332 A fixed I3; TMA 40\u2013160 A adjustable I3 (300 A minimum)."
+  },
+  {
+   "id": "abb-xt5-tma",
+   "manufacturer": "ABB",
+   "series": "Tmax XT5 400/630 TMA",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    320,
+    400,
+    500,
+    630
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Tmax XT catalogue gives no thermal times; the Tmax T published cold band (2\u00b7I1: 105.3\u2013357.8 s) is applied as ABB reference shape (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Tmax XT catalogue gives no thermal times; the Tmax T published cold band (2\u00b7I1: 105.3\u2013357.8 s) is applied as ABB reference shape (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "rangeA": {
+     "320": [
+      1600,
+      3200
+     ],
+     "400": [
+      2000,
+      4000
+     ],
+     "500": [
+      2500,
+      5000
+     ],
+     "630": [
+      3150,
+      6300
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "XT5 N/S/H/L/V/X",
+   "sources": [
+    "abb_xt_iec_2020"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (1600\u20136300 A)."
+  },
+  {
+   "id": "abb-xt6-tma",
+   "manufacturer": "ABB",
+   "series": "Tmax XT6 800/1000 TMA",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    630,
+    800
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.220139,
+      "K": 266.478989,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Tmax XT catalogue gives no thermal times; the Tmax T published cold band (2\u00b7I1: 105.3\u2013357.8 s) is applied as ABB reference shape (assumed)."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 112.284132,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.262237,
+      "K": 243.076998,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Tmax XT catalogue gives no thermal times; the Tmax T published cold band (2\u00b7I1: 105.3\u2013357.8 s) is applied as ABB reference shape (assumed)."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": null,
+    "basis": "datasheet"
+   },
+   "ii": {
+    "rangeA": {
+     "630": [
+      3150,
+      6300
+     ],
+     "800": [
+      4000,
+      8000
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "XT6 N/S/H/L",
+   "sources": [
+    "abb_xt_iec_2020"
+   ],
+   "notes": "I1 0.7\u20131\u00b7In; I3 5\u201310\u00b7In (3150\u20138000 A)."
+  },
+  {
+   "id": "abb-xt-ekipdip-lsi",
+   "manufacturer": "ABB",
+   "series": "Tmax XT2/XT5/XT6 Ekip Dip LS/I",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    10,
+    25,
+    63,
+    100,
+    160,
+    250,
+    320,
+    400,
+    630,
+    800,
+    1000
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.44,
+      0.48,
+      0.52,
+      0.56,
+      0.6,
+      0.64,
+      0.68,
+      0.72,
+      0.76,
+      0.8,
+      0.84,
+      0.88,
+      0.92,
+      0.96,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      12,
+      36
+     ]
+    },
+    "form": "i2t",
+    "ref": 3,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 12/36 s at 3\u00b7I1."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4.5,
+      5.5,
+      6.5,
+      7,
+      7.5,
+      8,
+      8.5,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.2
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": false
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     1,
+     1.5,
+     2,
+     2.5,
+     3,
+     3.5,
+     4.5,
+     5.5,
+     6.5,
+     7,
+     7.5,
+     8,
+     8.5,
+     9,
+     10
+    ],
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.02
+    ]
+   },
+   "sources": [
+    "abb_xt_iec_2020"
+   ],
+   "notes": "XT2 In 10\u2013160 A, XT5 250\u2013630 A, XT6 630\u20131000 A. S definite time t = k (0.1/0.2 s); I3 \u226420 ms."
+  },
+  {
+   "id": "abb-xt5-ekipdip-lsi",
+   "manufacturer": "ABB",
+   "series": "Tmax XT5 Ekip Dip LSI/LSIG",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    250,
+    320,
+    400,
+    630
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "step": 0.02,
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      3,
+      12,
+      36,
+      48
+     ]
+    },
+    "form": "i2t",
+    "ref": 3,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 at 3\u00b7I1; \u00b110 % up to 4\u00b7In."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4.5,
+      5.5,
+      6.5,
+      7,
+      7.5,
+      8,
+      8.5,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.05,
+      0.1,
+      0.2,
+      0.4
+     ]
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     1,
+     1.5,
+     2,
+     2.5,
+     3,
+     3.5,
+     4.5,
+     5.5,
+     6.5,
+     7,
+     7.5,
+     8,
+     8.5,
+     9,
+     10
+    ],
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.02
+    ]
+   },
+   "G": {
+    "note": "LSIG versions: G not plotted"
+   },
+   "sources": [
+    "abb_xt_iec_2020"
+   ],
+   "notes": "t1 3/12/36/48 s @3\u00b7I1; I2 1\u201310\u00b7In, t2 0.05\u20130.4 s (t=k or I\u00b2t @10\u00b7In); I3 1\u201310\u00b7In \u226420 ms."
+  },
+  {
+   "id": "abb-xt6-ekipdip-lsi",
+   "manufacturer": "ABB",
+   "series": "Tmax XT6 Ekip Dip LSI/LSIG",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    630,
+    800,
+    1000
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "step": 0.02,
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      3,
+      12,
+      36,
+      42,
+      72
+     ]
+    },
+    "form": "i2t",
+    "ref": 3,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 at 3\u00b7I1; \u00b110 % up to 4\u00b7In."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4.5,
+      5.5,
+      6.5,
+      7,
+      7.5,
+      8,
+      8.5,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.05,
+      0.1,
+      0.2,
+      0.4
+     ]
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     1,
+     1.5,
+     2,
+     2.5,
+     3,
+     3.5,
+     4.5,
+     5.5,
+     6.5,
+     7,
+     7.5,
+     8,
+     8.5,
+     9,
+     10
+    ],
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.02
+    ]
+   },
+   "G": {
+    "note": "LSIG versions: G not plotted"
+   },
+   "sources": [
+    "abb_xt_iec_2020"
+   ],
+   "notes": "t1 3/12/36/MAX @3\u00b7I1 \u2014 MAX = 72 s (800 A) or 42 s (1000 A)."
+  },
+  {
+   "id": "abb-xt7-ekipdip-lsi",
+   "manufacturer": "ABB",
+   "series": "Tmax XT7 Ekip Dip LSI/LSIG",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.42,
+      0.45,
+      0.47,
+      0.5,
+      0.52,
+      0.55,
+      0.57,
+      0.6,
+      0.62,
+      0.65,
+      0.67,
+      0.7,
+      0.72,
+      0.75,
+      0.77,
+      0.8,
+      0.82,
+      0.85,
+      0.87,
+      0.9,
+      0.92,
+      0.95,
+      0.97,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      3,
+      12,
+      24,
+      36,
+      48,
+      72,
+      108,
+      144
+     ]
+    },
+    "form": "i2t",
+    "ref": 3,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2, t1 at 3\u00b7I1; \u00b110 % up to 6\u00b7In."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      0.6,
+      0.8,
+      1,
+      1.5,
+      2,
+      2.5,
+      3,
+      3.5,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "unit": "xIn"
+    },
+    "tol": 0.1,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8
+     ]
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     1.5,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14,
+     15
+    ],
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.03
+    ]
+   },
+   "sources": [
+    "abb_xt_iec_2020"
+   ],
+   "notes": "I3 1.5\u201315\u00b7In, \u226430 ms."
+  },
+  {
+   "id": "abb-xt5-ekiptouch",
+   "manufacturer": "ABB",
+   "series": "Tmax XT5 Ekip Touch LSI/LSIG",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    250,
+    320,
+    400,
+    630
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "step": 0.001,
+     "unit": "xIn"
+    },
+    "tr": {
+     "min": 3,
+     "max": 48,
+     "step": 1
+    },
+    "form": "i2t",
+    "ref": 3,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.2
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2 (t1\u00b79/(I/I1)\u00b2), t1 at 3\u00b7I1; IEC 60255-151 L curves also selectable (not modelled)."
+   },
+   "S": {
+    "isd": {
+     "min": 0.6,
+     "max": 10,
+     "step": 0.1,
+     "unit": "xIn"
+    },
+    "tol": 0.07,
+    "tsd": {
+     "min": 0.05,
+     "max": 0.5,
+     "step": 0.01
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInMin": 1.5,
+    "xInMaxAll": 10,
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.03
+    ]
+   },
+   "G": {
+    "note": "LSIG versions: G not plotted"
+   },
+   "sources": [
+    "abb_xt_iec_2020"
+   ],
+   "notes": "I1 0.4\u20131\u00b7In; t1 3\u201348 s @3\u00b7I1 (\u00b110 % <6\u00b7In); I2 0.6\u201310\u00b7In \u00b17 %, t2 0.05\u20130.5 s; I3 1.5\u201310\u00b7In \u00b110 %, \u226430 ms."
+  },
+  {
+   "id": "abb-xt7-ekiptouch",
+   "manufacturer": "ABB",
+   "series": "Tmax XT7 Ekip Touch LSI/LSIG",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "step": 0.001,
+     "unit": "xIn"
+    },
+    "tr": {
+     "min": 3,
+     "max": 144,
+     "step": 1
+    },
+    "form": "i2t",
+    "ref": 3,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.2
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "t = k/I\u00b2 (t1\u00b79/(I/I1)\u00b2), t1 at 3\u00b7I1; IEC 60255-151 L curves also selectable (not modelled)."
+   },
+   "S": {
+    "isd": {
+     "min": 0.6,
+     "max": 10,
+     "step": 0.1,
+     "unit": "xIn"
+    },
+    "tol": 0.07,
+    "tsd": {
+     "min": 0.05,
+     "max": 0.8,
+     "step": 0.01
+    },
+    "tTol": 0.1,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefUnit": "xIn",
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInMin": 1.5,
+    "xInMaxAll": 15,
+    "tol": 0.1,
+    "band": [
+     0.01,
+     0.03
+    ]
+   },
+   "G": {
+    "note": "LSIG versions: G not plotted"
+   },
+   "sources": [
+    "abb_xt_iec_2020",
+    "abb_xt7_manual"
+   ],
+   "notes": "I1 0.4\u20131\u00b7In; t1 3\u2013144 s @3\u00b7I1 (\u00b110 % <6\u00b7In); I2 0.6\u201310\u00b7In \u00b17 %, t2 0.05\u20130.8 s; I3 1.5\u201315\u00b7In \u00b110 %, \u226430 ms."
+  },
+  {
+   "id": "chint-nxb63",
+   "manufacturer": "CHINT",
+   "series": "NXB-63",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60898-1",
+   "refTempC": 30,
+   "ratings": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    10,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 16,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "Icn 6 kA / 10 kA",
+   "sources": [
+    "chint_nxb63"
+   ],
+   "notes": "B 3\u20135\u00b7In, C 5\u201310\u00b7In, D 10\u201316\u00b7In; 1.13/1.45/2.55\u00b7In test points as IEC 60898-1; reference 30 \u00b0C."
+  },
+  {
+   "id": "chint-nb1",
+   "manufacturer": "CHINT",
+   "series": "NB1-63",
+   "category": "MCB",
+   "model": "mcb",
+   "standard": "IEC/EN 60898-1; IEC/EN 60947-2",
+   "refTempC": 30,
+   "ratings": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63
+   ],
+   "thermal": {
+    "le32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.424052,
+      "K": 132.388892,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points (1.13\u00b7In no-trip 1 h, 1.45\u00b7In trip <1 h, 2.55\u00b7In 1\u201360 s). Curve shape between points: I\u00b2-law thermal model (assumed)."
+    },
+    "gt32": {
+     "lo": {
+      "x0": 1.13,
+      "K": 4.092411,
+      "a": 2.0
+     },
+     "hi": {
+      "x0": 1.396702,
+      "K": 279.994697,
+      "a": 2.0
+     },
+     "basis": "standard",
+     "note": "Band through IEC 60898-1 conventional points for In > 32 A (2.55\u00b7In 1\u2013120 s). Shape between points: I\u00b2-law model (assumed)."
+    }
+   },
+   "curves": {
+    "B": {
+     "lo": 3,
+     "hi": 5,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "C": {
+     "lo": 5,
+     "hi": 10,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    },
+    "D": {
+     "lo": 10,
+     "hi": 14,
+     "basis": "datasheet",
+     "tripMax": 0.1,
+     "clearMin": 0.01,
+     "std": "IEC 60898-1"
+    }
+   },
+   "breaking": "6 kA (60898-1) / 10 kA (60947-2)",
+   "sources": [
+    "chint_nb1"
+   ],
+   "notes": "B 3\u20135\u00b7In, C 5\u201310\u00b7In, D 10\u201314\u00b7In; reference 30 \u00b0C. Thermal band from IEC 60898-1 points (not tabulated in catalogue)."
+  },
+  {
+   "id": "chint-nxm-tm",
+   "manufacturer": "CHINT",
+   "series": "NXM 63\u20131000 thermal-magnetic",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    10,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160,
+    180,
+    200,
+    225,
+    250,
+    315,
+    350,
+    400,
+    500,
+    630,
+    700,
+    800,
+    900,
+    1000
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 1.0,
+    "max": 1.0,
+    "steps": [
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "xIn": 10,
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "E/S/F/H (15\u201370 kA)",
+   "sources": [
+    "chint_nxm"
+   ],
+   "notes": "Thermal fixed; 1.05\u00b7In no trip / 1.30\u00b7In trip (1 h \u226463 A, 2 h >63 A). Magnetic 10\u00b7In fixed \u00b120 %. Motor version 12\u00b7In not included."
+  },
+  {
+   "id": "chint-nxm1600-tm",
+   "manufacturer": "CHINT",
+   "series": "NXM 1250/1600 thermal-magnetic",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    1000,
+    1250,
+    1600
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": [
+     0.7,
+     0.8,
+     0.9,
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsXIn": {
+     "1000": [
+      7,
+      8,
+      9,
+      10
+     ],
+     "1250": [
+      7,
+      8,
+      9,
+      10
+     ],
+     "1600": [
+      7,
+      8,
+      9,
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet",
+    "tolBasis": "standard"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "S/H (50/70 kA)",
+   "sources": [
+    "chint_nxm"
+   ],
+   "notes": "Ir 0.7-0.8-0.9-1\u00b7In (1600 frame); Ii 7-8-9-10\u00b7In."
+  },
+  {
+   "id": "chint-nxm-etu",
+   "manufacturer": "CHINT",
+   "series": "NXM electronic (distribution)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    63,
+    125,
+    160,
+    250,
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "io": {
+      "63": [
+       32,
+       36,
+       40,
+       45,
+       50,
+       56,
+       60,
+       63
+      ],
+      "125": [
+       63,
+       70,
+       75,
+       80,
+       90,
+       100,
+       110,
+       125
+      ],
+      "160": [
+       80,
+       90,
+       100,
+       110,
+       125,
+       140,
+       150,
+       160
+      ],
+      "250": [
+       125,
+       140,
+       150,
+       160,
+       180,
+       200,
+       225,
+       250
+      ],
+      "400": [
+       200,
+       225,
+       250,
+       280,
+       300,
+       315,
+       350,
+       400
+      ],
+      "630": [
+       400,
+       450,
+       480,
+       500,
+       530,
+       560,
+       600,
+       630
+      ],
+      "800": [
+       630,
+       660,
+       680,
+       700,
+       720,
+       750,
+       780,
+       800
+      ],
+      "1000": [
+       630,
+       680,
+       720,
+       780,
+       820,
+       900,
+       950,
+       1000
+      ],
+      "1250": [
+       630,
+       700,
+       800,
+       900,
+       1000,
+       1100,
+       1200,
+       1250
+      ],
+      "1600": [
+       800,
+       900,
+       1000,
+       1100,
+       1250,
+       1400,
+       1500,
+       1600
+      ]
+     }
+    },
+    "tr": {
+     "steps": [
+      12,
+      60,
+      80,
+      100,
+      150
+     ]
+    },
+    "form": "i2t",
+    "ref": 2,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "I\u00b2t = constant; tr at 2\u00b7Ir: 12-60-80-100 s (Inm <400 A) or 12-60-100-150 s (Inm \u2265400 A)."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      1.5,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+     ],
+     "unit": "xIr"
+    },
+    "tol": 0.15,
+    "tsd": {
+     "fixed": 0.3
+    },
+    "tTol": 0.2,
+    "i2t": false
+   },
+   "I": {
+    "xIrSteps": [
+     0,
+     2,
+     3,
+     4,
+     6,
+     8,
+     10,
+     12
+    ],
+    "tol": 0.15,
+    "band": [
+     0.01,
+     0.05
+    ],
+    "bandBasis": "assumed"
+   },
+   "sources": [
+    "chint_nxm"
+   ],
+   "notes": "Rating = frame Inm; Ir dial values in A. Isd 1.5\u20138\u00b7Ir \u00b115 %, tsd 0.3 \u00b10.06 s; Ii 2\u201312\u00b7Ir \u00b115 %."
+  },
+  {
+   "id": "chint-nm8n-tm",
+   "manufacturer": "CHINT",
+   "series": "NM8N thermal-magnetic (TM)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    160,
+    180,
+    200,
+    225,
+    250,
+    315,
+    350,
+    400,
+    500,
+    630,
+    700,
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": [
+     0.7,
+     0.8,
+     0.9,
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsXIn": {
+     "16": [
+      10
+     ],
+     "20": [
+      10
+     ],
+     "25": [
+      10
+     ],
+     "32": [
+      10
+     ],
+     "40": [
+      10
+     ],
+     "50": [
+      10
+     ],
+     "63": [
+      10
+     ],
+     "80": [
+      10
+     ],
+     "100": [
+      10
+     ],
+     "125": [
+      10
+     ],
+     "160": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "180": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "200": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "225": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "250": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "315": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "350": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "400": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "500": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "630": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "700": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "800": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "1000": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "1250": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "1600": [
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "assumed"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "C/S/Q/H/R (36\u2013150 kA @400 V)",
+   "sources": [
+    "chint_nm8n"
+   ],
+   "notes": "Catalogue lists Ir 1.0\u00b7In (fixed) or 0.7-0.8-0.9-1.0\u00b7In, and Ii 10\u00b7In, 5\u201310, 6\u201310 or 7\u201312\u00b7In, \u00b120 %, without a clear rating mapping in the extract. The mapping used here (\u2264125 A 10\u00b7In fixed, 160\u2013800 A 5\u201310\u00b7In, 1000\u20131600 A 6\u201310\u00b7In) is assumed \u2014 set Ir to 1.0 for fixed-thermal versions."
+  },
+  {
+   "id": "chint-nm8n-en",
+   "manufacturer": "CHINT",
+   "series": "NM8N electronic EN (LSI)",
+   "category": "MCCB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    32,
+    63,
+    100,
+    160,
+    250,
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      0.95,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      3,
+      6,
+      12,
+      18
+     ]
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.1,
+     0.1
+    ],
+    "note": "tr at 6\u00b7Ir \u00b110 %; pick-up 1.05/1.30 (IEC 60947-2, assumed)."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      1.5,
+      2,
+      3,
+      4,
+      6,
+      8,
+      10
+     ],
+     "unit": "xIr"
+    },
+    "tol": 0.15,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    },
+    "tTol": 0.2,
+    "i2t": false
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     2,
+     3,
+     4,
+     6,
+     8,
+     10,
+     12
+    ],
+    "tol": 0.15,
+    "band": [
+     0.01,
+     0.06
+    ]
+   },
+   "sources": [
+    "chint_nm8n"
+   ],
+   "notes": "Isd \u00b115 %, tsd \u00b120 % or \u00b140 ms; Ii 2\u201312\u00b7In \u00b115 %, \u226460 ms. EM version adds G (0.4\u20131\u00b7In, not plotted)."
+  },
+  {
+   "id": "chint-nm1-tm",
+   "manufacturer": "CHINT",
+   "series": "NM1 thermal-magnetic (distribution)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    10,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    63,
+    80,
+    100,
+    125,
+    140,
+    160,
+    180,
+    200,
+    225,
+    250,
+    300,
+    315,
+    350,
+    400,
+    450,
+    500,
+    630,
+    700,
+    800,
+    1000,
+    1250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 1.0,
+    "max": 1.0,
+    "steps": [
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "xIn": 10,
+    "tol": 0.2,
+    "basis": "assumed"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "S/H/R (15\u201370 kA)",
+   "sources": [
+    "chint_nm1_kr",
+    "chint_nm1"
+   ],
+   "notes": "Thermal fixed; 1.05\u00b7In no trip / 1.30\u00b7In trip (1 h \u226463 A, 2 h >63 A), calibrated at 40 \u00b0C. The magnetic setting is not legible in the available catalogue text: 10\u00b7In \u00b120 % (as on the successor NXM) is assumed."
+  },
+  {
+   "id": "chint-nxa",
+   "manufacturer": "CHINT",
+   "series": "NXA ACB intelligent controller (M/A, P/H)",
+   "category": "ACB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600,
+    2000,
+    2500,
+    3200,
+    3600,
+    4000,
+    5000,
+    6300
+   ],
+   "L": {
+    "ir": {
+     "steps": [
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+     ],
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      1,
+      2,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      30
+     ]
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.15,
+     0.15
+    ],
+    "note": "t = (6/N)\u00b2\u00b7tr, tr at 6\u00b7Ir, \u00b115 %. Factory tr = 2 s; tr step list taken from NA8 (assumed)."
+   },
+   "S": {
+    "isd": {
+     "steps": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8,
+      10
+     ],
+     "unit": "xIr"
+    },
+    "tol": 0.15,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefBasis": "assumed"
+   },
+   "I": {
+    "xInSteps": [
+     0,
+     2,
+     4,
+     6,
+     8,
+     10,
+     12,
+     15
+    ],
+    "tol": 0.15,
+    "band": [
+     0.02,
+     0.05
+    ],
+    "bandBasis": "datasheet"
+   },
+   "G": {
+    "note": "Ig 0.5\u00b7In (NXA16/20) or 800 A (NXA32+), inverse/definite (not plotted)"
+   },
+   "sources": [
+    "chint_nxa"
+   ],
+   "notes": "Isd: <0.85 no trip / >1.15 trip; 4-step definite time (values assumed 0.1\u20130.4 s); Ii 2\u201315\u00b7In, \u226450 ms."
+  },
+  {
+   "id": "chint-na8",
+   "manufacturer": "CHINT",
+   "series": "NA8 ACB intelligent controller",
+   "category": "ACB",
+   "model": "etu",
+   "standard": "IEC 60947-2",
+   "ratings": [
+    200,
+    400,
+    630,
+    800,
+    1000,
+    1250,
+    1600,
+    2000,
+    2500,
+    3200,
+    4000,
+    5000,
+    6300,
+    7500
+   ],
+   "L": {
+    "ir": {
+     "min": 0.4,
+     "max": 1.0,
+     "step": 0.01,
+     "unit": "xIn"
+    },
+    "tr": {
+     "steps": [
+      1,
+      2,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      30
+     ]
+    },
+    "form": "i2t",
+    "ref": 6,
+    "basis": "datasheet",
+    "pickup": [
+     1.05,
+     1.3
+    ],
+    "tTol": [
+     -0.15,
+     0.15
+    ],
+    "note": "t = (6/N)\u00b2\u00b7tr (catalogue example 1.8\u00b7Ir, tr 2 s \u2192 22.2 s). Pick-up 1.05/1.30 is IEC 60947-2 (assumed)."
+   },
+   "S": {
+    "isd": {
+     "min": 1.5,
+     "max": 10,
+     "step": 0.5,
+     "unit": "xIr"
+    },
+    "tol": 0.15,
+    "tsd": {
+     "steps": [
+      0.1,
+      0.2,
+      0.3,
+      0.4
+     ]
+    },
+    "tTol": 0.15,
+    "i2t": true,
+    "i2tRef": 10,
+    "i2tRefBasis": "datasheet"
+   },
+   "I": {
+    "xInMin": 2,
+    "xInMaxAll": 15,
+    "tol": 0.15,
+    "band": [
+     0.02,
+     0.1
+    ]
+   },
+   "G": {
+    "note": "Ig 0.2\u20131\u00b7In (\u22642500 frame) / 500\u20131200 A (not plotted)"
+   },
+   "sources": [
+    "chint_na8"
+   ],
+   "notes": "Isd <0.9 no trip / >1.15 trip; tsd definite 0.1\u20130.4 s or inverse I\u00b2t = (10\u00b7Ir)\u00b2\u00b7tsd; Ii 2\u201315\u00b7In, \u2264100 ms."
   }
  ]
 }
