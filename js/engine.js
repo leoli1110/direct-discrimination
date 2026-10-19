@@ -82,6 +82,7 @@ export function defaultSettings(dev) {
     st.plug = plug ? 100 : 100; st.tms = dev.tms.label === 'TD' ? 2 : 0.3;
     st.hs = !!(dev.highset && dev.highset.enabled); st.hsX = dev.highset ? dev.highset.default : 10; st.hsT = dev.highset ? dev.highset.time : 0.05;
   }
+  if (dev.model === 'custom') { st.kI = 1; st.kT = 1; st.base = dev.base || 100; st.kV = dev.kV ?? 0.4; }
   normalize(dev, st);
   return st;
 }
@@ -89,6 +90,7 @@ export function defaultSettings(dev) {
 // Keep settings inside the device's legal values whenever rating/curve changes.
 export function normalize(dev, st) {
   const clampR = (v, s) => Math.min(s.max, Math.max(s.min, num(v, s.max)));
+  if (dev.model === 'custom') { st.kI = Math.min(100, Math.max(0.01, num(st.kI, 1))); st.kT = Math.min(100, Math.max(0.01, num(st.kT, 1))); st.base = Math.max(0.001, num(st.base, dev.base || 100)); return st; }
   if (dev.model === 'mcb') {
     if (!dev.curves[st.curve]) st.curve = Object.keys(dev.curves)[0];
     const r = ratingsFor(dev, st); if (!r.includes(+st.In)) st.In = nearest(r, +st.In || r[0]);
@@ -140,6 +142,12 @@ export function normalize(dev, st) {
 export function controlsFor(dev, st) {
   const c = [];
   const fmtA = (a) => `${round(a, 1)} A`;
+  if (dev.model === 'custom') {
+    if (dev.unit === 'x') c.push({ key: 'base', label: 'Base current', kind: 'number', unit: 'A', min: 0.001, step: 'any' });
+    c.push({ key: 'kI', label: 'Current multiplier', kind: 'number', min: 0.01, max: 100, step: 'any' });
+    c.push({ key: 'kT', label: 'Time multiplier', kind: 'number', min: 0.01, max: 100, step: 'any' });
+    return c;
+  }
   if (dev.model === 'mcb') {
     c.push({ key: 'curve', label: 'Curve', kind: 'select', values: Object.keys(dev.curves), fmt: (v) => `${v}  (${dev.curves[v].lo}–${dev.curves[v].hi}×In)` });
     c.push({ key: 'In', label: 'Rating In', kind: 'select', values: ratingsFor(dev, st), fmt: (v) => `${v} A` });
@@ -199,6 +207,7 @@ export function evaluate(dev, st) {
   if (dev.model === 'tm') return evalTm(dev, st);
   if (dev.model === 'etu') return evalEtu(dev, st);
   if (dev.model === 'idmt') return evalIdmt(dev, st);
+  if (dev.model === 'custom') return evalCustom(dev, st);
   throw new Error('unknown model ' + dev.model);
 }
 
@@ -328,4 +337,70 @@ export function selectivity(up, kUp, dn, kDn, Imin, Imax) {
     if (Number.isFinite(tu) && Number.isFinite(td) && td >= tu) return I;
   }
   return null;
+}
+
+// ------------------------------------------------------------ user-defined curves (points list)
+// dev.points: [{ I, t, t2? }] — I in A (unit 'A') or multiples of a base current (unit 'x').
+// Log-log interpolation between points; equal currents give a vertical step. Below the first
+// point the device does not operate; above the last point the last time is held (extend) or
+// the curve ends.
+export function parsePoints(text) {
+  const out = [];
+  for (let raw of String(text).split(/\r?\n/)) {
+    const line = raw.replace(/(#|\/\/).*$/, '').trim();
+    if (!line) continue;
+    const parts = /[;\t]/.test(line) ? line.split(/[;\t]+/).map((x) => x.trim().replace(',', '.')) : line.split(/[\s,]+/);
+    const nums = parts.map((x) => Number(x)).filter((x) => Number.isFinite(x));
+    if (nums.length < 2 || parts.filter((x) => x !== '').length > nums.length + 1) continue; // header / text line
+    const [I, t, t2] = nums;
+    if (I > 0 && t > 0) out.push(t2 > 0 ? { I, t, t2 } : { I, t });
+  }
+  return out;
+}
+export function formatPoints(dev) {
+  const band = dev.mode === 'band';
+  const head = [`# TCC Studio custom curve: ${dev.series}`, `# unit: ${dev.unit === 'x' ? `multiples of ${dev.base} A` : 'A'}, voltage ${dev.kV ?? 0.4} kV`,
+    `# current${dev.unit === 'x' ? '_x' : '_A'}\t${band ? 't_min_s\tt_max_s' : 'time_s'}`];
+  return head.concat(sortPts(dev.points).map((p) => [p.I, p.t].concat(band ? [p.t2 ?? p.t] : []).join('\t'))).join('\n') + '\n';
+}
+export function sortPts(pts) { return pts.slice().sort((a, b) => a.I - b.I || b.t - a.t); }
+export function checkPoints(dev) {
+  const msgs = []; const p = sortPts(dev.points || []);
+  if (p.length < 2) msgs.push({ level: 'error', text: 'A curve needs at least 2 points.' });
+  for (let i = 1; i < p.length; i++) if (p[i].t > p[i - 1].t * 1.0001) { msgs.push({ level: 'warn', text: `Time rises with current between ${p[i - 1].I} and ${p[i].I} — check the point order.` }); break; }
+  if (dev.mode === 'band' && p.some((q) => (q.t2 ?? q.t) < q.t)) msgs.push({ level: 'error', text: 'Maximum time is below minimum time on at least one row.' });
+  return msgs;
+}
+function interpFn(pts, key, extend) {
+  const P = pts.map((p) => ({ I: p.I, t: key === 't2' ? (p.t2 ?? p.t) : p.t }));
+  const L = P.map((p) => ({ x: Math.log10(p.I), y: Math.log10(p.t) }));
+  return (I) => {
+    if (!(I > 0) || P.length < 2 || I < P[0].I) return INF;
+    const last = P[P.length - 1];
+    if (I > last.I) return extend ? last.t : INF;
+    const x = Math.log10(I);
+    let best = INF;
+    for (let i = 0; i < P.length - 1; i++) {
+      const a = L[i], b = L[i + 1];
+      if (x < a.x || x > b.x) continue;
+      if (b.x === a.x) { best = Math.min(best, 10 ** Math.min(a.y, b.y)); continue; }
+      best = Math.min(best, 10 ** (a.y + ((x - a.x) / (b.x - a.x)) * (b.y - a.y)));
+    }
+    if (best === INF) for (const p of P) if (Math.abs(p.I - I) / I < 1e-9) best = Math.min(best, p.t);
+    return best;
+  };
+}
+function evalCustom(dev, st) {
+  const base = dev.unit === 'x' ? +st.base || dev.base || 1 : 1;
+  const kI = +st.kI || 1, kT = +st.kT || 1;
+  const pts = sortPts(dev.points || []).map((p) => ({ I: p.I * base * kI, t: p.t * kT, t2: (p.t2 ?? p.t) * kT }));
+  const ext = dev.extend !== false;
+  const fMin = interpFn(pts, 't', ext), fMax = dev.mode === 'band' ? interpFn(pts, 't2', ext) : fMin;
+  const breaks = pts.map((p) => p.I);
+  return {
+    lo: fMin, hi: fMax, nom: null, breaks, pickup: pts.length ? pts[0].I : 1, isRelay: dev.category === 'RELAY',
+    summary: dev.series,
+    settingsText: `${pts.length} points${dev.mode === 'band' ? ' (min/max band)' : ''}, ${pts.length ? `${round(pts[0].I, 1)}–${round(pts[pts.length - 1].I, 1)} A` : '—'}`
+      + `${dev.unit === 'x' ? `, base ${round(base, 2)} A` : ''}${kI !== 1 ? `, current ×${kI}` : ''}${kT !== 1 ? `, time ×${kT}` : ''}${ext ? '' : ', ends at last point'}`,
+  };
 }

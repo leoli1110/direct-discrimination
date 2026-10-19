@@ -60,8 +60,13 @@
         <button class="chip" data-cat="MCCB" aria-pressed="false">MCCB</button>
         <button class="chip" data-cat="ACB" aria-pressed="false">ACB</button>
         <button class="chip" data-cat="RELAY" aria-pressed="false">Relay</button>
+        <button class="chip" data-cat="CUSTOM" aria-pressed="false">My curves</button>
       </div>
       <select id="lib-brand" aria-label="Manufacturer"><option value="">All manufacturers</option></select>
+    </div>
+    <div class="lib-custom">
+      <button class="btn small" id="btn-new-curve" title="Define a curve from current–time points">+ Custom curve</button>
+      <label class="btn small ghost" title="Load a points list (.txt / .csv) as a new custom curve">Load points<input type="file" id="file-points" accept=".txt,.csv,.tsv,text/plain,text/csv" hidden></label>
     </div>
     <div class="lib-list" id="lib-list"></div>
   </aside>
@@ -85,6 +90,10 @@
           </label>
           <label class="check"><input type="checkbox" id="show-bands" checked> Tolerance bands</label>
         </div>
+      </div>
+      <div class="pick-banner" id="pick-banner" hidden>
+        <span><b>Picking points</b> — click the chart to add a current–time point to <span id="pick-name"></span>. <span class="mono" id="pick-count"></span></span>
+        <span class="pb-actions"><button class="btn small" id="pick-undo">Undo last</button><button class="btn small primary" id="pick-done">Done</button></span>
       </div>
       <div class="chart-wrap" id="chart-wrap">
         <svg id="chart" role="img" aria-label="Time-current characteristic chart"></svg>
@@ -134,6 +143,55 @@
 <main id="view-method" class="view method" data-active="false" hidden>
   <article class="prose" id="method-body"></article>
 </main>
+
+
+<dialog class="cc-dialog" id="cc-dialog" aria-labelledby="cc-title">
+  <form method="dialog" class="cc-form" id="cc-form" novalidate>
+    <header class="cc-head">
+      <h2 id="cc-title">Custom curve</h2>
+      <button class="btn icon" value="cancel" aria-label="Close" formnovalidate>✕</button>
+    </header>
+    <div class="cc-body">
+      <div class="cc-meta">
+        <label class="ctl wide">Curve name<input type="text" id="cc-name" required maxlength="80" placeholder="e.g. 160 A gG fuse (digitised)"></label>
+        <label class="ctl">Type<select id="cc-cat">
+          <option value="FUSE">Fuse</option><option value="MCB">MCB</option><option value="MCCB">MCCB</option><option value="ACB">ACB</option>
+          <option value="RELAY">Relay</option><option value="DAMAGE">Damage / withstand</option><option value="OTHER">Other</option></select></label>
+        <label class="ctl">Device voltage (kV)<input type="number" id="cc-kv" min="0.01" step="0.01" value="0.4"></label>
+        <label class="ctl">Times<select id="cc-mode"><option value="line">Single line</option><option value="band">Min / max band</option></select></label>
+        <label class="ctl">Current values<select id="cc-unit"><option value="A">Amperes</option><option value="x">Multiples of a base current</option></select></label>
+        <label class="ctl" id="cc-base-wrap" hidden>Base current (A)<input type="number" id="cc-base" min="0.001" step="any" value="100"></label>
+        <label class="toggle wide"><input type="checkbox" id="cc-extend" checked> Hold the last time beyond the last point</label>
+      </div>
+      <div class="cc-points">
+        <div class="cc-points-head">
+          <h3>Points <span class="mono faint" id="cc-npts"></span></h3>
+          <div class="cc-tools">
+            <button type="button" class="btn small" id="cc-add">Add point</button>
+            <button type="button" class="btn small" id="cc-pick" title="Close this dialog and click points on the chart">Pick on chart</button>
+            <label class="btn small" title="Load a .txt or .csv points list">Load list<input type="file" id="cc-file" accept=".txt,.csv,.tsv,text/plain,text/csv" hidden></label>
+            <button type="button" class="btn small" id="cc-save-txt">Save list</button>
+          </div>
+        </div>
+        <div class="table-scroll cc-table-wrap"><table class="grid-table cc-table" id="cc-table"></table></div>
+        <details class="cc-paste">
+          <summary>Paste a points list</summary>
+          <p class="fine">One point per line: current, time (and maximum time for a band). Separators: space, tab, comma or semicolon. With tab or semicolon separators a decimal comma is accepted. Lines starting with # are ignored.</p>
+          <textarea id="cc-text" rows="5" spellcheck="false" placeholder="# current_A  time_s&#10;200   1000&#10;400   30&#10;1000  0.8&#10;2000  0.02"></textarea>
+          <div class="cc-tools"><button type="button" class="btn small" id="cc-paste-replace">Replace points</button><button type="button" class="btn small ghost" id="cc-paste-append">Append</button></div>
+        </details>
+        <ul class="cc-msgs" id="cc-msgs"></ul>
+      </div>
+    </div>
+    <footer class="cc-foot">
+      <label class="toggle"><input type="checkbox" id="cc-keep" checked> Save to My curves</label>
+      <span class="cc-foot-actions">
+        <button class="btn ghost" value="cancel" formnovalidate>Cancel</button>
+        <button class="btn primary" id="cc-ok" value="ok">Add to study</button>
+      </span>
+    </footer>
+  </form>
+</dialog>
 
 <script type="module" src="js/app.js"></script>
 </body>

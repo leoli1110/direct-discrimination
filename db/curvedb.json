@@ -6706,9 +6706,9 @@
    "notes": "Rating = frame Inm; Ir dial values in A. Isd 1.5\u20138\u00b7Ir \u00b115 %, tsd 0.3 \u00b10.06 s; Ii 2\u201312\u00b7Ir \u00b115 %."
   },
   {
-   "id": "chint-nm8n-tm",
+   "id": "chint-nm8n125-tm",
    "manufacturer": "CHINT",
-   "series": "NM8N thermal-magnetic (TM)",
+   "series": "NM8N-125 thermal-magnetic (TM)",
    "category": "MCCB",
    "model": "tm",
    "standard": "IEC 60947-2",
@@ -6723,18 +6723,417 @@
     63,
     80,
     100,
+    125
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 1.0,
+    "max": 1.0,
+    "steps": [
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsXIn": {
+     "16": [
+      10
+     ],
+     "20": [
+      10
+     ],
+     "25": [
+      10
+     ],
+     "32": [
+      10
+     ],
+     "40": [
+      10
+     ],
+     "50": [
+      10
+     ],
+     "63": [
+      10
+     ],
+     "80": [
+      10
+     ],
+     "100": [
+      10
+     ],
+     "125": [
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "C/S/Q/H/R (36\u2013150 kA @400 V)",
+   "sources": [
+    "chint_nm8n"
+   ],
+   "notes": "Ir 1.0\u00b7In non-adjustable; Ii 10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+  },
+  {
+   "id": "chint-nm8n250-tm",
+   "manufacturer": "CHINT",
+   "series": "NM8N-250 thermal-magnetic (TM)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
     125,
     160,
     180,
     200,
     225,
+    250
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": [
+     0.7,
+     0.8,
+     0.9,
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsXIn": {
+     "125": [
+      10
+     ],
+     "160": [
+      10
+     ],
+     "180": [
+      10
+     ],
+     "200": [
+      10
+     ],
+     "225": [
+      10
+     ],
+     "250": [
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "C/S/Q/H/R (36\u2013150 kA @400 V)",
+   "sources": [
+    "chint_nm8n"
+   ],
+   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+  },
+  {
+   "id": "chint-nm8n400-630-tm",
+   "manufacturer": "CHINT",
+   "series": "NM8N-400/630 thermal-magnetic (TM)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
     250,
     315,
     350,
     400,
     500,
+    630
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 1.0,
+    "max": 1.0,
+    "steps": [
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsXIn": {
+     "250": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "315": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "350": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "400": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "500": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ],
+     "630": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "C/S/Q/H/R (36\u2013150 kA @400 V)",
+   "sources": [
+    "chint_nm8n"
+   ],
+   "notes": "Ir 1.0\u00b7In non-adjustable; Ii 7-8-9-10-11-12\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+  },
+  {
+   "id": "chint-nm8n800-tm",
+   "manufacturer": "CHINT",
+   "series": "NM8N-800 thermal-magnetic (TM)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
+    500,
     630,
     700,
+    800
+   ],
+   "thermal": {
+    "le63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.274736,
+      "K": 80.463452,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    },
+    "gt63": {
+     "lo": {
+      "x0": 1.05,
+      "K": 59.330939,
+      "a": 1.126351
+     },
+     "hi": {
+      "x0": 1.288119,
+      "K": 74.844681,
+      "a": 1.126351
+     },
+     "basis": "assumed",
+     "note": "Manufacturer thermal time points not published in the cited document. Conventional currents 1.05/1.3\u00b7Ir (IEC 60947-2) are applied, but the time spread uses the Schneider TM-D published shape (1.5\u00b7In 120\u2013400 s) as a reference. Replace with the manufacturer's curve before design use."
+    }
+   },
+   "ir": {
+    "min": 0.7,
+    "max": 1.0,
+    "steps": [
+     0.7,
+     0.8,
+     0.9,
+     1.0
+    ],
+    "basis": "datasheet"
+   },
+   "ii": {
+    "stepsXIn": {
+     "500": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "630": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "700": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "800": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ]
+    },
+    "tol": 0.2,
+    "basis": "datasheet"
+   },
+   "instTimes": {
+    "clearMin": 0.01,
+    "tripMax": 0.05,
+    "basis": "assumed"
+   },
+   "breaking": "C/S/Q/H/R (36\u2013150 kA @400 V)",
+   "sources": [
+    "chint_nm8n"
+   ],
+   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 5-6-7-8-9-10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
+  },
+  {
+   "id": "chint-nm8n1600-tm",
+   "manufacturer": "CHINT",
+   "series": "NM8N-1600 thermal-magnetic (TM)",
+   "category": "MCCB",
+   "model": "tm",
+   "standard": "IEC 60947-2",
+   "refTempC": 40,
+   "ratings": [
     800,
     1000,
     1250,
@@ -6783,126 +7182,7 @@
    },
    "ii": {
     "stepsXIn": {
-     "16": [
-      10
-     ],
-     "20": [
-      10
-     ],
-     "25": [
-      10
-     ],
-     "32": [
-      10
-     ],
-     "40": [
-      10
-     ],
-     "50": [
-      10
-     ],
-     "63": [
-      10
-     ],
-     "80": [
-      10
-     ],
-     "100": [
-      10
-     ],
-     "125": [
-      10
-     ],
-     "160": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "180": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "200": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "225": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "250": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "315": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "350": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "400": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "500": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "630": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
-     "700": [
-      5,
-      6,
-      7,
-      8,
-      9,
-      10
-     ],
      "800": [
-      5,
       6,
       7,
       8,
@@ -6932,7 +7212,7 @@
      ]
     },
     "tol": 0.2,
-    "basis": "assumed"
+    "basis": "datasheet"
    },
    "instTimes": {
     "clearMin": 0.01,
@@ -6943,7 +7223,7 @@
    "sources": [
     "chint_nm8n"
    ],
-   "notes": "Catalogue lists Ir 1.0\u00b7In (fixed) or 0.7-0.8-0.9-1.0\u00b7In, and Ii 10\u00b7In, 5\u201310, 6\u201310 or 7\u201312\u00b7In, \u00b120 %, without a clear rating mapping in the extract. The mapping used here (\u2264125 A 10\u00b7In fixed, 160\u2013800 A 5\u201310\u00b7In, 1000\u20131600 A 6\u201310\u00b7In) is assumed \u2014 set Ir to 1.0 for fixed-thermal versions."
+   "notes": "Ir 0.7-0.8-0.9-1.0\u00b7In; Ii 6-7-8-9-10\u00b7In \u00b120 %. Setting-to-frame mapping read from the catalogue TM table by column order (frame 125 | 250 | 400/630 | 800 | 1600); thermal times not printed, so the conventional 1.05/1.30\u00b7In band with the reference shape is used."
   },
   {
    "id": "chint-nm8n-en",

@@ -9,14 +9,24 @@ const PALETTE = { light: ['#1d5f8a', '#b4441c', '#2c7a4b', '#7b4a9e', '#9a7412',
 
 let DB = null;
 const S = { items: [], baseKV: 0.4, faultKA: 10, xRange: 'auto', bands: true, uid: 1, cat: 'ALL', brand: '', q: '', collapsed: new Set() };
-const dev = (id) => DB.devices.find((d) => d.id === id);
+const CUSTOM = new Map(); // user-defined curves: id -> device definition (model 'custom')
+const dev = (id) => CUSTOM.get(id) || DB.devices.find((d) => d.id === id);
+const CC_TYPES = { FUSE: 'Fuse', MCB: 'MCB', MCCB: 'MCCB', ACB: 'ACB', RELAY: 'Relay', DAMAGE: 'Damage / withstand', OTHER: 'Other' };
+const LS_KEY = 'tcc-studio.mycurves.v1';
+function loadMyCurves() {
+  try { const arr = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); for (const d of arr) if (d && d.id && Array.isArray(d.points)) CUSTOM.set(d.id, { ...d, saved: true }); } catch { /* storage unavailable */ }
+}
+function storeMyCurves() {
+  try { localStorage.setItem(LS_KEY, JSON.stringify([...CUSTOM.values()].filter((d) => d.saved))); } catch { /* storage unavailable */ }
+}
 
 // ------------------------------------------------------------ boot
 async function boot() {
   const theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   document.documentElement.dataset.theme = theme;
   DB = await (await fetch('db/curvedb.json')).json();
-  initLibrary(); initToolbar(); initTabs(); renderDatabase(); renderMethod();
+  loadMyCurves();
+  initLibrary(); initToolbar(); initTabs(); initCustomCurves(); renderDatabase(); renderMethod();
   if (!loadFromHash()) demoStudy();
   renderStudy(); draw();
   new ResizeObserver(() => draw()).observe($('#chart-wrap'));
@@ -48,6 +58,7 @@ function shortName(d, st) {
   const series = d.series.split(' — ')[0].split(' (')[0];
   if (d.model === 'mcb') return `${m}${series} ${st.curve}${st.In}`;
   if (d.model === 'idmt') return `${series.split(' / ')[0]}`;
+  if (d.model === 'custom') return d.series;
   return `${m}${series} ${st.In} A`;
 }
 const colorFor = (it) => { const t = document.documentElement.dataset.theme; const i = PALETTE.light.indexOf(it.color); return t === 'dark' && i >= 0 ? PALETTE.dark[i] : it.color; };
@@ -60,23 +71,35 @@ function initLibrary() {
   $('#lib-search').addEventListener('input', (e) => { S.q = e.target.value.toLowerCase(); renderLibrary(); });
   $('#lib-brand').addEventListener('change', (e) => { S.brand = e.target.value; renderLibrary(); });
   $$('.chip').forEach((c) => c.addEventListener('click', () => { S.cat = c.dataset.cat; $$('.chip').forEach((x) => x.setAttribute('aria-pressed', x === c)); renderLibrary(); }));
-  $('#lib-list').addEventListener('click', (e) => { const b = e.target.closest('[data-add]'); if (b) add(b.dataset.add); });
+  $('#lib-list').addEventListener('click', (e) => {
+    const ed = e.target.closest('[data-edit]'); if (ed) { e.stopPropagation(); openEditor(CUSTOM.get(ed.dataset.edit)); return; }
+    const rm = e.target.closest('[data-forget]'); if (rm) { e.stopPropagation(); forgetCurve(rm.dataset.forget); return; }
+    const b = e.target.closest('[data-add]'); if (b) add(b.dataset.add);
+  });
   renderLibrary();
 }
 function devMeta(d) {
   if (d.model === 'mcb') return `${Object.keys(d.curves).join(' · ')} curves · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A`;
   if (d.model === 'tm') return `Thermal-magnetic · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A`;
   if (d.model === 'etu') return `Electronic ${d.S ? 'LSI' : 'LI'} · ${d.ratings[0]}–${d.ratings[d.ratings.length - 1]} A`;
+  if (d.model === 'custom') { const p = E.sortPts(d.points); return `${CC_TYPES[d.category] || 'Custom'} · ${p.length} points${d.mode === 'band' ? ' · band' : ''}${p.length ? ` · ${fmtI(p[0].I * (d.unit === 'x' ? d.base : 1))}–${fmtI(p[p.length - 1].I * (d.unit === 'x' ? d.base : 1))}` : ''}`; }
   return `IDMT · ${Object.keys(d.curves).map((k) => k.split(' ')[0]).join(' · ')}`;
 }
 function renderLibrary() {
+  const mine = [...CUSTOM.values()].filter((d) => d.saved || S.items.some((i) => i.deviceId === d.id));
   const list = DB.devices.filter((d) => (S.cat === 'ALL' || d.category === S.cat) && (!S.brand || d.manufacturer === S.brand) &&
     (!S.q || `${d.manufacturer} ${d.series} ${d.standard} ${Object.keys(d.curves || {}).join(' ')} ${d.category}`.toLowerCase().includes(S.q)));
-  $('#lib-count').textContent = `${list.length} / ${DB.devices.length}`;
+  const myList = mine.filter((d) => (S.cat === 'ALL' || S.cat === 'CUSTOM') && !S.brand && (!S.q || `${d.series} ${CC_TYPES[d.category] || ''} custom`.toLowerCase().includes(S.q)));
+  $('#lib-count').textContent = `${list.length + myList.length} / ${DB.devices.length + mine.length}`;
   const groups = {};
   for (const d of list) (groups[d.category] ||= []).push(d);
   const names = { MCB: 'Miniature circuit breakers', MCCB: 'Moulded-case circuit breakers', ACB: 'Air circuit breakers', RELAY: 'Overcurrent relays (IDMT)' };
-  $('#lib-list').innerHTML = list.length ? ['MCB', 'MCCB', 'ACB', 'RELAY'].filter((g) => groups[g]).map((g) => `
+  const myHtml = myList.length ? `<div class="lib-group"><h3>My curves</h3>${myList.map((d) => `<div class="lib-item" data-add="${d.id}" role="button" tabindex="0" title="Add to study">
+      <span class="li-name">${esc(d.series)}</span><span class="li-add" aria-hidden="true">+</span>
+      <span class="li-meta">${esc(devMeta(d))}${d.saved ? '' : ' · this study only'}</span>
+      <span class="li-edit"><span data-edit="${d.id}" role="button" tabindex="0">Edit</span>${d.saved ? `<span data-forget="${d.id}" role="button" tabindex="0">Remove</span>` : ''}</span></div>`).join('')}</div>`
+    : S.cat === 'CUSTOM' ? `<p class="study-empty">No custom curves yet. Use “+ Custom curve” to enter current–time points, paste a list or load a .txt / .csv file.</p>` : '';
+  $('#lib-list').innerHTML = (list.length || myHtml) ? myHtml + ['MCB', 'MCCB', 'ACB', 'RELAY'].filter((g) => groups[g]).map((g) => `
     <div class="lib-group"><h3>${names[g]}</h3>
     ${groups[g].map((d) => `<button class="lib-item" data-add="${d.id}" title="Add to study">
       <span class="li-name">${esc(d.manufacturer.startsWith('Generic') ? d.series : `${d.manufacturer.replace(' Electric', '')} · ${d.series}`)}</span>
@@ -133,7 +156,7 @@ function renderStudy() {
     return `<div class="card" data-uid="${it.uid}" data-hidden="${!it.visible}">
       <div class="card-head">
         <label class="card-color" style="background:${colorFor(it)}" title="Curve colour"><input type="color" data-k="color" value="${it.color}" aria-label="Curve colour"></label>
-        <div class="card-title"><input type="text" data-k="label" value="${esc(it.label)}" aria-label="Label"><div class="card-sub" title="${esc(d.manufacturer + ' ' + d.series)}">${esc(d.manufacturer)} · ${esc(d.series)}</div></div>
+        <div class="card-title"><input type="text" data-k="label" value="${esc(it.label)}" aria-label="Label"><div class="card-sub" title="${esc(d.manufacturer + ' ' + d.series)}">${d.model === 'custom' ? `Custom ${esc((CC_TYPES[d.category] || '').toLowerCase())} · ${esc(d.series)}` : `${esc(d.manufacturer)} · ${esc(d.series)}`}</div></div>
         <div class="card-tools">
           <button data-act="vis" title="${it.visible ? 'Hide' : 'Show'} curve" aria-label="Toggle visibility">${it.visible ? eyeIcon : eyeOffIcon}</button>
           <button data-act="dup" title="Duplicate" aria-label="Duplicate">${dupIcon}</button>
@@ -145,7 +168,7 @@ function renderStudy() {
         ${ctls}
         <label class="ctl wide">Downstream of<select data-k="downOf"><option value="">— none (top of chain) —</option>${others.map((o) => `<option value="${o.uid}"${o.uid === it.downOf ? ' selected' : ''}>${esc(o.label)}</option>`).join('')}</select></label>
         <div class="card-foot"><span class="mono">${esc(ev.settingsText)}</span></div>
-        <div class="card-foot">${basisTags(d)} ${src}</div>
+        <div class="card-foot">${d.model === 'custom' ? `<span class="tag user">user-defined</span> <button class="btn small" data-act="edit">Edit points</button>` : `${basisTags(d)} ${src}`}</div>
       </div></div>`;
   }).join('');
   bindCards();
@@ -168,6 +191,7 @@ function bindCards() {
         let v = el.type === 'checkbox' ? el.checked : el.value;
         if (k === 'downOf') v = v ? +v : null;
         else if (!['label', 'color', 'curve', 'plugRange'].includes(k) && el.type !== 'checkbox') v = +v;
+        if (el.type === 'number' && !(v > 0) && k !== 'downOf') return;
         it[k] = v;
         if (k === 'io') it.Ir = v;
         E.normalize(d, it);
@@ -187,6 +211,7 @@ function bindCards() {
       if (a === 'vis') it.visible = !it.visible;
       if (a === 'dup') { const c = { ...it, uid: S.uid++, label: it.label + ' (copy)', color: nextColor(), downOf: null }; S.items.splice(S.items.indexOf(it) + 1, 0, c); }
       if (a === 'fold') S.collapsed.has(it.uid) ? S.collapsed.delete(it.uid) : S.collapsed.add(it.uid);
+      if (a === 'edit') { openEditor(d); return; }
       refresh();
     }));
   });
@@ -272,6 +297,7 @@ function draw() {
   labels.sort((a, b) => a.y - b.y);
   for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 13 && Math.abs(labels[i].x - labels[i - 1].x) < 160) labels[i].y = labels[i - 1].y + 13;
   if (!narrow) for (const L of labels) { const t = narrow && L.text.length > 18 ? L.text.slice(0, 17) + '…' : L.text; g += `<text x="${Math.min(L.x, m.l + pw - 4)}" y="${L.y}" fill="${L.col}" font-size="${fs}" font-family="Geist, sans-serif" font-weight="600" text-anchor="${L.x > m.l + pw - 120 ? 'end' : 'start'}" paint-order="stroke" stroke="${C.paper}" stroke-width="3">${esc(t)}</text>`; }
+  g += previewSvg(sx, sy, m, pw, ph);
   g += `</g><g id="cursor"></g>`;
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   svg.innerHTML = g;
@@ -353,14 +379,18 @@ function renderSelectivity() {
 }
 
 // ------------------------------------------------------------ persistence (file + URL hash)
-function serialize() { return { app: 'tcc-studio', version: DB.meta.version, baseKV: S.baseKV, faultKA: S.faultKA, items: S.items.map(({ uid, ...r }) => ({ uid, ...r })) }; }
+function serialize() {
+  const used = [...new Set(S.items.map((i) => i.deviceId))].filter((id) => CUSTOM.has(id)).map((id) => { const { saved, ...d } = CUSTOM.get(id); return d; });
+  return { app: 'tcc-studio', version: DB.meta.version, baseKV: S.baseKV, faultKA: S.faultKA, customCurves: used, items: S.items.map(({ uid, ...r }) => ({ uid, ...r })) };
+}
 function applyStudy(o) {
   if (!o || !Array.isArray(o.items)) throw new Error('not a study file');
+  for (const d of o.customCurves || []) if (d && d.id && Array.isArray(d.points)) CUSTOM.set(d.id, { ...d, model: 'custom', saved: CUSTOM.get(d.id)?.saved || false });
   S.baseKV = +o.baseKV || 0.4; S.faultKA = +o.faultKA || 10;
   $('#base-kv').value = S.baseKV; $('#fault-ka').value = S.faultKA;
   S.items = o.items.filter((i) => dev(i.deviceId)).map((i) => E.normalize(dev(i.deviceId), { ...i }));
   S.uid = Math.max(0, ...S.items.map((i) => i.uid)) + 1;
-  refresh();
+  refresh(); if (DB) renderLibrary();
 }
 function saveHash() {
   try { const s = btoa(unescape(encodeURIComponent(JSON.stringify(serialize())))); history.replaceState(null, '', '#s=' + s); } catch (e) { /* hash not available in some frames */ }
@@ -393,7 +423,7 @@ function doExport(kind) {
   }
   if (kind === 'report') {
     const L = [`# TCC study report`, ``, `Base voltage ${S.baseKV} kV · fault level ${S.faultKA} kA · database ${DB.meta.version}`, ``, `> ${DB.meta.disclaimer}`, ``, `## Devices`, ``, `| Label | Device | Voltage | Settings | Sources |`, `|---|---|---|---|---|`];
-    for (const it of S.items) { const d = dev(it.deviceId); L.push(`| ${it.label} | ${d.manufacturer} ${d.series} | ${it.kV} kV | ${E.evaluate(d, it).settingsText} | ${d.sources.map((s) => `[${DB.sources[s].publisher}](${DB.sources[s].url})`).join(', ')} |`); }
+    for (const it of S.items) { const d = dev(it.deviceId); L.push(`| ${it.label} | ${d.model === 'custom' ? 'Custom curve: ' + d.series : d.manufacturer + ' ' + d.series} | ${it.kV} kV | ${E.evaluate(d, it).settingsText} | ${d.model === 'custom' ? 'user-defined points' : d.sources.map((s) => `[${DB.sources[s].publisher}](${DB.sources[s].url})`).join(', ')} |`); }
     L.push('', '## Coordination', '', '| Upstream | Downstream | Pick-up ratio | Selective up to | At fault | Result |', '|---|---|---|---|---|---|');
     $$('#sel-table tbody tr').forEach((tr) => { const c = [...tr.children].map((td) => td.textContent.trim()); if (c.length === 6) L.push(`| ${c.join(' | ')} |`); });
     return download('tcc-report.md', L.join('\n'), 'text/markdown');
@@ -440,9 +470,140 @@ function renderMethod() {
   <p>The CDG11 3 s relay follows BS 142, which uses the same equation as IEC SI (2.97 s at 10× setting). It has error class E7.5, which gives a ±7.5 % band, and plug settings of 50–200 %, 20–80 % or 10–40 %, per ${a('cdg_brochure', 'the CDG11 brochure')}. CDG12, CDG13 and CDG14 map to LTI, VI and EI per ${a('cdg_ops', 'the operating instructions')}. CDG12's 30 s at 5× tap matches IEC LTI exactly. The 1.3 s CDG11 is approximated by scaling SI and is tagged assumed. CDG21 adds a high-set instantaneous element. Relay current is converted to primary amps with Is = plug % × CT primary. All devices are then referred to the study base voltage by multiplying by kV<sub>device</sub>/kV<sub>base</sub>.</p>
   <h2>Coordination check</h2>
   <p>For each linked pair, the check scans current from the downstream pick-up up to the fault level. It returns the first current where the downstream latest clearing time reaches the upstream earliest operating time. Relay pairs are also checked against a CTI of 0.4 s if either relay is electromechanical, otherwise 0.3 s. This tool does not model current-limiting energy selectivity (I²t let-through). For breaker-to-breaker selectivity at short-circuit levels, use the manufacturer's selectivity tables.</p>
+  <h2>Custom curves</h2>
+  <p>Any device that is not in the database, such as a fuse, a motor starting curve, a cable or transformer withstand curve or a relay you digitised from a manufacturer chart, can be entered as a custom curve. This works like Curve Direct's "curve defined by points": give the curve a name, then add, edit or delete current–time points, paste a list, load a <span class="mono">.txt</span> or <span class="mono">.csv</span> points list, or click points straight onto the chart. A curve needs at least two points.</p>
+  <p>Between points the curve is interpolated linearly on the log-log chart. Two points at the same current give a vertical step, for example an instantaneous trip. Below the first point the device does not operate. Above the last point it either holds the last time or the curve ends, as you choose. In band mode each row has a minimum and a maximum time, and the coordination check uses the minimum as the earliest operating time and the maximum as the latest clearing time.</p>
+  <p>Currents can be entered in amperes or as multiples of a base current, which is useful when you copy points from a chart drawn in multiples of In or Ir. On the study card, the current and time multipliers shift the whole curve, for example ×0.577 to move a curve across a delta-star transformer for a phase-to-phase fault. Custom curves are saved inside the study file and its link. Ticking "Save to My curves" also keeps them in this browser for reuse in other studies.</p>
+  <p>Points list format: one point per line, giving current, then time, then an optional maximum time. Values can be separated by spaces, tabs, commas or semicolons. When the separator is a tab or semicolon, decimal commas are accepted. Lines starting with <span class="mono">#</span> and header lines are ignored.</p>
   <h2>Limits</h2>
   <ul><li>Ambient derating is not applied. Each entry records its calibration reference temperature (20–50 °C).</li><li>Ground-fault (G) functions are stored in the database but not plotted.</li><li>Some rating lists marked in notes are typical values that were not extracted from the cited page. Check catalogue numbers before use.</li></ul>
   <p><b>${esc(DB.meta.disclaimer)}</b></p>`;
+}
+
+// ------------------------------------------------------------ custom curves (points list editor)
+// Mirrors Curve Direct's "Curve defined by points": name a curve, add / modify / delete
+// current–time points, load or save a .txt points list, plus band mode and chart picking.
+let ED = null; // working copy while the editor is open
+function newCurveId() { return 'user-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+function blankCurve() { return { id: null, manufacturer: 'User', series: '', category: 'FUSE', model: 'custom', mode: 'line', unit: 'A', base: 100, kV: S.baseKV, extend: true, points: [], sources: [], ratings: [] }; }
+function initCustomCurves() {
+  const dlg = $('#cc-dialog');
+  $('#btn-new-curve').addEventListener('click', () => openEditor(null));
+  $('#file-points').addEventListener('change', async (e) => { const f = e.target.files[0]; if (!f) return; const pts = E.parsePoints(await f.text()); e.target.value = '';
+    const c = blankCurve(); c.series = f.name.replace(/\.[^.]+$/, ''); c.points = pts; if (pts.some((p) => p.t2)) c.mode = 'band'; openEditor(c, true); });
+  $('#cc-unit').addEventListener('change', (e) => { ED.unit = e.target.value; $('#cc-base-wrap').hidden = ED.unit !== 'x'; renderPts(); });
+  $('#cc-mode').addEventListener('change', (e) => { ED.mode = e.target.value; renderPts(); });
+  for (const [id, k, f] of [['cc-name', 'series', String], ['cc-cat', 'category', String], ['cc-kv', 'kV', Number], ['cc-base', 'base', Number]]) $('#' + id).addEventListener('input', (e) => { ED[k] = f(e.target.value); if (k === 'series') validate(); });
+  $('#cc-extend').addEventListener('change', (e) => { ED.extend = e.target.checked; });
+  $('#cc-add').addEventListener('click', () => { const p = E.sortPts(ED.points), last = p[p.length - 1];
+    ED.points.push(last ? { I: +(last.I * 2).toPrecision(4), t: +(Math.max(last.t / 5, 0.01)).toPrecision(3) } : { I: 100, t: 100 }); renderPts(true); });
+  $('#cc-table').addEventListener('input', (e) => { const inp = e.target.closest('input[data-row]'); if (!inp) return;
+    const v = +String(inp.value).replace(',', '.'), row = ED.points[+inp.dataset.row]; inp.classList.toggle('bad', !(v > 0)); if (v > 0) row[inp.dataset.f] = v; validate(); });
+  $('#cc-table').addEventListener('change', () => { ED.points = E.sortPts(ED.points); renderPts(); });
+  $('#cc-table').addEventListener('click', (e) => { const b = e.target.closest('[data-del]'); if (b) { ED.points.splice(+b.dataset.del, 1); renderPts(); } });
+  $('#cc-file').addEventListener('change', async (e) => { const f = e.target.files[0]; if (!f) return; const pts = E.parsePoints(await f.text()); e.target.value = '';
+    if (!pts.length) return msg('error', `No current–time pairs found in ${f.name}.`); ED.points = pts; if (pts.some((p) => p.t2)) { ED.mode = 'band'; $('#cc-mode').value = 'band'; }
+    if (!ED.series) { ED.series = f.name.replace(/\.[^.]+$/, ''); $('#cc-name').value = ED.series; } renderPts(); msg('info', `Loaded ${pts.length} points from ${f.name}.`); });
+  $('#cc-save-txt').addEventListener('click', () => download(`${(ED.series || 'custom-curve').replace(/[^\w.-]+/g, '_')}.txt`, E.formatPoints(ED), 'text/plain'));
+  const paste = (append) => { const pts = E.parsePoints($('#cc-text').value); if (!pts.length) return msg('error', 'No current–time pairs found in the pasted text.');
+    ED.points = append ? ED.points.concat(pts) : pts; if (pts.some((p) => p.t2)) { ED.mode = 'band'; $('#cc-mode').value = 'band'; } renderPts(); msg('info', `${append ? 'Appended' : 'Loaded'} ${pts.length} points.`); };
+  $('#cc-paste-replace').addEventListener('click', () => paste(false));
+  $('#cc-paste-append').addEventListener('click', () => paste(true));
+  $('#cc-pick').addEventListener('click', () => startPick());
+  $('#pick-done').addEventListener('click', () => endPick());
+  $('#pick-undo').addEventListener('click', () => { if (ED && ED.points.length) { ED.points.pop(); pickStatus(); draw(); } });
+  $('#cc-form').addEventListener('submit', (e) => { if (e.submitter && e.submitter.value === 'ok') { e.preventDefault(); commitEditor(); } });
+  dlg.addEventListener('close', () => { if (!S.pick) ED = null; });
+  $('#chart').addEventListener('pointerup', (e) => { if (!S.pick || !ED || !lastScale) return; const pt = chartPoint(e); if (!pt) return;
+    const k = (ED.kV || S.baseKV) / S.baseKV, b = ED.unit === 'x' ? (ED.base || 1) : 1;
+    const I = +(pt.I / k / b).toPrecision(4), t = +pt.t.toPrecision(3);
+    ED.points.push(ED.mode === 'band' ? { I, t, t2: t } : { I, t }); pickStatus(); draw(); });
+}
+function chartPoint(e) {
+  const svg = $('#chart'), r = svg.getBoundingClientRect(), { m, pw, ph, X0, X1, W, H } = lastScale;
+  const x = ((e.clientX - r.left) / r.width) * W, y = ((e.clientY - r.top) / r.height) * H;
+  if (x < m.l || x > m.l + pw || y < m.t || y > m.t + ph) return null;
+  const I = 10 ** (Math.log10(X0) + ((x - m.l) / pw) * (Math.log10(X1) - Math.log10(X0)));
+  const t = 10 ** (Math.log10(Y1) - ((y - m.t) / ph) * (Math.log10(Y1) - Math.log10(Y0)));
+  return { I, t };
+}
+function openEditor(def, isNew = !def) {
+  ED = def ? JSON.parse(JSON.stringify(def)) : blankCurve();
+  ED._editing = !isNew && def && def.id ? def.id : null;
+  $('#cc-title').textContent = ED._editing ? 'Edit custom curve' : 'New custom curve';
+  $('#cc-ok').textContent = ED._editing ? 'Save changes' : 'Add to study';
+  $('#cc-name').value = ED.series; $('#cc-cat').value = ED.category; $('#cc-kv').value = ED.kV ?? 0.4; $('#cc-mode').value = ED.mode;
+  $('#cc-unit').value = ED.unit; $('#cc-base').value = ED.base ?? 100; $('#cc-base-wrap').hidden = ED.unit !== 'x'; $('#cc-extend').checked = ED.extend !== false;
+  $('#cc-keep').checked = ED._editing ? !!CUSTOM.get(ED._editing)?.saved : true;
+  $('#cc-text').value = ''; $('#cc-msgs').innerHTML = '';
+  renderPts();
+  const dlg = $('#cc-dialog'); if (!dlg.open) dlg.showModal();
+  setTimeout(() => (ED.series ? $('#cc-add') : $('#cc-name')).focus(), 30);
+}
+function renderPts(focusLast) {
+  const band = ED.mode === 'band', u = ED.unit === 'x' ? '×base' : 'A';
+  const head = `<thead><tr><th>#</th><th>Current (${u})</th><th>${band ? 'Min time (s)' : 'Time (s)'}</th>${band ? '<th>Max time (s)</th>' : ''}<th></th></tr></thead>`;
+  const rows = ED.points.map((p, i) => `<tr><td class="idx">${i + 1}</td>
+    <td><input inputmode="decimal" data-row="${i}" data-f="I" value="${p.I}" aria-label="Current, point ${i + 1}"></td>
+    <td><input inputmode="decimal" data-row="${i}" data-f="t" value="${p.t}" aria-label="Time, point ${i + 1}"></td>
+    ${band ? `<td><input inputmode="decimal" data-row="${i}" data-f="t2" value="${p.t2 ?? p.t}" aria-label="Maximum time, point ${i + 1}"></td>` : ''}
+    <td class="del"><button type="button" data-del="${i}" title="Delete point" aria-label="Delete point ${i + 1}">${xIcon}</button></td></tr>`).join('');
+  $('#cc-table').innerHTML = head + `<tbody>${rows || `<tr class="empty-row"><td colspan="${band ? 5 : 4}">No points yet — add points, paste a list, load a .txt/.csv file or pick them on the chart.</td></tr>`}</tbody>`;
+  $('#cc-npts').textContent = ED.points.length ? `${ED.points.length}` : '';
+  if (focusLast) { const ins = $$('#cc-table input[data-f="I"]'); ins[ins.length - 1]?.focus(); ins[ins.length - 1]?.select(); }
+  validate();
+}
+function validate() {
+  const m = E.checkPoints(ED); if (!String(ED.series || '').trim()) m.unshift({ level: 'error', text: 'Give the curve a name.' });
+  $('#cc-msgs').innerHTML = m.map((x) => `<li class="${x.level}">${esc(x.text)}</li>`).join('');
+  $('#cc-ok').disabled = m.some((x) => x.level === 'error');
+  return m;
+}
+function msg(level, text) { $('#cc-msgs').insertAdjacentHTML('afterbegin', `<li class="${level}">${esc(text)}</li>`); }
+function commitEditor() {
+  if (validate().some((x) => x.level === 'error')) return;
+  const keep = $('#cc-keep').checked;
+  const { _editing, ...def } = ED;
+  def.series = def.series.trim(); def.points = E.sortPts(def.points).map((p) => (def.mode === 'band' ? { I: p.I, t: p.t, t2: p.t2 ?? p.t } : { I: p.I, t: p.t }));
+  def.model = 'custom'; def.manufacturer = 'User'; def.sources = []; def.ratings = []; def.saved = keep;
+  if (_editing) {
+    def.id = _editing; CUSTOM.set(def.id, def);
+    S.items.filter((i) => i.deviceId === def.id).forEach((i) => E.normalize(def, i));
+  } else {
+    def.id = newCurveId(); CUSTOM.set(def.id, def);
+    add(def.id, { kV: def.kV, label: def.series }, false);
+  }
+  storeMyCurves();
+  ED = null; $('#cc-dialog').close();
+  renderLibrary(); refresh();
+}
+function forgetCurve(id) {
+  const d = CUSTOM.get(id); if (!d) return;
+  if (!confirm(`Remove “${d.series}” from My curves?${S.items.some((i) => i.deviceId === id) ? ' It stays in the current study.' : ''}`)) return;
+  if (S.items.some((i) => i.deviceId === id)) d.saved = false; else CUSTOM.delete(id);
+  storeMyCurves(); renderLibrary();
+}
+function startPick() {
+  S.pick = true; $('#cc-dialog').close();
+  $('#pick-name').textContent = `“${ED.series || 'new curve'}”`; $('#pick-banner').hidden = false; $('#chart-wrap').classList.add('picking');
+  pickStatus(); draw();
+  $('#chart-wrap').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+function pickStatus() { $('#pick-count').textContent = `${ED.points.length} point${ED.points.length === 1 ? '' : 's'}`; }
+function endPick() {
+  S.pick = false; $('#pick-banner').hidden = true; $('#chart-wrap').classList.remove('picking');
+  ED.points = E.sortPts(ED.points); draw(); openEditor(ED, !ED._editing);
+}
+// preview of the curve being edited (drawn on the chart while picking)
+function previewSvg(sx, sy, m, pw, ph) {
+  if (!S.pick || !ED || !ED.points.length) return '';
+  const k = (ED.kV || S.baseKV) / S.baseKV, b = ED.unit === 'x' ? (ED.base || 1) : 1;
+  const P = E.sortPts(ED.points).map((p) => ({ x: sx(p.I * b * k), y: sy(p.t), y2: sy(p.t2 ?? p.t) }));
+  const col = cssVar('--accent');
+  let g = `<path d="${P.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join('')}" fill="none" stroke="${col}" stroke-width="1.8" stroke-dasharray="6 3"/>`;
+  if (ED.mode === 'band') g += `<path d="${P.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)},${p.y2.toFixed(1)}`).join('')}" fill="none" stroke="${col}" stroke-width="1.2" stroke-dasharray="2 3"/>`;
+  g += P.map((p) => `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="${cssVar('--paper')}" stroke="${col}" stroke-width="1.6"/>`).join('');
+  return g;
 }
 
 boot();
