@@ -271,11 +271,12 @@ function draw() {
   // de-overlap labels
   labels.sort((a, b) => a.y - b.y);
   for (let i = 1; i < labels.length; i++) if (labels[i].y - labels[i - 1].y < 13 && Math.abs(labels[i].x - labels[i - 1].x) < 160) labels[i].y = labels[i - 1].y + 13;
-  for (const L of labels) { const t = narrow && L.text.length > 18 ? L.text.slice(0, 17) + '…' : L.text; g += `<text x="${Math.min(L.x, m.l + pw - 4)}" y="${L.y}" fill="${L.col}" font-size="${fs}" font-family="Geist, sans-serif" font-weight="600" text-anchor="${L.x > m.l + pw - 120 ? 'end' : 'start'}" paint-order="stroke" stroke="${C.paper}" stroke-width="3">${esc(t)}</text>`; }
+  if (!narrow) for (const L of labels) { const t = narrow && L.text.length > 18 ? L.text.slice(0, 17) + '…' : L.text; g += `<text x="${Math.min(L.x, m.l + pw - 4)}" y="${L.y}" fill="${L.col}" font-size="${fs}" font-family="Geist, sans-serif" font-weight="600" text-anchor="${L.x > m.l + pw - 120 ? 'end' : 'start'}" paint-order="stroke" stroke="${C.paper}" stroke-width="3">${esc(t)}</text>`; }
   g += `</g><g id="cursor"></g>`;
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   svg.innerHTML = g;
   $('#empty-chart').hidden = S.items.some((i) => i.visible);
+  showLegend();
   bindCursor();
 }
 function bindCursor() {
@@ -302,7 +303,13 @@ function bindCursor() {
   };
   svg.addEventListener('pointermove', move);
   svg.addEventListener('pointerdown', move);
-  svg.addEventListener('pointerleave', () => { const c = $('#cursor'); if (c) c.innerHTML = ''; });
+  svg.addEventListener('pointerleave', () => { const c = $('#cursor'); if (c) c.innerHTML = ''; showLegend(); });
+}
+
+function showLegend() {
+  const vis = S.items.filter((i) => i.visible);
+  $('#readout').innerHTML = vis.length ? vis.map((it) => `<span class="ro-item"><span class="swatch" style="background:${colorFor(it)}"></span>${esc(it.label)}</span>`).join('') + `<span class="ro-hint">· hover or tap the chart for operating times</span>`
+    : `<span class="ro-hint">Hover the chart to read operating times at any current.</span>`;
 }
 
 // ------------------------------------------------------------ coordination
@@ -371,11 +378,12 @@ function download(name, data, type) {
 }
 function doExport(kind) {
   const svg = $('#chart');
-  const src = `<?xml version="1.0" encoding="UTF-8"?>` + new XMLSerializer().serializeToString(svg).replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
+  const src = `<?xml version="1.0" encoding="UTF-8"?>` + (() => { const x = new XMLSerializer().serializeToString(svg); return x.includes('xmlns="http://www.w3.org/2000/svg"') ? x : x.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"'); })();
   if (kind === 'svg') return download('tcc-chart.svg', src, 'image/svg+xml');
   if (kind === 'png') {
     const { W, H } = lastScale; const img = new Image(); const scale = 2;
     img.onload = () => { const c = document.createElement('canvas'); c.width = W * scale; c.height = H * scale; const x = c.getContext('2d'); x.scale(scale, scale); x.drawImage(img, 0, 0); c.toBlob((b) => download('tcc-chart.png', b)); };
+    img.onerror = () => alert('PNG export failed in this browser — try SVG export.');
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(src); return;
   }
   if (kind === 'csv') {

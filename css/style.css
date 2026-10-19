@@ -175,7 +175,7 @@ input[type=search], select, input[type=number], input[type=text] { width: 100%; 
 .prose h2 { margin: var(--sp-8) 0 var(--sp-2); }
 .prose p, .prose li { color: var(--text); }
 .prose code, .prose .eq { font-family: var(--mono); font-size: .92em; background: var(--surface-2); padding: 1px 5px; border-radius: 4px; }
-.prose .eq { display: block; padding: 8px 12px; margin: 8px 0; }
+.prose .eq { white-space: nowrap; }
 .prose table { border-collapse: collapse; font-size: var(--text-sm); margin: var(--sp-2) 0; }
 .prose td, .prose th { border-bottom: 1px solid var(--border); padding: 5px 10px; text-align: left; }
 
