@@ -1,0 +1,6 @@
+{
+  "name": "TCC Studio 2026",
+  "description": "Multi-manufacturer time-current curve (TCC) generator and viewer for low-voltage breakers, RCBOs and IDMT overcurrent relays with fault analysis and custom curves.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

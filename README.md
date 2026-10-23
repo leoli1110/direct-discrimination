@@ -52,34 +52,52 @@ The Database tab in the app lists every entry, and the full source list with URL
 
 ## Running locally
 
-The app is static HTML, CSS and ES modules with no build step.
+The application is built with React 19, TypeScript, and Vite.
 
 ```bash
-npm run serve           # or: python3 -m http.server 8765
-# open http://localhost:8765
+npm run dev             # starts the Vite development server on port 3000
+npm run build           # builds the production assets
+npm test                # runs engine and domain calculations tests
 ```
 
 ## Project layout
 
 ```
-index.html, css/, js/app.js   UI
-js/engine.js                  curve maths: settings, bands, sampling, selectivity, custom curves
-js/fault.js                   fault analysis: source and cable impedances, fault levels, breaking, disconnection, Iz, ΔU, adiabatic
-db/curvedb.json               generated curve database (committed)
-database/build_db.py          builds db/curvedb.json (fits thermal bands with SciPy)
-database/additions_2026b.py   ABB Tmax T/XT and CHINT entries (executed by build_db.py)
-database/additions_2026c.py   RCBO/RCD entries and trip-unit G functions
-database/additions_2026d.py   breaking capacities, residual add-ons, cable and network data
-tests/engine.test.mjs         engine and database tests (node --test)
-tests/fault.test.mjs          fault-analysis tests against hand calculations
-```
-
-## Rebuilding the database
-
-```bash
-pip install -r database/requirements.txt
-npm run build:db
-npm test
+src/
+  App.tsx               Root React application & state coordination
+  main.tsx              Vite React entry point
+  index.css             Global styles, theme variables, layout & dialog styling
+  types.ts              TypeScript data models & interfaces
+  engine/
+    engine.ts           Parametric curve algorithms, bands, sampling & selectivity
+    fault.ts            Radial LV network fault analysis (IEC 60909 / IEC 60364)
+  data/
+    db.ts               Typed curve database loader
+  components/
+    Header.tsx          Top bar, navigation tabs, study save/load, export menu, theme toggle
+    Disclaimer.tsx      Engineering aid disclaimer banner
+    study/
+      StudyView.tsx     3-column protection study view
+      LibraryPanel.tsx  Device catalog with search, category chips, custom curves
+      ChartCard.tsx     Interactive toolbar & chart view container
+      TccChart.tsx      Log-log SVG chart with tolerance bands, fault levels & crosshair readout
+      CoordinationSection.tsx Selectivity checking table & auto-chain by pick-up
+      StudyPanel.tsx    Active study devices panel & clear action
+      StudyCard.tsx     Device settings dials, sliders, downstream linking, citations
+    fault/
+      FaultView.tsx     Radial fault analysis, supply forms, cable circuit checks
+    database/
+      DatabaseView.tsx  Full datasheet database explorer with source links
+    method/
+      MethodView.tsx    Comprehensive documentation of mathematical models
+    custom/
+      CustomCurveModal.tsx Custom curve points editor with live chart picking
+public/
+  db/curvedb.json       Static database file for direct JSON download
+  favicon.svg           Favicon asset
+db/curvedb.json         Source-cited curve database
+tests/engine.test.mjs   Engine and database tests
+tests/fault.test.mjs    Fault-analysis tests against hand calculations
 ```
 
 CI rebuilds the database, fails if the committed `db/curvedb.json` is out of date, and runs the tests.
